@@ -1,0 +1,277 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-pixelencoder-1",
+  "plugins": [
+    {
+      "api": 2,
+      "bridge_host_revision": 1,
+      "id": "org.craftbridge.pixelencoder",
+      "name": "Bridge Pixel Encoder (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original mathematical tile/glyph renderer. No MEGAKRUNCH assets or proprietary patterns. Requires experimental API2 host geometry.",
+      "params": [
+        {
+          "id": "pattern",
+          "name": "Presets",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "High Detail",
+            "Numbers & Letters",
+            "Horizontal Lines",
+            "Dots",
+            "Vertical Lines",
+            "Extra Grunge",
+            "Rings",
+            "Solid",
+            "Diagonal (Left)",
+            "Diagonal (Right)"
+          ]
+        },
+        {
+          "id": "brightness",
+          "name": "Brightness",
+          "type": "slider",
+          "default": -50.0,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "id": "contrast",
+          "name": "Contrast",
+          "type": "slider",
+          "default": 150.0,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "size",
+          "name": "Pattern Size",
+          "type": "slider",
+          "default": 3.0,
+          "min": 0.1,
+          "max": 1024
+        },
+        {
+          "id": "lock",
+          "name": "Enable Scale Lock",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "detail_x",
+          "name": "Horizontal Detail",
+          "type": "slider",
+          "default": 20.0,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "detail_y",
+          "name": "Vertical Detail",
+          "type": "slider",
+          "default": 10.0,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "foreground",
+          "name": "Pixel Color",
+          "type": "color",
+          "default": [
+            1.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "id": "background",
+          "name": "Background Color",
+          "type": "color",
+          "default": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "id": "original_color",
+          "name": "Use Original Color",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "transparent",
+          "name": "Transparent Background",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "chaos",
+          "name": "Enable Chaos",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "intensity",
+          "name": "Intensity",
+          "type": "slider",
+          "default": 5.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "speed",
+          "name": "Animation Speed",
+          "type": "slider",
+          "default": 0.0,
+          "min": -10000,
+          "max": 10000
+        },
+        {
+          "id": "seed",
+          "name": "Seed",
+          "type": "slider",
+          "default": 0.0,
+          "min": -1000000000.0,
+          "max": 1000000000.0
+        },
+        {
+          "id": "behavior",
+          "name": "Chaos Behavior",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Increase Size",
+            "Decrease Size",
+            "Increase & Decrease Size"
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "source": "ADBE PixelEncoder - AEPlugins",
+      "effect": "org.craftbridge.pixelencoder",
+      "params": {
+        "ADBE PixelEncoder - AEPlugins-0003": {
+          "target": "pattern",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE PixelEncoder - AEPlugins-0004": {
+          "target": "brightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0005": {
+          "target": "contrast",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0011": {
+          "target": "size",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0012": {
+          "target": "lock",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0006": {
+          "target": "detail_x",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0007": {
+          "target": "detail_y",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0008": {
+          "target": "foreground",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE PixelEncoder - AEPlugins-0009": {
+          "target": "background",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE PixelEncoder - AEPlugins-0015": {
+          "target": "original_color",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0010": {
+          "target": "transparent",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0017": {
+          "target": "chaos",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0018": {
+          "target": "intensity",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0020": {
+          "target": "speed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0019": {
+          "target": "seed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE PixelEncoder - AEPlugins-0021": {
+          "target": "behavior",
+          "kind": "Choice",
+          "operation": "minus_one"
+        }
+      },
+      "required_on_create": [
+        "ADBE PixelEncoder - AEPlugins-0003",
+        "ADBE PixelEncoder - AEPlugins-0004",
+        "ADBE PixelEncoder - AEPlugins-0005",
+        "ADBE PixelEncoder - AEPlugins-0011",
+        "ADBE PixelEncoder - AEPlugins-0012",
+        "ADBE PixelEncoder - AEPlugins-0006",
+        "ADBE PixelEncoder - AEPlugins-0007",
+        "ADBE PixelEncoder - AEPlugins-0008",
+        "ADBE PixelEncoder - AEPlugins-0009",
+        "ADBE PixelEncoder - AEPlugins-0015",
+        "ADBE PixelEncoder - AEPlugins-0010",
+        "ADBE PixelEncoder - AEPlugins-0017",
+        "ADBE PixelEncoder - AEPlugins-0018",
+        "ADBE PixelEncoder - AEPlugins-0020",
+        "ADBE PixelEncoder - AEPlugins-0019",
+        "ADBE PixelEncoder - AEPlugins-0021"
+      ],
+      "evidence": "One complete real parT/tdb4 snapshot proves 16 controls, two ARGB colors and ten pattern choices. aescripts functional description consulted 2026-10-09. Original MIT formulas, no proprietary assets.",
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Renderer original aproximado. Padrões, glifos, tom, caos, PRNG, calibração e geometria próprios; nunca equivalência Pixel Encoder. Sempre PARTIAL; strict não publica.",
+        "16 controles brutos preservados. Sliders kind 10 não comprovam unidade; divisores 100, interpretação de tamanho e frequência são escolhas do renderer. ARGB→RGBA deriva do tipo real.",
+        "Células amostram o centro mais próximo; não média ou integração de área. Padrões matemáticos originais, Numbers & Letters usa glifos de segmentos próprios; nenhum asset/font proprietário copiado.",
+        "Caos usa hash espacial/temporal com seed fracionário; comportamento modifica tamanho dentro da célula, sem repetir engine proprietária. Sliders animados não têm fixture real neste perfil.",
+        "RGB straight com composição foreground/background por cobertura binária e alpha de origem; gama/HDR/antialias/color management não certificados. Transparência multiplica alpha de origem.",
+        "API 2 exige host experimental separado e geometria do buffer. Canvas fixo, até 2097152 pixels; presets de UI/mascaras/expressões e parâmetros de versões futuras permanecem perdas."
+      ]
+    }
+  ]
+}

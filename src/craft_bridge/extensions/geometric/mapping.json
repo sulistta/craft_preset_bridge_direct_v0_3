@@ -1,0 +1,355 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-geometric-1",
+  "plugins": [
+    {
+      "api": 4,
+      "bridge_host_revision": 3,
+      "id": "org.craftbridge.geometric",
+      "name": "Bridge Geometric (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original bounded proximity-matching geometric painter. Not the proprietary Satori algorithm. Requires experimental API 4 host.",
+      "params": [
+        {
+          "id": "keep",
+          "name": "Keep Original Image",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "skip",
+          "name": "Skip Frame(s)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 1024
+        },
+        {
+          "id": "shape",
+          "name": "Shape type",
+          "type": "popup",
+          "default": 2,
+          "options": [
+            "Line",
+            "Curve",
+            "Triangle",
+            "Square",
+            "Circle",
+            "Rectangle"
+          ]
+        },
+        {
+          "id": "count",
+          "name": "Count",
+          "type": "slider",
+          "default": 1000.0,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "recursion",
+          "name": "Recursion Steps",
+          "type": "slider",
+          "default": 1.0,
+          "min": 0,
+          "max": 16
+        },
+        {
+          "id": "size",
+          "name": "Size",
+          "type": "slider",
+          "default": 28.0,
+          "min": 0,
+          "max": 2048
+        },
+        {
+          "id": "growth",
+          "name": "Size Growth",
+          "type": "slider",
+          "default": 32.0,
+          "min": 0,
+          "max": 2048
+        },
+        {
+          "id": "width",
+          "name": "Line Width",
+          "type": "slider",
+          "default": 1.75,
+          "min": 0,
+          "max": 512
+        },
+        {
+          "id": "fill",
+          "name": "Fill",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "opacity",
+          "name": "Opacity",
+          "type": "slider",
+          "default": 100.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "angle",
+          "name": "Starting Angle",
+          "type": "slider",
+          "default": 228.0,
+          "min": -1000000,
+          "max": 1000000
+        },
+        {
+          "id": "angle_random",
+          "name": "Angle Randomization",
+          "type": "slider",
+          "default": 32.0,
+          "min": 0,
+          "max": 1000000
+        },
+        {
+          "id": "angle_range",
+          "name": "Angle Range",
+          "type": "slider",
+          "default": 150.0,
+          "min": 0,
+          "max": 1000000
+        },
+        {
+          "id": "accuracy",
+          "name": "Matching Accuracy",
+          "type": "slider",
+          "default": 95.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "fade",
+          "name": "Fade Type",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "None",
+            "Fade out by size",
+            "Fade in by size",
+            "Fade out by recursion",
+            "Fade in by recursion"
+          ]
+        },
+        {
+          "id": "fade_level",
+          "name": "Fade Level",
+          "type": "slider",
+          "default": 40.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "min_luma",
+          "name": "Minimum Luminosity",
+          "type": "slider",
+          "default": 2.0,
+          "min": 0,
+          "max": 255
+        },
+        {
+          "id": "max_luma",
+          "name": "Maximum Luminosity",
+          "type": "slider",
+          "default": 255.0,
+          "min": 0,
+          "max": 255
+        },
+        {
+          "id": "strategy",
+          "name": "Starting Pos. Strategy",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "Random",
+            "Stable Random",
+            "Grid"
+          ]
+        },
+        {
+          "id": "grid_random",
+          "name": "Grid Randomization",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "seed",
+          "name": "Random Seed (Evolution)",
+          "type": "slider",
+          "default": 777.0,
+          "min": -1000000000,
+          "max": 1000000000
+        }
+      ],
+      "temporal_inputs": [
+        {
+          "id": "held",
+          "mode": "frame_hold",
+          "parameter": "skip",
+          "multiple": 1,
+          "edge": "clamp"
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "source": "SatoriGeometricFilters",
+      "effect": "org.craftbridge.geometric",
+      "params": {
+        "SatoriGeometricFilters-0002": {
+          "target": "keep",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0027": {
+          "target": "skip",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0004": {
+          "target": "shape",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "SatoriGeometricFilters-0005": {
+          "target": "count",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0006": {
+          "target": "recursion",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0007": {
+          "target": "size",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0008": {
+          "target": "growth",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0009": {
+          "target": "width",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0010": {
+          "target": "fill",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0011": {
+          "target": "opacity",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0012": {
+          "target": "angle",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0013": {
+          "target": "angle_random",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0014": {
+          "target": "angle_range",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0017": {
+          "target": "accuracy",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0018": {
+          "target": "fade",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "SatoriGeometricFilters-0019": {
+          "target": "fade_level",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0020": {
+          "target": "min_luma",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0021": {
+          "target": "max_luma",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0022": {
+          "target": "strategy",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "SatoriGeometricFilters-0023": {
+          "target": "grid_random",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "SatoriGeometricFilters-0024": {
+          "target": "seed",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "required_on_create": [
+        "SatoriGeometricFilters-0002",
+        "SatoriGeometricFilters-0027",
+        "SatoriGeometricFilters-0004",
+        "SatoriGeometricFilters-0005",
+        "SatoriGeometricFilters-0006",
+        "SatoriGeometricFilters-0007",
+        "SatoriGeometricFilters-0008",
+        "SatoriGeometricFilters-0009",
+        "SatoriGeometricFilters-0010",
+        "SatoriGeometricFilters-0011",
+        "SatoriGeometricFilters-0012",
+        "SatoriGeometricFilters-0013",
+        "SatoriGeometricFilters-0014",
+        "SatoriGeometricFilters-0017",
+        "SatoriGeometricFilters-0018",
+        "SatoriGeometricFilters-0019",
+        "SatoriGeometricFilters-0020",
+        "SatoriGeometricFilters-0021",
+        "SatoriGeometricFilters-0022",
+        "SatoriGeometricFilters-0023",
+        "SatoriGeometricFilters-0024"
+      ],
+      "evidence": "One real parT/tdb4 snapshot proves 21 controls and four menus. aescripts official functional documentation consulted 2026-10-09. Original MIT renderer; no proprietary code or assets.",
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Renderer original aproximado, nunca equivalência Satori. Busca, PRNG, rasterização, recursão e calibração são próprios; sempre PARTIAL, strict sem publicação parcial.",
+        "21 controles brutos preservados. Sliders kind 2/10 não recebem unidades Adobe inferidas; /255, /100, ângulos em graus do renderer e geometria em pixels locais são escolhas originais.",
+        "Preset 0001 é seletor de estilo sem ação certificada e 0026 é hidden sem semântica comprovada: ambos são perdas. Máscaras, expressões e ações de UI não são reproduzidas.",
+        "Busca esparsa de 16 direções e três comprimentos; distância RGB com quatro probes por candidato. Cor do ponto inicial, alpha sobre straight RGB e curva de 12 segmentos são aproximações; HDR/cor/antialias/canvas permanecem diferenças.",
+        "Count e Recursion são arredondados para baixo no renderer; até 10000 formas, 16 passos, 8000000 visitas de rasterização. Exceder orçamento recusa o render completo. Canvas fixo; formas exteriores são recortadas.",
+        "Skip exige valores inteiros e chaves Hold; acessa pixels reais do prefixo em tempo local retido. Limites temporais do host e quantização de ticks podem diferir de Adobe. Keep Original usa a imagem retida."
+      ]
+    }
+  ]
+}

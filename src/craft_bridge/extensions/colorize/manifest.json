@@ -1,0 +1,219 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.colorize",
+  "name": "Bridge Colorize (approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge",
+  "description": "Original six-color gradient toning. Independent calibration; PixelChooser, Mocha and tracking are not transferred. See ADR 027.",
+  "params": [
+    {
+      "id": "input",
+      "name": "Input",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Luma",
+        "Red",
+        "Green",
+        "Blue",
+        "Luma Inverse",
+        "Red Inverse",
+        "Green Inverse",
+        "Blue Inverse"
+      ]
+    },
+    {
+      "id": "color_space",
+      "name": "Color Space",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "RGB",
+        "HSL",
+        "HSV"
+      ]
+    },
+    {
+      "id": "color2_on",
+      "name": "Color 2 On",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "color3_on",
+      "name": "Color 3 On",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "color4_on",
+      "name": "Color 4 On",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "color5_on",
+      "name": "Color 5 On",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "color1",
+      "name": "Color 1",
+      "type": "color",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "color2",
+      "name": "Color 2",
+      "type": "color",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "color3",
+      "name": "Color 3",
+      "type": "color",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "color4",
+      "name": "Color 4",
+      "type": "color",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "color5",
+      "name": "Color 5",
+      "type": "color",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "color6",
+      "name": "Color 6",
+      "type": "color",
+      "default": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "id": "black_point",
+      "name": "Black Point",
+      "type": "slider",
+      "default": 0,
+      "min": -1000,
+      "max": 1000
+    },
+    {
+      "id": "white_point",
+      "name": "White Point",
+      "type": "slider",
+      "default": 100,
+      "min": -1000,
+      "max": 1000
+    },
+    {
+      "id": "squeeze",
+      "name": "Squeeze",
+      "type": "slider",
+      "default": 0,
+      "min": -100,
+      "max": 100
+    },
+    {
+      "id": "loop_mode",
+      "name": "Loop Mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Off",
+        "Forward Loop",
+        "Back & Forth Loop"
+      ]
+    },
+    {
+      "id": "loop_count",
+      "name": "Loop Count",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "gradient_offset",
+      "name": "Gradient Offset",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "color_ease",
+      "name": "Color Ease",
+      "type": "slider",
+      "default": 0,
+      "min": -100,
+      "max": 100
+    },
+    {
+      "id": "hue",
+      "name": "Hue (degrees)",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000000.0,
+      "max": 1000000000.0
+    },
+    {
+      "id": "saturation",
+      "name": "Saturation",
+      "type": "slider",
+      "default": 0,
+      "min": -100,
+      "max": 100
+    },
+    {
+      "id": "lightness",
+      "name": "Lightness",
+      "type": "slider",
+      "default": 0,
+      "min": -100,
+      "max": 100
+    },
+    {
+      "id": "mix",
+      "name": "Mix with Original",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    }
+  ]
+}

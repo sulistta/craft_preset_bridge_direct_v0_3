@@ -1,0 +1,1994 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 1,
+  "name": "builtin-1",
+  "mappings": [
+    {
+      "source": "AE.ADBE Gaussian Blur 2",
+      "source_format": "prfpset",
+      "target": "filmcraft",
+      "effect": "gaussian_blur",
+      "params": {
+        "1": {
+          "target": "blurriness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "2": {
+          "target": "dimensions",
+          "kind": "Choice",
+          "operation": "identity"
+        },
+        "3": {
+          "target": "repeat_edge",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; target-schema",
+      "evidence": "notoow: Gaussian Blur samples; filmcraft project/effect.rs",
+      "target_commit": "a4536bcfedf588cbef9ea24df149c70bf99a037d"
+    },
+    {
+      "source": "AE.ADBE Geometry2",
+      "source_format": "prfpset",
+      "target": "filmcraft",
+      "effect": "transform",
+      "params": {
+        "1": {
+          "target": "anchor",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "2": {
+          "target": "position",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "11": {
+          "target": "uniform_scale",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "3": {
+          "target": "scale_height",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "4": {
+          "target": "scale_width",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "5": {
+          "target": "skew",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "6": {
+          "target": "skew_axis",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "7": {
+          "target": "rotation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "8": {
+          "target": "opacity",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "10": {
+          "target": "shutter_angle",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source-partial; target-schema",
+      "evidence": "notoow: 변형.prfpset; filmcraft project/effect.rs; source 9 and 12 intentionally unsupported",
+      "target_commit": "a4536bcfedf588cbef9ea24df149c70bf99a037d"
+    },
+    {
+      "source": "AE.ADBE Geometry",
+      "source_format": "prfpset",
+      "target": "filmcraft",
+      "effect": "transform",
+      "params": {
+        "1": {
+          "target": "anchor",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "2": {
+          "target": "position",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "11": {
+          "target": "uniform_scale",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "3": {
+          "target": "scale_height",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "4": {
+          "target": "scale_width",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "5": {
+          "target": "skew",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "6": {
+          "target": "skew_axis",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "7": {
+          "target": "rotation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "8": {
+          "target": "opacity",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source-partial; native-import",
+      "evidence": "PPCS6-Pack-DM-001@498aa583f45af4316eb4ab54403ddb6b30af3601; source SHA256 f87d7c0f7422d2f876990a772ccd557a680c837c97b5d31619240f9cb3432367; ADR 016",
+      "target_commit": "a4536bcfedf588cbef9ea24df149c70bf99a037d",
+      "limitations": [
+        "Geometry CS6: controles 9/10 de obturação não traduzidos; motion blur não preservado."
+      ]
+    },
+    {
+      "source": "AE.ADBE Channel Blur",
+      "source_format": "prfpset",
+      "target": "filmcraft",
+      "effect": "channel_blur",
+      "params": {
+        "1": {
+          "target": "red",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "2": {
+          "target": "green",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "3": {
+          "target": "blue",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "4": {
+          "target": "alpha",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "5": {
+          "target": "repeat_edge",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source-partial; native-import",
+      "evidence": "PPCS6-Pack-DM-001@498aa583f45af4316eb4ab54403ddb6b30af3601; source SHA256 f87d7c0f7422d2f876990a772ccd557a680c837c97b5d31619240f9cb3432367; ADR 016",
+      "target_commit": "a4536bcfedf588cbef9ea24df149c70bf99a037d",
+      "limitations": [
+        "Dimensions (ID 6) sem ordem de menu rotulada: não traduzido; destino usa seu default bidimensional. Calibração do Gaussian por canal não comparada com Adobe."
+      ]
+    },
+    {
+      "source": "AE.ADBE Mosaic",
+      "source_format": "prfpset",
+      "target": "filmcraft",
+      "effect": "mosaic",
+      "params": {
+        "1": {
+          "target": "horizontal",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "2": {
+          "target": "vertical",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source-partial; native-import",
+      "evidence": "PPCS6-Pack-DM-001@498aa583f45af4316eb4ab54403ddb6b30af3601; source SHA256 f87d7c0f7422d2f876990a772ccd557a680c837c97b5d31619240f9cb3432367; ADR 016",
+      "target_commit": "a4536bcfedf588cbef9ea24df149c70bf99a037d",
+      "limitations": [
+        "Sharp Colors (ID 3) não preservado: renderer FilmCraft amostra o centro do bloco e não consulta sharp; média de pixels Adobe não reproduzida."
+      ]
+    },
+    {
+      "source": "ADBE Gaussian Blur 2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.blur.gaussian",
+      "params": {
+        "ADBE Gaussian Blur 2-0001": {
+          "target": "blurriness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Gaussian Blur 2-0002": {
+          "target": "dimensions",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Gaussian Blur 2-0003": {
+          "target": "repeatEdge",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "synthetic-only; source-parameter-ids-require-real-fixture",
+      "evidence": "FFX parT naming; sample_1/user corpus for real-source; EffectCraft effects misc.rs/color_fx.rs",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Directional Blur",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.blur.directional",
+      "params": {
+        "ADBE Directional Blur-0001": {
+          "target": "direction",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Directional Blur-0002": {
+          "target": "length",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "synthetic-only; source-parameter-ids-require-real-fixture",
+      "evidence": "FFX parT naming; sample_1/user corpus for real-source; EffectCraft effects misc.rs/color_fx.rs",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Sharpen",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.blur.sharpen",
+      "params": {
+        "ADBE Sharpen-0001": {
+          "target": "amount",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; protocol-mock",
+      "evidence": "FFX parT naming; sample_1/user corpus for real-source; EffectCraft effects misc.rs/color_fx.rs",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Unsharp Mask2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.blur.unsharp",
+      "params": {
+        "ADBE Unsharp Mask2-0001": {
+          "target": "amount",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Unsharp Mask2-0002": {
+          "target": "radius",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Unsharp Mask2-0003": {
+          "target": "threshold",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; protocol-mock",
+      "evidence": "FFX parT naming; sample_1/user corpus for real-source; EffectCraft effects misc.rs/color_fx.rs",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Brightness & Contrast 2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.brightnesscontrast",
+      "params": {
+        "ADBE Brightness & Contrast 2-0001": {
+          "target": "brightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Brightness & Contrast 2-0002": {
+          "target": "contrast",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Brightness & Contrast 2-0003": {
+          "target": "useLegacy",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; protocol-mock",
+      "evidence": "FFX parT naming; sample_1/user corpus for real-source; EffectCraft effects misc.rs/color_fx.rs",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Geometry2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.distort.transform",
+      "params": {
+        "ADBE Geometry2-0001": {
+          "target": "anchor",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "ADBE Geometry2-0002": {
+          "target": "position",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "ADBE Geometry2-0011": {
+          "target": "uniform",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Geometry2-0003": {
+          "target": "scaleHeight",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Geometry2-0004": {
+          "target": "scaleWidth",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Geometry2-0005": {
+          "target": "skew",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Geometry2-0006": {
+          "target": "skewAxis",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Geometry2-0007": {
+          "target": "rotation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Geometry2-0008": {
+          "target": "opacity",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Geometry2-0009": {
+          "target": "useCompositionShutterAngle",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Geometry2-0010": {
+          "target": "shutterAngle",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Geometry2-0012": {
+          "target": "sampling",
+          "kind": "Choice",
+          "operation": "minus_one"
+        }
+      },
+      "validation": "real-source-static; protocol-mock",
+      "evidence": "User corpus Geometry2; EffectCraft effects/lib.rs default_value and distort.rs: pixel points; 0-based sampling",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Tile",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.stylize.motiontile",
+      "params": {
+        "ADBE Tile-0001": {
+          "target": "tileCenter",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "ADBE Tile-0002": {
+          "target": "tileWidth",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Tile-0003": {
+          "target": "tileHeight",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Tile-0004": {
+          "target": "outputWidth",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Tile-0005": {
+          "target": "outputHeight",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Tile-0006": {
+          "target": "mirrorEdges",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Tile-0007": {
+          "target": "phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Tile-0008": {
+          "target": "horizontalPhaseShift",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Noise2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.noise.noise",
+      "params": {
+        "ADBE Noise2-0001": {
+          "target": "amount",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Noise2-0002": {
+          "target": "color",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Noise2-0003": {
+          "target": "clip",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Noise HLS2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.noise.noisehls",
+      "params": {
+        "ADBE Noise HLS2-0001": {
+          "target": "noise",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Noise HLS2-0002": {
+          "target": "hue",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Noise HLS2-0003": {
+          "target": "lightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Noise HLS2-0004": {
+          "target": "saturation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Noise HLS2-0005": {
+          "target": "grainSize",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Noise HLS2-0006": {
+          "target": "noisePhase",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Noise HLS Auto2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.noise.noisehlsauto",
+      "params": {
+        "ADBE Noise HLS Auto2-0001": {
+          "target": "noise",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Noise HLS Auto2-0002": {
+          "target": "hue",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Noise HLS Auto2-0003": {
+          "target": "lightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Noise HLS Auto2-0004": {
+          "target": "saturation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Noise HLS Auto2-0005": {
+          "target": "grainSize",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Noise HLS Auto2-0006": {
+          "target": "noiseAnimationSpeed",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Wave Warp",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.distort.wavewarp",
+      "params": {
+        "ADBE Wave Warp-0001": {
+          "target": "waveType",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Wave Warp-0002": {
+          "target": "height",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Wave Warp-0003": {
+          "target": "width",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Wave Warp-0004": {
+          "target": "direction",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Wave Warp-0005": {
+          "target": "speed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Wave Warp-0006": {
+          "target": "pinning",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "5": 3,
+            "6": 4,
+            "7": 5,
+            "8": 6,
+            "10": 7,
+            "11": 8
+          }
+        },
+        "ADBE Wave Warp-0007": {
+          "target": "phase",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Optics Compensation",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.distort.opticscompensation",
+      "params": {
+        "ADBE Optics Compensation-0001": {
+          "target": "fieldOfView",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Optics Compensation-0002": {
+          "target": "reverseLensDistortion",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Optics Compensation-0003": {
+          "target": "fovOrientation",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Optics Compensation-0004": {
+          "target": "viewCenter",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "ADBE Optics Compensation-0005": {
+          "target": "optimalPixels",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Optics Compensation-0006": {
+          "target": "resize",
+          "kind": "Choice",
+          "operation": "minus_one"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Upscale",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.distort.upscale",
+      "params": {
+        "ADBE Upscale-0001": {
+          "target": "scale",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Upscale-0002": {
+          "target": "reduceNoise",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Upscale-0007": {
+          "target": "detail",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Upscale-0005": {
+          "target": "alpha",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "2": 1
+          }
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE CameraShakeDeblur",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.blur.camerashakedeblur",
+      "params": {
+        "ADBE CameraShakeDeblur-0001": {
+          "target": "blurDuration",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE CameraShakeDeblur-0002": {
+          "target": "deblurMethod",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE CameraShakeDeblur-0003": {
+          "target": "strength",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE CameraShakeDeblur-0004": {
+          "target": "shakeSensitivity",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Tritone",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.tritone",
+      "params": {
+        "ADBE Tritone-0001": {
+          "target": "highlights",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE Tritone-0002": {
+          "target": "midtones",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE Tritone-0003": {
+          "target": "shadows",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE Tritone-0004": {
+          "target": "blend",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Tint",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.tint",
+      "params": {
+        "ADBE Tint-0001": {
+          "target": "black",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE Tint-0002": {
+          "target": "white",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE Tint-0003": {
+          "target": "amount",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE 4ColorGradient",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.generate.fourcolor",
+      "params": {
+        "ADBE 4ColorGradient-0001": {
+          "target": "positionsColors/point1",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "ADBE 4ColorGradient-0002": {
+          "target": "positionsColors/color1",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE 4ColorGradient-0003": {
+          "target": "positionsColors/point2",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "ADBE 4ColorGradient-0004": {
+          "target": "positionsColors/color2",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE 4ColorGradient-0005": {
+          "target": "positionsColors/point3",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "ADBE 4ColorGradient-0006": {
+          "target": "positionsColors/color3",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE 4ColorGradient-0007": {
+          "target": "positionsColors/point4",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "ADBE 4ColorGradient-0008": {
+          "target": "positionsColors/color4",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "ADBE 4ColorGradient-0009": {
+          "target": "blend",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE 4ColorGradient-0010": {
+          "target": "jitter",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE 4ColorGradient-0013": {
+          "target": "opacity",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE 4ColorGradient-0014": {
+          "target": "blendingMode",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "4": 2,
+            "5": 3,
+            "6": 4,
+            "7": 5,
+            "8": 6,
+            "9": 7,
+            "11": 8,
+            "12": 9,
+            "14": 10,
+            "15": 11,
+            "16": 12,
+            "17": 13,
+            "19": 14,
+            "20": 15,
+            "21": 16,
+            "22": 17
+          }
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Exposure2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.exposure",
+      "params": {
+        "ADBE Exposure2-0001": {
+          "target": "channels",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Exposure2-0003": {
+          "target": "master/exposure",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0004": {
+          "target": "master/offset",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0005": {
+          "target": "master/gamma",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0008": {
+          "target": "red/redExposure",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0009": {
+          "target": "red/redOffset",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0010": {
+          "target": "red/redGamma",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0013": {
+          "target": "green/greenExposure",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0014": {
+          "target": "green/greenOffset",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0015": {
+          "target": "green/greenGamma",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0018": {
+          "target": "blue/blueExposure",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0019": {
+          "target": "blue/blueOffset",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0020": {
+          "target": "blue/blueGamma",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Exposure2-0022": {
+          "target": "bypassLinearLight",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Black&White",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.blackwhite",
+      "params": {
+        "ADBE Black&White-0001": {
+          "target": "reds",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Black&White-0002": {
+          "target": "yellows",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Black&White-0003": {
+          "target": "greens",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Black&White-0004": {
+          "target": "cyans",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Black&White-0005": {
+          "target": "blues",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Black&White-0006": {
+          "target": "magentas",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Black&White-0007": {
+          "target": "tint",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Black&White-0008": {
+          "target": "tintColor",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Invert",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.channel.invert",
+      "params": {
+        "ADBE Invert-0001": {
+          "target": "channel",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "6": 4,
+            "7": 5,
+            "8": 6,
+            "9": 7,
+            "11": 8,
+            "12": 9,
+            "13": 10,
+            "14": 11,
+            "16": 12
+          }
+        },
+        "ADBE Invert-0002": {
+          "target": "blend",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Box Blur2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.blur.fastbox",
+      "params": {
+        "ADBE Box Blur2-0001": {
+          "target": "radius",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Box Blur2-0002": {
+          "target": "iterations",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Box Blur2-0003": {
+          "target": "dimensions",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Box Blur2-0004": {
+          "target": "repeatEdge",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE HUE SATURATION",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.huesaturation",
+      "params": {
+        "ADBE HUE SATURATION-0002": {
+          "target": "channelControl",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE HUE SATURATION-0007": {
+          "target": "colorize",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE HUE SATURATION-0008": {
+          "target": "colorizeHue",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE HUE SATURATION-0009": {
+          "target": "colorizeSaturation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE HUE SATURATION-0010": {
+          "target": "colorizeLightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE HUE SATURATION-0003/hue": {
+          "target": "hue",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/saturation": {
+          "target": "saturation",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/lightness": {
+          "target": "lightness",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/redsRangeStart": {
+          "target": "redsRangeStart",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/redsRangeEnd": {
+          "target": "redsRangeEnd",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/redsStartFalloff": {
+          "target": "redsStartFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/redsEndFalloff": {
+          "target": "redsEndFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/redsHue": {
+          "target": "redsHue",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/redsSaturation": {
+          "target": "redsSaturation",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/redsLightness": {
+          "target": "redsLightness",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/yellowsRangeStart": {
+          "target": "yellowsRangeStart",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/yellowsRangeEnd": {
+          "target": "yellowsRangeEnd",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/yellowsStartFalloff": {
+          "target": "yellowsStartFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/yellowsEndFalloff": {
+          "target": "yellowsEndFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/yellowsHue": {
+          "target": "yellowsHue",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/yellowsSaturation": {
+          "target": "yellowsSaturation",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/yellowsLightness": {
+          "target": "yellowsLightness",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/greensRangeStart": {
+          "target": "greensRangeStart",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/greensRangeEnd": {
+          "target": "greensRangeEnd",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/greensStartFalloff": {
+          "target": "greensStartFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/greensEndFalloff": {
+          "target": "greensEndFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/greensHue": {
+          "target": "greensHue",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/greensSaturation": {
+          "target": "greensSaturation",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/greensLightness": {
+          "target": "greensLightness",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/cyansRangeStart": {
+          "target": "cyansRangeStart",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/cyansRangeEnd": {
+          "target": "cyansRangeEnd",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/cyansStartFalloff": {
+          "target": "cyansStartFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/cyansEndFalloff": {
+          "target": "cyansEndFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/cyansHue": {
+          "target": "cyansHue",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/cyansSaturation": {
+          "target": "cyansSaturation",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/cyansLightness": {
+          "target": "cyansLightness",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/bluesRangeStart": {
+          "target": "bluesRangeStart",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/bluesRangeEnd": {
+          "target": "bluesRangeEnd",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/bluesStartFalloff": {
+          "target": "bluesStartFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/bluesEndFalloff": {
+          "target": "bluesEndFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/bluesHue": {
+          "target": "bluesHue",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/bluesSaturation": {
+          "target": "bluesSaturation",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/bluesLightness": {
+          "target": "bluesLightness",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/magentasRangeStart": {
+          "target": "magentasRangeStart",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/magentasRangeEnd": {
+          "target": "magentasRangeEnd",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/magentasStartFalloff": {
+          "target": "magentasStartFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/magentasEndFalloff": {
+          "target": "magentasEndFalloff",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/magentasHue": {
+          "target": "magentasHue",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/magentasSaturation": {
+          "target": "magentasSaturation",
+          "kind": "Float"
+        },
+        "ADBE HUE SATURATION-0003/magentasLightness": {
+          "target": "magentasLightness",
+          "kind": "Float"
+        }
+      },
+      "validation": "real-source-static; native-engine-param-roundtrip",
+      "evidence": "py-aep aRbp 180-byte BE45i; private real blobs; EffectCraft color_fx.rs HueRange and specs",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Easy Levels2",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.levels",
+      "params": {
+        "ADBE Easy Levels2-0001": {
+          "target": "channel",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Easy Levels2-0002/inBlack": {
+          "target": "inBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/inWhite": {
+          "target": "inWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/gamma": {
+          "target": "gamma",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/outBlack": {
+          "target": "outBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/outWhite": {
+          "target": "outWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0008": {
+          "target": "clipToOutputBlack",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        },
+        "ADBE Easy Levels2-0009": {
+          "target": "clipToOutputWhite",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        },
+        "ADBE Easy Levels2-0002/redInBlack": {
+          "target": "redInBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/redInWhite": {
+          "target": "redInWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/redGamma": {
+          "target": "redGamma",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/redOutBlack": {
+          "target": "redOutBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/redOutWhite": {
+          "target": "redOutWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0008/red": {
+          "target": "redClipToOutputBlack",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        },
+        "ADBE Easy Levels2-0009/red": {
+          "target": "redClipToOutputWhite",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        },
+        "ADBE Easy Levels2-0002/greenInBlack": {
+          "target": "greenInBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/greenInWhite": {
+          "target": "greenInWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/greenGamma": {
+          "target": "greenGamma",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/greenOutBlack": {
+          "target": "greenOutBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/greenOutWhite": {
+          "target": "greenOutWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0008/green": {
+          "target": "greenClipToOutputBlack",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        },
+        "ADBE Easy Levels2-0009/green": {
+          "target": "greenClipToOutputWhite",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        },
+        "ADBE Easy Levels2-0002/blueInBlack": {
+          "target": "blueInBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/blueInWhite": {
+          "target": "blueInWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/blueGamma": {
+          "target": "blueGamma",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/blueOutBlack": {
+          "target": "blueOutBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/blueOutWhite": {
+          "target": "blueOutWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0008/blue": {
+          "target": "blueClipToOutputBlack",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        },
+        "ADBE Easy Levels2-0009/blue": {
+          "target": "blueClipToOutputWhite",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        },
+        "ADBE Easy Levels2-0002/alphaInBlack": {
+          "target": "alphaInBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/alphaInWhite": {
+          "target": "alphaInWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/alphaGamma": {
+          "target": "alphaGamma",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/alphaOutBlack": {
+          "target": "alphaOutBlack",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0002/alphaOutWhite": {
+          "target": "alphaOutWhite",
+          "kind": "Float"
+        },
+        "ADBE Easy Levels2-0008/alpha": {
+          "target": "alphaClipToOutputBlack",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        },
+        "ADBE Easy Levels2-0009/alpha": {
+          "target": "alphaClipToOutputWhite",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 1,
+            "2": 0
+          }
+        }
+      },
+      "validation": "real-source-static; native-engine-param-roundtrip; 32bpc-clip-option-unsupported",
+      "evidence": "py-aep aRbp 108-byte magic/version/BE25f; private real blobs; EffectCraft color_fx.rs levels_channel_ids/LEVELS_CLIP",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Lumetri",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.lumetri",
+      "params": {
+        "ADBE Lumetri-0062": {
+          "target": "highDynamicRange",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Lumetri-0063": {
+          "target": "basicCorrection/tone/hdrWhite",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0064": {
+          "target": "basicCorrection/tone/hdrSpecular",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0005": {
+          "target": "basicCorrection/inputLut",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          },
+          "choices": {
+            "1": 0
+          }
+        },
+        "ADBE Lumetri-0007": {
+          "target": "basicCorrection/whiteBalance/temperature",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0008": {
+          "target": "basicCorrection/whiteBalance/tint",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0011": {
+          "target": "basicCorrection/tone/exposure",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0012": {
+          "target": "basicCorrection/tone/contrast",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0013": {
+          "target": "basicCorrection/tone/highlights",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0014": {
+          "target": "basicCorrection/tone/shadows",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0015": {
+          "target": "basicCorrection/tone/whites",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0016": {
+          "target": "basicCorrection/tone/blacks",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0020": {
+          "target": "basicCorrection/saturation",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0003": true
+          }
+        },
+        "ADBE Lumetri-0025": {
+          "target": "creative/look",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "requires": {
+            "ADBE Lumetri-0023": true,
+            "ADBE Lumetri-0026": 100.0
+          },
+          "choices": {
+            "1": 0
+          }
+        },
+        "ADBE Lumetri-0026": {
+          "target": "creative/lookIntensity",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0023": true,
+            "ADBE Lumetri-0026": 100.0
+          }
+        },
+        "ADBE Lumetri-0028": {
+          "target": "creative/adjustments/fadedFilm",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0023": true,
+            "ADBE Lumetri-0026": 100.0
+          }
+        },
+        "ADBE Lumetri-0029": {
+          "target": "creative/adjustments/sharpen",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0023": true,
+            "ADBE Lumetri-0026": 100.0
+          }
+        },
+        "ADBE Lumetri-0030": {
+          "target": "creative/adjustments/vibrance",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0023": true,
+            "ADBE Lumetri-0026": 100.0
+          }
+        },
+        "ADBE Lumetri-0031": {
+          "target": "creative/adjustments/creativeSaturation",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0023": true,
+            "ADBE Lumetri-0026": 100.0
+          }
+        },
+        "ADBE Lumetri-0033": {
+          "target": "creative/adjustments/tintBalance",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0023": true,
+            "ADBE Lumetri-0026": 100.0
+          }
+        },
+        "ADBE Lumetri-0051": {
+          "target": "vignette/vignetteAmount",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0050": true
+          }
+        },
+        "ADBE Lumetri-0052": {
+          "target": "vignette/vignetteMidpoint",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0050": true
+          }
+        },
+        "ADBE Lumetri-0053": {
+          "target": "vignette/vignetteRoundness",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0050": true
+          }
+        },
+        "ADBE Lumetri-0054": {
+          "target": "vignette/vignetteFeather",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Lumetri-0050": true
+          }
+        }
+      },
+      "validation": "real-source-static; native-engine-param-roundtrip; group-conditions; opaque-curves-LUTs-wheels-unsupported",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Radial Blur",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.blur.radial",
+      "params": {
+        "ADBE Radial Blur-0001": {
+          "target": "amount",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Radial Blur-0002": {
+          "target": "center",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "ADBE Radial Blur-0003": {
+          "target": "type",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Radial Blur-0004": {
+          "target": "antialiasing",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "2": 1
+          }
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; low-antialias-and-seed-unsupported",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "CC Radial Blur",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.blur.ccradial",
+      "params": {
+        "CC Radial Blur-0001": {
+          "target": "type",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "5": 3,
+            "7": 4
+          }
+        },
+        "CC Radial Blur-0002": {
+          "target": "amount",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "CC Radial Blur-0003": {
+          "target": "quality",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "CC Radial Blur-0004": {
+          "target": "center",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; scratch-unsupported",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE Camera Lens Blur",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.blur.cameralens",
+      "params": {
+        "ADBE Camera Lens Blur-0001": {
+          "target": "blurRadius",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Camera Lens Blur-0003": {
+          "target": "irisProperties/irisShape",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "5": 4,
+            "6": 5,
+            "7": 6,
+            "8": 7
+          }
+        },
+        "ADBE Camera Lens Blur-0004": {
+          "target": "irisProperties/irisRoundness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Camera Lens Blur-0005": {
+          "target": "irisProperties/irisAspectRatio",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Camera Lens Blur-0006": {
+          "target": "irisProperties/irisRotation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Camera Lens Blur-0007": {
+          "target": "irisProperties/diffractionFringe",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Camera Lens Blur-0011": {
+          "target": "blurMap/channel",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "5": 1
+          }
+        },
+        "ADBE Camera Lens Blur-0012": {
+          "target": "blurMap/placement",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Camera Lens Blur-0013": {
+          "target": "blurMap/blurFocalDistance",
+          "kind": "Float",
+          "operation": "identity",
+          "requires": {
+            "ADBE Camera Lens Blur-0013": 0.0
+          }
+        },
+        "ADBE Camera Lens Blur-0014": {
+          "target": "blurMap/invertBlurMap",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Camera Lens Blur-0017": {
+          "target": "highlight/specularBrightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Camera Lens Blur-0018": {
+          "target": "highlight/specularThreshold",
+          "kind": "Float",
+          "operation": "times_255"
+        },
+        "ADBE Camera Lens Blur-0019": {
+          "target": "highlight/highlightSaturation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Camera Lens Blur-0021": {
+          "target": "repeatEdge",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Camera Lens Blur-0022": {
+          "target": "useLinear",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; layer-reference-and-nonzero-focal-distance-unsupported",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md; Adobe Blur & Sharpen documentation: highlight Threshold 0..1; native blur2.rs divides by 255",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "CC Scale Wipe",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.transition.ccscalewipe",
+      "params": {
+        "CC Scale Wipe-0001": {
+          "target": "stretch",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "CC Scale Wipe-0002": {
+          "target": "center",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "CC Scale Wipe-0003": {
+          "target": "direction",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; native-engine-param-roundtrip; no-visual-comparison",
+      "evidence": "Private corpus: parT match IDs/types/menu and tdbs values; official EffectCraft ParamSpec snapshot at pinned commit; docs/effect-expansion.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "ADBE CurvesCustom",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.curves",
+      "params": {
+        "ADBE CurvesCustom-0001/rgb": {
+          "target": "rgb",
+          "kind": "Text"
+        },
+        "ADBE CurvesCustom-0001/red": {
+          "target": "red",
+          "kind": "Text"
+        },
+        "ADBE CurvesCustom-0001/green": {
+          "target": "green",
+          "kind": "Text"
+        },
+        "ADBE CurvesCustom-0001/blue": {
+          "target": "blue",
+          "kind": "Text"
+        },
+        "ADBE CurvesCustom-0001/alpha": {
+          "target": "alpha",
+          "kind": "Text"
+        }
+      },
+      "validation": "real-source-static; native-engine-param-roundtrip; LUT-resampling-loss-explicit",
+      "evidence": "py-aep aRbp 1644-byte BE Curves v1; 256-sample/channel LUT; EffectCraft color2.rs Curve::parse/eval; docs/decisions/005-curves-lut-transfer.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    },
+    {
+      "source": "CS Color Neutralizer",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "ec.color.cccolorneutralizer",
+      "params": {
+        "CS Color Neutralizer/rgb/shadows": {
+          "target": "shadowsBalance",
+          "kind": "Color",
+          "requires": {
+            "CS Color Neutralizer-0022": 1.0,
+            "CS Color Neutralizer-0023": 0.0,
+            "CS Color Neutralizer-0024": 100.0
+          }
+        },
+        "CS Color Neutralizer/rgb/midtones": {
+          "target": "midtonesBalance",
+          "kind": "Color",
+          "requires": {
+            "CS Color Neutralizer-0022": 1.0,
+            "CS Color Neutralizer-0023": 0.0,
+            "CS Color Neutralizer-0024": 100.0
+          }
+        },
+        "CS Color Neutralizer/rgb/highlights": {
+          "target": "highlightsBalance",
+          "kind": "Color",
+          "requires": {
+            "CS Color Neutralizer-0022": 1.0,
+            "CS Color Neutralizer-0023": 0.0,
+            "CS Color Neutralizer-0024": 100.0
+          }
+        },
+        "CS Color Neutralizer-0019": {
+          "target": "pinning",
+          "kind": "Float",
+          "requires": {
+            "CS Color Neutralizer-0022": 1.0,
+            "CS Color Neutralizer-0023": 0.0,
+            "CS Color Neutralizer-0024": 100.0
+          }
+        },
+        "CS Color Neutralizer-0020": {
+          "target": "blendWOriginal",
+          "kind": "Float",
+          "requires": {
+            "CS Color Neutralizer-0022": 1.0,
+            "CS Color Neutralizer-0023": 0.0,
+            "CS Color Neutralizer-0024": 100.0
+          }
+        }
+      },
+      "validation": "real-source-pinning-blend; native-engine-param-roundtrip; RGB-percent-profile-synthetic; approximate-tonal-algorithm; default-black-white-final-view-only",
+      "evidence": "Cycore FX HD 1.8.9 Manual pp12-13; pard percent/UI-only flags; native color3.rs Balance-Unbalance; docs/decisions/006-neutralizer-rgb-transfer.md",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8"
+    }
+  ]
+}

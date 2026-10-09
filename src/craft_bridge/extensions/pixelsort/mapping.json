@@ -1,0 +1,372 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-pixelsort-1",
+  "plugins": [
+    {
+      "api": 1,
+      "id": "org.craftbridge.pixelsort",
+      "name": "Bridge Pixel Sort (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original deterministic thresholded whole-pixel sort along projected lines, radial rays and circular annuli. Own raster grouping/metrics/seed/restarts/mask/alpha calibration; Matte/Mocha/border expansion unresolved. Not Sapphire render equivalence.",
+      "params": [
+        {
+          "id": "mode",
+          "name": "Pattern",
+          "default": 0,
+          "type": "popup",
+          "options": [
+            "Linear",
+            "Radial",
+            "Circular"
+          ]
+        },
+        {
+          "id": "sort_angle",
+          "name": "Sort Angle",
+          "default": 0,
+          "type": "slider",
+          "min": -36000,
+          "max": 36000
+        },
+        {
+          "id": "radial_center",
+          "name": "Radial Center (pixels)",
+          "default": [
+            0.5,
+            0.5
+          ],
+          "type": "point"
+        },
+        {
+          "id": "radial_start",
+          "name": "Radial Start Angle",
+          "default": 0,
+          "type": "slider",
+          "min": -36000,
+          "max": 36000
+        },
+        {
+          "id": "radial_degrees",
+          "name": "Radial Degrees Sorted",
+          "default": 360,
+          "type": "slider",
+          "min": 0,
+          "max": 360
+        },
+        {
+          "id": "radial_inner",
+          "name": "Raw Radial Inner Radius",
+          "default": 0,
+          "type": "slider",
+          "min": 0,
+          "max": 65536
+        },
+        {
+          "id": "ray_length",
+          "name": "Raw Ray Length",
+          "default": 768,
+          "type": "slider",
+          "min": 0,
+          "max": 65536
+        },
+        {
+          "id": "vary_radius",
+          "name": "Vary Radius",
+          "default": 0.1,
+          "type": "slider",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "circular_start",
+          "name": "Circular Start Angle",
+          "default": 0,
+          "type": "slider",
+          "min": -36000,
+          "max": 36000
+        },
+        {
+          "id": "circular_degrees",
+          "name": "Circular Degrees Sorted",
+          "default": 270,
+          "type": "slider",
+          "min": 0,
+          "max": 360
+        },
+        {
+          "id": "circular_center",
+          "name": "Circular Center (pixels)",
+          "default": [
+            0.5,
+            0.5
+          ],
+          "type": "point"
+        },
+        {
+          "id": "vary_start",
+          "name": "Vary Start",
+          "default": 0.15,
+          "type": "slider",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "circular_inner",
+          "name": "Raw Circular Inner Radius",
+          "default": 0,
+          "type": "slider",
+          "min": 0,
+          "max": 65536
+        },
+        {
+          "id": "thickness",
+          "name": "Raw Circular Thickness",
+          "default": 1056,
+          "type": "slider",
+          "min": 0,
+          "max": 65536
+        },
+        {
+          "id": "threshold",
+          "name": "Threshold",
+          "default": 0.3,
+          "type": "slider",
+          "min": -1000000,
+          "max": 1000000
+        },
+        {
+          "id": "sort_direction",
+          "name": "Threshold Direction",
+          "default": 1,
+          "type": "popup",
+          "options": [
+            "sort below threshold",
+            "sort above threshold"
+          ]
+        },
+        {
+          "id": "reverse",
+          "name": "Reverse Sort Direction",
+          "default": false,
+          "type": "checkbox"
+        },
+        {
+          "id": "sort_type",
+          "name": "Sort Type",
+          "default": 0,
+          "type": "popup",
+          "options": [
+            "monochrome",
+            "average",
+            "minimum",
+            "maximum",
+            "red",
+            "green",
+            "blue",
+            "hue",
+            "saturation",
+            "brightness"
+          ]
+        },
+        {
+          "id": "restart",
+          "name": "Raw Randomly Restart Sort",
+          "default": 100,
+          "type": "slider",
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "soften",
+          "name": "Raw Soften Threshold Mask",
+          "default": 0,
+          "type": "slider",
+          "min": 0,
+          "max": 4096
+        },
+        {
+          "id": "seed",
+          "name": "Raw Seed (fraction retained)",
+          "default": 0.273,
+          "type": "slider",
+          "min": 0,
+          "max": 1000000
+        },
+        {
+          "id": "mix",
+          "name": "Mix With Source",
+          "default": 0,
+          "type": "slider",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "show",
+          "name": "Show",
+          "default": 0,
+          "type": "popup",
+          "options": [
+            "Result",
+            "Raw Sort Values",
+            "Threshold Mask",
+            "Random Restart Noise",
+            "Combined Mask"
+          ]
+        },
+        {
+          "id": "opacity_mode",
+          "name": "Opacity Mode",
+          "default": 1,
+          "type": "popup",
+          "options": [
+            "All Opaque",
+            "Normal",
+            "As Premult"
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "S_PixelSort",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.pixelsort",
+      "params": {
+        "S_PixelSort-0045": {
+          "target": "mode",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_PixelSort-0050": {
+          "target": "sort_angle",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0051": {
+          "target": "radial_center",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "S_PixelSort-0052": {
+          "target": "radial_start",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0053": {
+          "target": "radial_degrees",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0054": {
+          "target": "radial_inner",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0055": {
+          "target": "ray_length",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0056": {
+          "target": "vary_radius",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0057": {
+          "target": "circular_start",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0058": {
+          "target": "circular_degrees",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0059": {
+          "target": "circular_center",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "S_PixelSort-0060": {
+          "target": "vary_start",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0061": {
+          "target": "circular_inner",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0062": {
+          "target": "thickness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0063": {
+          "target": "threshold",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0064": {
+          "target": "sort_direction",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_PixelSort-0065": {
+          "target": "reverse",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "S_PixelSort-0066": {
+          "target": "sort_type",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_PixelSort-0067": {
+          "target": "restart",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0068": {
+          "target": "soften",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0069": {
+          "target": "seed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0070": {
+          "target": "mix",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_PixelSort-0071": {
+          "target": "show",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_PixelSort-0075": {
+          "target": "opacity_mode",
+          "kind": "Choice",
+          "operation": "minus_one"
+        }
+      },
+      "validation": "real-source; original-renderer-approximate",
+      "evidence": "One real S_PixelSort parT/tdb4 profile with exact IDs/types/menus and normalized points; official Boris FX functional description; independent algorithm/calibration ADR 020, no source plugin code/assets reused",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Ordenação e agrupamento raster Linear/Radial/Circular são originais; geometria/filtros/calibração e fidelidade Sapphire não certificados.",
+        "Matte de camada/path e Mocha opacos não são resolvidos; seleção própria usa somente geometria/threshold sem presumir ausência de máscaras originais.",
+        "Métricas RGB/HSV/HDR/gama/alpha, seed fracionário, reinícios e suavização usam fórmulas próprias; unidades de Radius/Length/Soften não inferidas.",
+        "ABI de quadro fixo não expande Soft Borders; Combined Mask omite entradas opacas, controles de Matte/Mocha permanecem perdas; sempre parcial e strict não publica."
+      ]
+    }
+  ]
+}

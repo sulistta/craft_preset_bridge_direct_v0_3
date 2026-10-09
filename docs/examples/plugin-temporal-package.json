@@ -1,0 +1,36 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "original-temporal-probe",
+  "plugins": [
+    {
+      "api": 4,
+      "bridge_host_revision": 3,
+      "id": "org.craftbridge.test.temporal",
+      "name": "Original frame-hold transport probe",
+      "category": "Bridge Validation",
+      "version": "0.1.0",
+      "description": "Original transport test only. Copies preceding-effect pixels at a held source time; no Adobe effect map.",
+      "params": [
+        {
+          "id": "skip",
+          "name": "Frames to skip (test contract)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0.0,
+          "max": 1024.0
+        }
+      ],
+      "temporal_inputs": [
+        {
+          "id": "held",
+          "mode": "frame_hold",
+          "parameter": "skip",
+          "multiple": 1,
+          "edge": "clamp"
+        }
+      ]
+    }
+  ],
+  "mappings": []
+}

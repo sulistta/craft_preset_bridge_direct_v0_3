@@ -1,0 +1,151 @@
+{
+  "api": 2,
+  "bridge_host_revision": 1,
+  "id": "org.craftbridge.pixelencoder",
+  "name": "Bridge Pixel Encoder (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original mathematical tile/glyph renderer. No MEGAKRUNCH assets or proprietary patterns. Requires experimental API2 host geometry.",
+  "params": [
+    {
+      "id": "pattern",
+      "name": "Presets",
+      "type": "popup",
+      "default": 1,
+      "options": [
+        "High Detail",
+        "Numbers & Letters",
+        "Horizontal Lines",
+        "Dots",
+        "Vertical Lines",
+        "Extra Grunge",
+        "Rings",
+        "Solid",
+        "Diagonal (Left)",
+        "Diagonal (Right)"
+      ]
+    },
+    {
+      "id": "brightness",
+      "name": "Brightness",
+      "type": "slider",
+      "default": -50.0,
+      "min": -100,
+      "max": 100
+    },
+    {
+      "id": "contrast",
+      "name": "Contrast",
+      "type": "slider",
+      "default": 150.0,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "size",
+      "name": "Pattern Size",
+      "type": "slider",
+      "default": 3.0,
+      "min": 0.1,
+      "max": 1024
+    },
+    {
+      "id": "lock",
+      "name": "Enable Scale Lock",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "detail_x",
+      "name": "Horizontal Detail",
+      "type": "slider",
+      "default": 20.0,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "detail_y",
+      "name": "Vertical Detail",
+      "type": "slider",
+      "default": 10.0,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "foreground",
+      "name": "Pixel Color",
+      "type": "color",
+      "default": [
+        1.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "background",
+      "name": "Background Color",
+      "type": "color",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "original_color",
+      "name": "Use Original Color",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "transparent",
+      "name": "Transparent Background",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "chaos",
+      "name": "Enable Chaos",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "intensity",
+      "name": "Intensity",
+      "type": "slider",
+      "default": 5.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "speed",
+      "name": "Animation Speed",
+      "type": "slider",
+      "default": 0.0,
+      "min": -10000,
+      "max": 10000
+    },
+    {
+      "id": "seed",
+      "name": "Seed",
+      "type": "slider",
+      "default": 0.0,
+      "min": -1000000000.0,
+      "max": 1000000000.0
+    },
+    {
+      "id": "behavior",
+      "name": "Chaos Behavior",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Increase Size",
+        "Decrease Size",
+        "Increase & Decrease Size"
+      ]
+    }
+  ]
+}

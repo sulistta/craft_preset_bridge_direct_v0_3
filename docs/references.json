@@ -1,0 +1,39 @@
+{
+  "filmcraft": {
+    "url": "https://github.com/storytold/filmcraft",
+    "commit": "a4536bcfedf588cbef9ea24df149c70bf99a037d",
+    "license": "MIT OR Apache-2.0"
+  },
+  "effectcraft": {
+    "url": "https://github.com/storytold/effectcraft",
+    "commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+    "license": "MIT OR Apache-2.0"
+  },
+  "ffx-compat": {
+    "url": "https://github.com/marbou92/FFX-Compatibility-Tool",
+    "commit": "1607b7771025a4fa3b84c6ff3065ae8315d61215",
+    "license": "MIT"
+  },
+  "prfpset-analysis": {
+    "url": "https://github.com/notoow/premiere-pro-prfpset-analysis",
+    "commit": "4cd86871577b8f692d7654c11a9960701538b195",
+    "license": "MIT + disclaimer de pesquisa"
+  },
+  "py-aep": {
+    "url": "https://github.com/forticheprod/py-aep",
+    "commit": "edcae7abf08dc31b75c878d84b2a4e952105d842",
+    "license": "MIT"
+  },
+  "dot-aep": {
+    "url": "https://github.com/virtualritz/dot-aep",
+    "commit": "265bee8736d9ce3f50f0de7d1b14149a03b564ff",
+    "license": "MIT OR Apache-2.0"
+  },
+  "ofp-format-research": {
+    "url": "https://github.com/Patapom/NuajFramework",
+    "commit": "3ae072166486e5df6a575062bd0da1afeb50a471",
+    "path": "Packages/Cirrus.Utility/Helpers/LensFlare.cs",
+    "license": "No explicit license identified; no code or assets reused",
+    "use": "Format research; independently verified in 38 authorized local blobs"
+  }
+}

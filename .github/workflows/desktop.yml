@@ -1,0 +1,19 @@
+name: Desktop bundles
+on: workflow_dispatch
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - run: uv sync --frozen --extra gui --extra build
+      - run: uv run --frozen --extra gui --extra build python scripts/build_desktop.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CraftPresetBridge-${{ matrix.os }}
+          path: dist/CraftPresetBridge*

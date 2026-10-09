@@ -1,0 +1,82 @@
+{
+  "$defs": {
+    "SourceLayerBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "layer_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,79}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Layer Ref"
+        },
+        "preset_index": {
+          "default": 0,
+          "maximum": 2047,
+          "minimum": 0,
+          "title": "Preset Index",
+          "type": "integer"
+        },
+        "effect_index": {
+          "maximum": 2047,
+          "minimum": 0,
+          "title": "Effect Index",
+          "type": "integer"
+        },
+        "parameter": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Parameter",
+          "type": "string"
+        }
+      },
+      "required": [
+        "layer_ref",
+        "effect_index",
+        "parameter"
+      ],
+      "title": "SourceLayerBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "craftbridge.source-layer-bindings",
+      "default": "craftbridge.source-layer-bindings",
+      "title": "Format",
+      "type": "string"
+    },
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "bindings": {
+      "items": {
+        "$ref": "#/$defs/SourceLayerBinding"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "title": "Bindings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_sha256",
+    "bindings"
+  ],
+  "title": "SourceLayerBindings",
+  "type": "object"
+}

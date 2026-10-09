@@ -1,0 +1,512 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-signal-1",
+  "plugins": [
+    {
+      "api": 2,
+      "bridge_host_revision": 1,
+      "id": "org.craftbridge.signal",
+      "name": "Bridge Signal (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original bounded luminance/chrominance modulation and decoding. Independent calibration; no Zaebects Signal equivalence. Requires experimental Bridge API 2 host.",
+      "params": [
+        {
+          "id": "seed",
+          "name": "Random seed",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 1000000000.0
+        },
+        {
+          "id": "strength",
+          "name": "Signal strength",
+          "type": "slider",
+          "default": 40,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "amplification",
+          "name": "Signal amplification",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "cutoff",
+          "name": "Cutoff filter",
+          "type": "slider",
+          "default": 88,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "luma_noise",
+          "name": "Luma noise",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "chroma_noise",
+          "name": "Chroma noise",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "hue_noise",
+          "name": "Hue Noise",
+          "type": "slider",
+          "default": 15,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "chroma_loss",
+          "name": "Chroma loss",
+          "type": "slider",
+          "default": 0.24,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "sharpen",
+          "name": "Sharpen",
+          "type": "slider",
+          "default": 2,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "connections",
+          "name": "Device-to-device connections",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 16
+        },
+        {
+          "id": "vhs",
+          "name": "Emulating VHS",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "VHS_SP",
+            "VHS_LP",
+            "VHS_EP"
+          ]
+        },
+        {
+          "id": "luma_enable",
+          "name": "Luma modulation On/Off",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "frequency",
+          "name": "Frequency",
+          "type": "slider",
+          "default": 0.62,
+          "min": -10000,
+          "max": 10000
+        },
+        {
+          "id": "phase",
+          "name": "Phase",
+          "type": "slider",
+          "default": 2,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "lightness",
+          "name": "Lightness",
+          "type": "slider",
+          "default": 0.62,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "id": "quantize",
+          "name": "Quantize",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "tape_enable",
+          "name": "Tape Errors",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "te_start",
+          "name": "TE start",
+          "type": "slider",
+          "default": 0.92,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "te_end",
+          "name": "TE end",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "te_probability",
+          "name": "TE probability",
+          "type": "slider",
+          "default": 0.1,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "te_fade",
+          "name": "TE fade",
+          "type": "slider",
+          "default": 5,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "te_gamma",
+          "name": "TE gamma",
+          "type": "slider",
+          "default": 3,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "thick",
+          "name": "Thick distortion",
+          "type": "slider",
+          "default": 0,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "id": "fine",
+          "name": "Fine distotrion",
+          "type": "slider",
+          "default": 0,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "id": "distortion_speed",
+          "name": "Distortion speed",
+          "type": "slider",
+          "default": 0,
+          "min": -10000,
+          "max": 10000
+        },
+        {
+          "id": "roll_speed",
+          "name": "Roll speed",
+          "type": "slider",
+          "default": 0,
+          "min": -10000,
+          "max": 10000
+        },
+        {
+          "id": "lowpass_in",
+          "name": "Low-Pass filter in",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "lowpass_out",
+          "name": "Low-Pass filter out",
+          "type": "popup",
+          "default": 2,
+          "options": [
+            "Off",
+            "Lite",
+            "Strong"
+          ]
+        },
+        {
+          "id": "phase_shift",
+          "name": "Phase shift",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "phase_offset",
+          "name": "Phase shift offset",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "s_video",
+          "name": "S-video out",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "chroma_vertical",
+          "name": "Chroma vertical blend",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "sharpen_enable",
+          "name": "Sharpen On/Off",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "scan_blur",
+          "name": "Scanlines blur",
+          "type": "slider",
+          "default": 1.5,
+          "min": 0,
+          "max": 100
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "source": "ADBE Signal",
+      "effect": "org.craftbridge.signal",
+      "params": {
+        "ADBE Signal-0001": {
+          "target": "seed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0002": {
+          "target": "strength",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0003": {
+          "target": "amplification",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0004": {
+          "target": "cutoff",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0005": {
+          "target": "luma_noise",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0006": {
+          "target": "chroma_noise",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0007": {
+          "target": "hue_noise",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0008": {
+          "target": "chroma_loss",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0009": {
+          "target": "sharpen",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0010": {
+          "target": "connections",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0011": {
+          "target": "vhs",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Signal-0014": {
+          "target": "luma_enable",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Signal-0015": {
+          "target": "frequency",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0016": {
+          "target": "phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0017": {
+          "target": "lightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0018": {
+          "target": "quantize",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0019": {
+          "target": "tape_enable",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Signal-0020": {
+          "target": "te_start",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0021": {
+          "target": "te_end",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0022": {
+          "target": "te_probability",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0023": {
+          "target": "te_fade",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0024": {
+          "target": "te_gamma",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0027": {
+          "target": "thick",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0028": {
+          "target": "fine",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0029": {
+          "target": "distortion_speed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0030": {
+          "target": "roll_speed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0033": {
+          "target": "lowpass_in",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Signal-0034": {
+          "target": "lowpass_out",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Signal-0035": {
+          "target": "phase_shift",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0036": {
+          "target": "phase_offset",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Signal-0037": {
+          "target": "s_video",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Signal-0038": {
+          "target": "chroma_vertical",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Signal-0039": {
+          "target": "sharpen_enable",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Signal-0040": {
+          "target": "scan_blur",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "required_on_create": [
+        "ADBE Signal-0001",
+        "ADBE Signal-0002",
+        "ADBE Signal-0003",
+        "ADBE Signal-0004",
+        "ADBE Signal-0005",
+        "ADBE Signal-0006",
+        "ADBE Signal-0007",
+        "ADBE Signal-0008",
+        "ADBE Signal-0009",
+        "ADBE Signal-0010",
+        "ADBE Signal-0011",
+        "ADBE Signal-0014",
+        "ADBE Signal-0015",
+        "ADBE Signal-0016",
+        "ADBE Signal-0017",
+        "ADBE Signal-0018",
+        "ADBE Signal-0019",
+        "ADBE Signal-0020",
+        "ADBE Signal-0021",
+        "ADBE Signal-0022",
+        "ADBE Signal-0023",
+        "ADBE Signal-0024",
+        "ADBE Signal-0027",
+        "ADBE Signal-0028",
+        "ADBE Signal-0029",
+        "ADBE Signal-0030",
+        "ADBE Signal-0033",
+        "ADBE Signal-0034",
+        "ADBE Signal-0035",
+        "ADBE Signal-0036",
+        "ADBE Signal-0037",
+        "ADBE Signal-0038",
+        "ADBE Signal-0039",
+        "ADBE Signal-0040"
+      ],
+      "evidence": "Two complete local parT/tdb4 snapshots prove 34 scalar/bool/menu controls. Destruction button excluded. Official aescripts Signal functional description consulted 2026-10-09; ADR 034. Original MIT code only.",
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Renderer original aproximado, n\u00e3o implementa\u00e7\u00e3o do plugin Zaebects. Matrizes, filtros, portadora, PRNG, tempo, VHS, calibra\u00e7\u00e3o e unidades s\u00e3o pr\u00f3prios. Sempre PARTIAL; strict n\u00e3o publica.",
+        "Sliders kind 10 s\u00e3o preservados brutos. Fase/Hue n\u00e3o recebem unidade Adobe inferida; divis\u00f5es por 360, frequ\u00eancias e escalas s\u00e3o escolhas documentadas do renderer. Menus parT locais t\u00eam preced\u00eancia.",
+        "Destruction button (0012) n\u00e3o traduzido: a\u00e7\u00e3o/muta\u00e7\u00e3o de controles n\u00e3o comprovada. Grupos, presets, Force CPU/GPU, m\u00e1scaras e express\u00f5es n\u00e3o s\u00e3o reproduzidos; avisos de origem preservados.",
+        "Processamento RGB n\u00e3o premultiplicado em matriz pr\u00f3pria YIQ, com portadora de quatro amostras por pixel e receptor FIR limitado. S-video separa lumin\u00e2ncia; composite permite cross-talk. Gamma/HDR/alpha/cor Adobe n\u00e3o certificados; alpha original preservado sem deslocamento.",
+        "VHS e conex\u00f5es usam degrada\u00e7\u00e3o/filtro pr\u00f3prios, n\u00e3o simula\u00e7\u00e3o certificada de hardware nem n\u00famero de passagens propriet\u00e1rio. Ru\u00eddo e tape errors usam rel\u00f3gio pr\u00f3prio de 30 Hz; n\u00e3o FPS da origem. TE start maior que end produz intervalo vazio.",
+        "Exterior horizontal/vertical usa repeti\u00e7\u00e3o, canvas fixo. Preview usa geometria do buffer, mas filtragem/discretiza\u00e7\u00e3o por resolu\u00e7\u00e3o pode diferir. Limite de 2097152 pixels/imagem; nenhum recurso privado copiado."
+      ]
+    }
+  ]
+}

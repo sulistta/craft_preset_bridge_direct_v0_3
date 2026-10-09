@@ -1,0 +1,16 @@
+[package]
+name = "craft-bridge-native-validation"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+filmcraft-engine = { path = "../../.research/filmcraft/crates/engine" }
+filmcraft-project = { path = "../../.research/filmcraft/crates/project" }
+effectcraft-engine = { path = "../../.research/effectcraft/crates/engine" }
+effectcraft-effects = { path = "../../.research/effectcraft/crates/effects" }
+effectcraft-plugin = { path = "../../.research/effectcraft/crates/plugin", features = ["wasm"] }
+serde_json = "1"
+
+# Benchmark the interpreter with production optimization even in this research harness.
+[profile.dev.package.wasmi]
+opt-level = 3

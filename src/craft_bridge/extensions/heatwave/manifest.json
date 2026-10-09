@@ -1,0 +1,239 @@
+{
+  "api": 2,
+  "bridge_host_revision": 1,
+  "id": "org.craftbridge.heatwave",
+  "name": "Bridge Heatwave (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original noise displacement, spatial blur and geometric/layer masks. Independent noise, geometry, alpha and raw slider calibration; no Universe equivalence. Requires experimental Bridge API 2 host.",
+  "params": [
+    {
+      "id": "mask",
+      "name": "Mask Layer",
+      "type": "layer",
+      "default": null
+    },
+    {
+      "id": "maskSource",
+      "name": "Mask source mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Source",
+        "Masks",
+        "Effects & Masks"
+      ]
+    },
+    {
+      "id": "wave_type",
+      "name": "Wave Type",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Default",
+        "Billowed",
+        "Ridged"
+      ]
+    },
+    {
+      "id": "intensity",
+      "name": "Heat Intensity",
+      "type": "slider",
+      "default": 25,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "direction",
+      "name": "Flow Direction (degrees)",
+      "type": "slider",
+      "default": 90,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "speed",
+      "name": "Flow Speed",
+      "type": "slider",
+      "default": 19,
+      "min": -10000,
+      "max": 10000
+    },
+    {
+      "id": "blur",
+      "name": "Blur Amount",
+      "type": "slider",
+      "default": 25,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "heat_size",
+      "name": "Heat Size",
+      "type": "slider",
+      "default": 100,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "heat_detail",
+      "name": "Heat Detail Amount",
+      "type": "slider",
+      "default": 42,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "heat_detail_scale",
+      "name": "Heat Detail Scale",
+      "type": "slider",
+      "default": 150,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "blur_size",
+      "name": "Blur Size",
+      "type": "slider",
+      "default": 100,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "blur_feather",
+      "name": "Blur Feather",
+      "type": "slider",
+      "default": 100,
+      "min": -10000,
+      "max": 10000
+    },
+    {
+      "id": "blur_detail",
+      "name": "Blur Detail Amount",
+      "type": "slider",
+      "default": 42,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "blur_detail_scale",
+      "name": "Blur Detail Scale",
+      "type": "slider",
+      "default": 50,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "quality",
+      "name": "Blur Quality",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Fast",
+        "Medium",
+        "Accurate (Slow)"
+      ]
+    },
+    {
+      "id": "shape",
+      "name": "Shape",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "None",
+        "Ellipse",
+        "Rectangle",
+        "Layer"
+      ]
+    },
+    {
+      "id": "invert",
+      "name": "Invert",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "point_a",
+      "name": "Point A",
+      "type": "point",
+      "default": [
+        0.5,
+        0.25
+      ]
+    },
+    {
+      "id": "point_b",
+      "name": "Point B",
+      "type": "point",
+      "default": [
+        0.5,
+        0.75
+      ]
+    },
+    {
+      "id": "radius",
+      "name": "Radius",
+      "type": "slider",
+      "default": 25,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "feather",
+      "name": "Feather Size",
+      "type": "slider",
+      "default": 10,
+      "min": -10000,
+      "max": 10000
+    },
+    {
+      "id": "mask_channel",
+      "name": "Mask Channel",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Luminance",
+        "Alpha"
+      ]
+    },
+    {
+      "id": "mask_scale",
+      "name": "Mask Scale",
+      "type": "slider",
+      "default": 100,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "mask_position",
+      "name": "Mask Position",
+      "type": "point",
+      "default": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "output",
+      "name": "Output",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Final Image",
+        "Distortion",
+        "Blur",
+        "Mask",
+        "Mask Overlay"
+      ]
+    },
+    {
+      "id": "bias",
+      "name": "Heat Bias",
+      "type": "slider",
+      "default": 0,
+      "min": -100,
+      "max": 100
+    }
+  ]
+}

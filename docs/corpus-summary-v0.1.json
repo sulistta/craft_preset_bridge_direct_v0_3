@@ -1,0 +1,15 @@
+{
+  "files": 144,
+  "status": {
+    "UNSUPPORTED": 138,
+    "PARTIAL": 6
+  },
+  "mapped_effects": {
+    "ec.color.brightnesscontrast": 3,
+    "ec.blur.unsharp": 4,
+    "ec.distort.transform": 2
+  },
+  "converted_parameters": 45,
+  "preserved_keyframes": 0,
+  "evidence": "Private user files; structured reading and conservative mapping, no Adobe render comparison."
+}

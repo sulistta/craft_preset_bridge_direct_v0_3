@@ -1,0 +1,50 @@
+{
+  "files": 144,
+  "status": {
+    "PARTIAL": 52,
+    "UNSUPPORTED": 92
+  },
+  "mapped_effects": {
+    "ec.generate.fourcolor": 9,
+    "ec.color.brightnesscontrast": 6,
+    "ec.blur.unsharp": 7,
+    "ec.noise.noise": 3,
+    "ec.color.tritone": 9,
+    "ec.color.tint": 2,
+    "ec.stylize.motiontile": 27,
+    "ec.blur.sharpen": 2,
+    "ec.distort.upscale": 1,
+    "ec.blur.camerashakedeblur": 4,
+    "ec.noise.noisehls": 1,
+    "ec.distort.opticscompensation": 1,
+    "ec.noise.noisehlsauto": 6,
+    "ec.distort.wavewarp": 1,
+    "ec.distort.transform": 2
+  },
+  "converted_parameters": 513,
+  "preserved_keyframes": 9,
+  "native_applied_plans": 51,
+  "native_verified_effects": {
+    "ec.generate.fourcolor": 9,
+    "ec.color.brightnesscontrast": 6,
+    "ec.blur.unsharp": 7,
+    "ec.noise.noise": 3,
+    "ec.color.tritone": 8,
+    "ec.color.tint": 2,
+    "ec.stylize.motiontile": 27,
+    "ec.blur.sharpen": 2,
+    "ec.distort.upscale": 1,
+    "ec.blur.camerashakedeblur": 3,
+    "ec.distort.opticscompensation": 1,
+    "ec.noise.noisehlsauto": 6,
+    "ec.distort.wavewarp": 1,
+    "ec.distort.transform": 2
+  },
+  "native_verified_parameters": 500,
+  "reference_size": [
+    1920,
+    1080
+  ],
+  "native_rejected_plans": 1,
+  "evidence": "Private corpus; explicit destination layer reference 1920x1080; parameter roundtrip in official engine; no Adobe render comparison."
+}

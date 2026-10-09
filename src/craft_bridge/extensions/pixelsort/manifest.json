@@ -1,0 +1,226 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.pixelsort",
+  "name": "Bridge Pixel Sort (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original deterministic thresholded whole-pixel sort along projected lines, radial rays and circular annuli. Own raster grouping/metrics/seed/restarts/mask/alpha calibration; Matte/Mocha/border expansion unresolved. Not Sapphire render equivalence.",
+  "params": [
+    {
+      "id": "mode",
+      "name": "Pattern",
+      "default": 0,
+      "type": "popup",
+      "options": [
+        "Linear",
+        "Radial",
+        "Circular"
+      ]
+    },
+    {
+      "id": "sort_angle",
+      "name": "Sort Angle",
+      "default": 0,
+      "type": "slider",
+      "min": -36000,
+      "max": 36000
+    },
+    {
+      "id": "radial_center",
+      "name": "Radial Center (pixels)",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "type": "point"
+    },
+    {
+      "id": "radial_start",
+      "name": "Radial Start Angle",
+      "default": 0,
+      "type": "slider",
+      "min": -36000,
+      "max": 36000
+    },
+    {
+      "id": "radial_degrees",
+      "name": "Radial Degrees Sorted",
+      "default": 360,
+      "type": "slider",
+      "min": 0,
+      "max": 360
+    },
+    {
+      "id": "radial_inner",
+      "name": "Raw Radial Inner Radius",
+      "default": 0,
+      "type": "slider",
+      "min": 0,
+      "max": 65536
+    },
+    {
+      "id": "ray_length",
+      "name": "Raw Ray Length",
+      "default": 768,
+      "type": "slider",
+      "min": 0,
+      "max": 65536
+    },
+    {
+      "id": "vary_radius",
+      "name": "Vary Radius",
+      "default": 0.1,
+      "type": "slider",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "circular_start",
+      "name": "Circular Start Angle",
+      "default": 0,
+      "type": "slider",
+      "min": -36000,
+      "max": 36000
+    },
+    {
+      "id": "circular_degrees",
+      "name": "Circular Degrees Sorted",
+      "default": 270,
+      "type": "slider",
+      "min": 0,
+      "max": 360
+    },
+    {
+      "id": "circular_center",
+      "name": "Circular Center (pixels)",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "type": "point"
+    },
+    {
+      "id": "vary_start",
+      "name": "Vary Start",
+      "default": 0.15,
+      "type": "slider",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "circular_inner",
+      "name": "Raw Circular Inner Radius",
+      "default": 0,
+      "type": "slider",
+      "min": 0,
+      "max": 65536
+    },
+    {
+      "id": "thickness",
+      "name": "Raw Circular Thickness",
+      "default": 1056,
+      "type": "slider",
+      "min": 0,
+      "max": 65536
+    },
+    {
+      "id": "threshold",
+      "name": "Threshold",
+      "default": 0.3,
+      "type": "slider",
+      "min": -1000000,
+      "max": 1000000
+    },
+    {
+      "id": "sort_direction",
+      "name": "Threshold Direction",
+      "default": 1,
+      "type": "popup",
+      "options": [
+        "sort below threshold",
+        "sort above threshold"
+      ]
+    },
+    {
+      "id": "reverse",
+      "name": "Reverse Sort Direction",
+      "default": false,
+      "type": "checkbox"
+    },
+    {
+      "id": "sort_type",
+      "name": "Sort Type",
+      "default": 0,
+      "type": "popup",
+      "options": [
+        "monochrome",
+        "average",
+        "minimum",
+        "maximum",
+        "red",
+        "green",
+        "blue",
+        "hue",
+        "saturation",
+        "brightness"
+      ]
+    },
+    {
+      "id": "restart",
+      "name": "Raw Randomly Restart Sort",
+      "default": 100,
+      "type": "slider",
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "soften",
+      "name": "Raw Soften Threshold Mask",
+      "default": 0,
+      "type": "slider",
+      "min": 0,
+      "max": 4096
+    },
+    {
+      "id": "seed",
+      "name": "Raw Seed (fraction retained)",
+      "default": 0.273,
+      "type": "slider",
+      "min": 0,
+      "max": 1000000
+    },
+    {
+      "id": "mix",
+      "name": "Mix With Source",
+      "default": 0,
+      "type": "slider",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "show",
+      "name": "Show",
+      "default": 0,
+      "type": "popup",
+      "options": [
+        "Result",
+        "Raw Sort Values",
+        "Threshold Mask",
+        "Random Restart Noise",
+        "Combined Mask"
+      ]
+    },
+    {
+      "id": "opacity_mode",
+      "name": "Opacity Mode",
+      "default": 1,
+      "type": "popup",
+      "options": [
+        "All Opaque",
+        "Normal",
+        "As Premult"
+      ]
+    }
+  ]
+}

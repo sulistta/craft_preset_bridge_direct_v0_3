@@ -1,0 +1,85 @@
+{
+  "files": 144,
+  "status": {
+    "PARTIAL": 75,
+    "UNSUPPORTED": 69
+  },
+  "mapped_effects": {
+    "ec.color.curves": 22,
+    "ec.generate.fourcolor": 9,
+    "ec.color.lumetri": 9,
+    "ec.color.brightnesscontrast": 6,
+    "ec.blur.unsharp": 7,
+    "ec.noise.noise": 3,
+    "ec.color.huesaturation": 7,
+    "ec.color.levels": 3,
+    "ec.color.tritone": 10,
+    "ec.color.tint": 2,
+    "ec.stylize.motiontile": 31,
+    "ec.blur.sharpen": 2,
+    "ec.distort.upscale": 1,
+    "ec.blur.ccradial": 3,
+    "ec.blur.camerashakedeblur": 4,
+    "ec.blur.cameralens": 2,
+    "ec.noise.noisehls": 1,
+    "ec.distort.opticscompensation": 1,
+    "ec.noise.noisehlsauto": 6,
+    "ec.blur.fastbox": 2,
+    "ec.color.exposure": 2,
+    "ec.channel.invert": 2,
+    "ec.distort.wavewarp": 1,
+    "ec.blur.radial": 2,
+    "ec.distort.transform": 2,
+    "ec.transition.ccscalewipe": 1,
+    "ec.color.blackwhite": 1
+  },
+  "converted_parameters": 1366,
+  "preserved_keyframes": 17,
+  "reference_size": [
+    1920,
+    1080
+  ],
+  "native_validation": {
+    "v0.3_full_plan_base": {
+      "plans": 55,
+      "verified_parameters": 976
+    },
+    "v0.4_new_components": {
+      "new_native_components": 16,
+      "native_component_effects": {
+        "ec.color.lumetri": 9,
+        "ec.color.tritone": 1,
+        "ec.blur.camerashakedeblur": 2,
+        "ec.stylize.motiontile": 4
+      },
+      "native_verified_component_parameters": 226,
+      "native_verified_component_keyframes": 11
+    },
+    "new_component_errors": 0,
+    "complete_v0.4_plans_all_verified": false,
+    "adobe_visual_comparison": false,
+    "v0.5_new_components": {
+      "native_components": 8,
+      "native_component_effects": {
+        "ec.blur.ccradial": 3,
+        "ec.blur.cameralens": 2,
+        "ec.blur.radial": 2,
+        "ec.transition.ccscalewipe": 1
+      },
+      "native_verified_parameters": 47,
+      "native_verified_keyframes": 2,
+      "project_reopen_verified": true
+    },
+    "complete_v0.5_plans_all_verified": false,
+    "v0.6_curves_components": {
+      "native_components": 22,
+      "native_component_effects": {
+        "ec.color.curves": 22
+      },
+      "native_verified_parameters": 110,
+      "native_verified_keyframes": 0,
+      "project_reopen_verified": true
+    },
+    "complete_v0.6_plans_all_verified": false
+  }
+}

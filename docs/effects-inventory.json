@@ -1,0 +1,725 @@
+{
+  "goal": "Support all effects; not achieved",
+  "corpus_files": 144,
+  "distinct_source_ids": 77,
+  "native_effectcraft_catalog_size": 306,
+  "items": [
+    {
+      "source": "VIDEOCOPILOT OpticalFlares",
+      "occurrences": 300,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "structural_reader": {
+        "format": "OFP v3",
+        "blobs_verified": 38,
+        "objects": 602,
+        "fields": 39665,
+        "static_snapshots_associated": 9,
+        "unassociated_blobs_preserved": 29,
+        "binary_data_roundtrip_verified": true,
+        "renderer_implemented": true,
+        "mapping_implemented": true,
+        "approximate": true
+      },
+      "optional_extension": {
+        "name": "local-flare-library",
+        "mapping_target_pattern": "org.craftbridge.flare.lib_*",
+        "created_components_verified": 9,
+        "selected_groups_verified": 21,
+        "distinct_scenes_verified": 6,
+        "native_properties_verified": 219,
+        "native_keyframes_verified": 141,
+        "approximate": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    {
+      "source": "S_Shake",
+      "occurrences": 157,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "shake",
+        "mapping_target": "org.craftbridge.shake",
+        "complete_snapshots_converted": 19,
+        "complete_snapshots_native_verified": 18,
+        "selected_groups_verified": 13,
+        "native_parameters_verified": 911,
+        "native_keyframes_verified": 229,
+        "native_time_refusals": 1,
+        "approximate": true,
+        "complete_visual_equivalence_verified": false
+      }
+    },
+    {
+      "source": "PEDG",
+      "occurrences": 73,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "glow",
+        "mapping_target": "org.craftbridge.glow",
+        "complete_snapshots_verified": 23,
+        "native_parameters_verified": 348,
+        "approximate": true,
+        "complete_visual_equivalence_verified": false,
+        "selected_groups_verified": 18,
+        "native_keyframes_verified": 93
+      }
+    },
+    {
+      "source": "S_DissolveShake",
+      "occurrences": 52,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Tile",
+      "occurrences": 39,
+      "mapping_target": "ec.stylize.motiontile",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "MB LookSuite3",
+      "occurrences": 28,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE CurvesCustom",
+      "occurrences": 24,
+      "mapping_target": "ec.color.curves",
+      "mapping_validation": "real-source-static; native-engine-param-roundtrip; LUT-resampling-loss-explicit",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Tritone",
+      "occurrences": 10,
+      "mapping_target": "ec.color.tritone",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE 4ColorGradient",
+      "occurrences": 9,
+      "mapping_target": "ec.generate.fourcolor",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Lumetri",
+      "occurrences": 9,
+      "mapping_target": "ec.color.lumetri",
+      "mapping_validation": "real-source-static; native-engine-param-roundtrip; group-conditions; opaque-curves-LUTs-wheels-unsupported",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "pixel_stretch",
+      "occurrences": 8,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "stretch",
+        "mapping_target": "org.craftbridge.stretch",
+        "created_components_converted": 8,
+        "created_components_native_verified": 8,
+        "native_properties_verified": 145,
+        "native_keyframes_verified": 0,
+        "approximate": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    {
+      "source": "FC NITRATE",
+      "occurrences": 7,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Unsharp Mask2",
+      "occurrences": 7,
+      "mapping_target": "ec.blur.unsharp",
+      "mapping_validation": "real-source; protocol-mock",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE HUE SATURATION",
+      "occurrences": 7,
+      "mapping_target": "ec.color.huesaturation",
+      "mapping_validation": "real-source-static; native-engine-param-roundtrip",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Brightness & Contrast 2",
+      "occurrences": 6,
+      "mapping_target": "ec.color.brightnesscontrast",
+      "mapping_validation": "real-source; protocol-mock",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Noise HLS Auto2",
+      "occurrences": 6,
+      "mapping_target": "ec.noise.noisehlsauto",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "BCC3Colorize",
+      "occurrences": 4,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "colorize",
+        "mapping_target": "org.craftbridge.colorize",
+        "controls": 23,
+        "created_components_verified": 4,
+        "native_properties_verified": 92,
+        "native_keyframes_verified": 0,
+        "approximate": true,
+        "adobe_visual_comparison": false,
+        "evidence": "decisions/027-approximate-colorize-renderer.md"
+      }
+    },
+    {
+      "source": "S_MathOps",
+      "occurrences": 4,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "Magic_Bullet_Suite_Magic_Bullet",
+      "occurrences": 4,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE CameraShakeDeblur",
+      "occurrences": 4,
+      "mapping_target": "ec.blur.camerashakedeblur",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_Flicker",
+      "occurrences": 4,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "flicker",
+        "mapping_target": "org.craftbridge.flicker",
+        "created_components_native_verified": 1,
+        "selected_groups_verified": 1,
+        "native_properties_verified": 17,
+        "native_keyframes_verified": 3,
+        "real_animation_multiple_key_segment_verified": false,
+        "approximate": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    {
+      "source": "GG AEPixelSorter2",
+      "occurrences": 4,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "omino_diffusion",
+      "occurrences": 4,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "diffusion",
+        "mapping_target": "org.craftbridge.diffusion",
+        "created_components_converted": 4,
+        "created_components_native_verified": 4,
+        "native_properties_verified": 68,
+        "native_keyframes_verified": 0,
+        "approximate": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    {
+      "source": "ADBE Apply Color LUT2",
+      "occurrences": 3,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Noise2",
+      "occurrences": 3,
+      "mapping_target": "ec.noise.noise",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Easy Levels2",
+      "occurrences": 3,
+      "mapping_target": "ec.color.levels",
+      "mapping_validation": "real-source-static; native-engine-param-roundtrip; 32bpc-clip-option-unsupported",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "CC Radial Blur",
+      "occurrences": 3,
+      "mapping_target": "ec.blur.ccradial",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; scratch-unsupported",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "BCC3Median",
+      "occurrences": 3,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "median",
+        "mapping_target": "org.craftbridge.median",
+        "created_components_native_verified": 3,
+        "native_properties_verified": 30,
+        "native_keyframes_verified": 0,
+        "real_modes_verified": [
+          "A R G B Separately"
+        ],
+        "real_angles_degrees": [
+          45,
+          108,
+          138
+        ],
+        "real_animation_verified": false,
+        "approximate": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    {
+      "source": "BCC3Directional Blur",
+      "occurrences": 3,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "directional",
+        "mapping_target": "org.craftbridge.directional",
+        "created_components_native_verified": 3,
+        "native_properties_verified": 36,
+        "native_keyframes_verified": 0,
+        "real_apply_modes_verified": [
+          "Normal"
+        ],
+        "real_channels_verified": [
+          "RGBA"
+        ],
+        "real_angles_degrees": [
+          0,
+          90
+        ],
+        "real_animation_verified": false,
+        "avoiding_canvas_clipping_equivalence_verified": false,
+        "approximate": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    {
+      "source": "CS Color Neutralizer",
+      "occurrences": 2,
+      "mapping_target": "ec.color.cccolorneutralizer",
+      "mapping_validation": "real-source-pinning-blend; native-engine-param-roundtrip; RGB-percent-profile-synthetic; approximate-tonal-algorithm; default-black-white-final-view-only",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Tint",
+      "occurrences": 2,
+      "mapping_target": "ec.color.tint",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Sharpen",
+      "occurrences": 2,
+      "mapping_target": "ec.blur.sharpen",
+      "mapping_validation": "real-source; protocol-mock",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_Glint",
+      "occurrences": 2,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "glint",
+        "mapping_target": "org.craftbridge.glint",
+        "complete_snapshots_converted": 2,
+        "native_parameters_verified": 50,
+        "native_keyframes_verified": 12,
+        "intermediate_samples_verified": 15,
+        "approximate": true,
+        "complete_visual_equivalence_verified": false
+      }
+    },
+    {
+      "source": "ADBE Camera Lens Blur",
+      "occurrences": 2,
+      "mapping_target": "ec.blur.cameralens",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; layer-reference-and-nonzero-focal-distance-unsupported",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "CROSSPHERE_Bokeh",
+      "occurrences": 2,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "Dehancer v7",
+      "occurrences": 2,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "SatoriCurveTracer",
+      "occurrences": 2,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "com.FXHOME.HitFilm.Hotspots",
+      "occurrences": 2,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Box Blur2",
+      "occurrences": 2,
+      "mapping_target": "ec.blur.fastbox",
+      "mapping_validation": "real-source; native-engine-param-roundtrip",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Exposure2",
+      "occurrences": 2,
+      "mapping_target": "ec.color.exposure",
+      "mapping_validation": "real-source; native-engine-param-roundtrip",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Invert",
+      "occurrences": 2,
+      "mapping_target": "ec.channel.invert",
+      "mapping_validation": "real-source; native-engine-param-roundtrip",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Checkout",
+      "occurrences": 2,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "modulation",
+        "mapping_target": "org.craftbridge.modulation",
+        "complete_snapshots_converted": 2,
+        "native_parameters_verified": 24,
+        "native_keyframes_verified": 6,
+        "intermediate_samples_verified": 12,
+        "approximate": true,
+        "complete_visual_equivalence_verified": false
+      }
+    },
+    {
+      "source": "CS Polytrace",
+      "occurrences": 2,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Radial Blur",
+      "occurrences": 2,
+      "mapping_target": "ec.blur.radial",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; low-antialias-and-seed-unsupported",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Signal",
+      "occurrences": 2,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Geometry2",
+      "occurrences": 2,
+      "mapping_target": "ec.distort.transform",
+      "mapping_validation": "real-source-static; protocol-mock",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_Sharpen",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "sharpen",
+        "mapping_target": "org.craftbridge.sharpen",
+        "native_components_verified": 1,
+        "native_properties_verified": 15,
+        "native_keyframes_verified": 0,
+        "real_quality": "Best",
+        "real_opacity": "Normal",
+        "widget_is_ui_only": true,
+        "mask_absence_verified": false,
+        "approximate": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    {
+      "source": "DGE Instant 4K",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Upscale",
+      "occurrences": 1,
+      "mapping_target": "ec.distort.upscale",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "BCC3Color Correction",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_Glow",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_LensFlare",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Noise HLS2",
+      "occurrences": 1,
+      "mapping_target": "ec.noise.noisehls",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE AudWave",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "BCC_HIGHCONTRAST",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "BCC3Hue-Sat-Lightness",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "irrealix Nebulosity",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "Universe_Distort_Heatwave",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "com.FXHOME.HitFilm.LensDirt",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_WarpPuddle",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "tc Tao",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_DistortBlur",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_WarpBubble",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "DRAGOY Tracery",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "OLM Directional Blur",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "SatoriGeometricFilters",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Optics Compensation",
+      "occurrences": 1,
+      "mapping_target": "ec.distort.opticscompensation",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "PEGR",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "VISINF Grain Implant",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Wave Warp",
+      "occurrences": 1,
+      "mapping_target": "ec.distort.wavewarp",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; per-parameter-limitations",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_PixelSort",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "optional_extension": {
+        "name": "pixelsort",
+        "mapping_target": "org.craftbridge.pixelsort",
+        "complete_snapshots_converted": 1,
+        "native_parameters_verified": 24,
+        "native_keyframes_verified": 0,
+        "real_mode": "Linear",
+        "radial_circular_real_source_verified": false,
+        "approximate": true,
+        "complete_visual_equivalence_verified": false
+      }
+    },
+    {
+      "source": "BCC3Rays Ripply",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "S_Hotspots",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "CC Scale Wipe",
+      "occurrences": 1,
+      "mapping_target": "ec.transition.ccscalewipe",
+      "mapping_validation": "real-source; native-engine-param-roundtrip; no-visual-comparison",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE PixelEncoder - AEPlugins",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE Black&White",
+      "occurrences": 1,
+      "mapping_target": "ec.color.blackwhite",
+      "mapping_validation": "real-source; native-engine-param-roundtrip",
+      "complete_visual_equivalence_verified": false
+    },
+    {
+      "source": "ADBE MESH WARP",
+      "occurrences": 1,
+      "mapping_target": null,
+      "mapping_validation": null,
+      "complete_visual_equivalence_verified": false,
+      "structural_reader": {
+        "layout": "AE-MeshWarp-8x8-10f32-structural",
+        "static_instance_snapshots_verified": 1,
+        "definition_and_instance_blobs_roundtripped": 2,
+        "float_fields_preserved": 1280,
+        "render_supported": false
+      }
+    }
+  ],
+  "native_filmcraft_catalog_size": 303
+}

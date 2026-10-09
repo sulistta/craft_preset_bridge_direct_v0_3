@@ -1,0 +1,99 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.modulation",
+  "name": "Bridge Modulation (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original bounded grayscale FM carrier and quadrature demodulation. Modulation v1 controls; source filters, transfer functions, frequency and opacity calibration, alpha, white-line behavior and color space are not certified.",
+  "params": [
+    {
+      "id": "omega",
+      "name": "Raw Omega (original calibration)",
+      "type": "slider",
+      "default": 0.8,
+      "min": 0,
+      "max": 4
+    },
+    {
+      "id": "phase",
+      "name": "Raw Phase (original calibration)",
+      "type": "slider",
+      "default": 0.25,
+      "min": 0,
+      "max": 4
+    },
+    {
+      "id": "distortion",
+      "name": "Raw Distortion (original calibration)",
+      "type": "slider",
+      "default": 12,
+      "min": -4096,
+      "max": 4096
+    },
+    {
+      "id": "lowpass_1",
+      "name": "Lowpass 1",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "lowpass_2",
+      "name": "Lowpass 2",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "lowpass_3",
+      "name": "Lowpass 3",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "direction",
+      "name": "Direction",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Forward",
+        "Backward"
+      ]
+    },
+    {
+      "id": "invert",
+      "name": "Invert",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "opacity",
+      "name": "Raw Opacity (original calibration)",
+      "type": "slider",
+      "default": 255,
+      "min": 0,
+      "max": 255
+    },
+    {
+      "id": "ignore_alpha",
+      "name": "Ignore alpha",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "orientation",
+      "name": "Wave Orientation",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Vertical",
+        "Horizontal"
+      ]
+    },
+    {
+      "id": "hide_white_line",
+      "name": "Hide white line",
+      "type": "checkbox",
+      "default": true
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "layer-mix-example",
+  "mappings": [],
+  "plugins": [
+    {
+      "api": 2,
+      "bridge_host_revision": 1,
+      "id": "org.craftbridge.test.layer_mix",
+      "name": "Bridge Layer Mix Probe",
+      "category": "Bridge Validation",
+      "version": "0.1.0",
+      "author": "",
+      "description": "",
+      "params": [
+        {
+          "id": "source",
+          "name": "Source",
+          "type": "layer",
+          "default": null
+        },
+        {
+          "id": "sourceSource",
+          "name": "Source mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Source",
+            "Masks",
+            "Effects & Masks"
+          ]
+        },
+        {
+          "id": "mix",
+          "name": "Mix",
+          "type": "slider",
+          "default": 1.0,
+          "min": 0.0,
+          "max": 1.0
+        }
+      ]
+    }
+  ]
+}

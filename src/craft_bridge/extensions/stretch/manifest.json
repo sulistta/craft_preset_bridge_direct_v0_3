@@ -1,0 +1,208 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.stretch",
+  "name": "Bridge Stretch (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original area-integrated cumulative pixel stretch. Partial pixel_stretch control transfer; no external intensity layer, source kernel or Adobe visual equivalence.",
+  "params": [
+    {
+      "id": "direction",
+      "name": "Direction",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Right",
+        "Left",
+        "Down",
+        "Up"
+      ]
+    },
+    {
+      "id": "channels",
+      "name": "Channels",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Luma",
+        "RGBA",
+        "Red",
+        "Green",
+        "Blue",
+        "Alpha",
+        "Luma (no Alpha)",
+        "RGB (no Alpha)"
+      ]
+    },
+    {
+      "id": "intensity",
+      "name": "Intensity (%)",
+      "type": "slider",
+      "default": 100,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "stretch",
+      "name": "Pixel Stretch (original calibration)",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "pixel_size",
+      "name": "Pixel Size (original calibration)",
+      "type": "slider",
+      "default": 1,
+      "min": 0.001,
+      "max": 10000
+    },
+    {
+      "id": "curve",
+      "name": "Stretch Curve",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Linear Ramp Up",
+        "Linear Ramp Down",
+        "Triangle Wave",
+        "Sine Wave",
+        "Exp Up",
+        "Exp Down"
+      ]
+    },
+    {
+      "id": "curve_phase",
+      "name": "Curve Phase (degrees)",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0,
+      "sliderMin": -360,
+      "sliderMax": 360
+    },
+    {
+      "id": "smoothness",
+      "name": "Curve Smoothness (original calibration)",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "start",
+      "name": "Start Offset (%)",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "distribution",
+      "name": "Distribution Mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Constant",
+        "Linear Ramp Up",
+        "Linear Ramp Down"
+      ]
+    },
+    {
+      "id": "range",
+      "name": "Distribution Range (frame ratio)",
+      "type": "slider",
+      "default": 2,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "shift_phase",
+      "name": "Image Shift Phase (degrees)",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0,
+      "sliderMin": -360,
+      "sliderMax": 360
+    },
+    {
+      "id": "sync",
+      "name": "Image Shift Phase Sync",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "shading",
+      "name": "Shading",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "None",
+        "Sine Wave",
+        "Triangle Wave",
+        "Linear Ramp Up",
+        "Linear Ramp Down",
+        "Line"
+      ]
+    },
+    {
+      "id": "shade_size",
+      "name": "Shading Interval Size (original calibration)",
+      "type": "slider",
+      "default": 10,
+      "min": 0.001,
+      "max": 10000
+    },
+    {
+      "id": "shade_phase",
+      "name": "Shading Interval Phase (degrees)",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0,
+      "sliderMin": -360,
+      "sliderMax": 360
+    },
+    {
+      "id": "shade_channels",
+      "name": "Shading Channels",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Alpha",
+        "RGB"
+      ]
+    },
+    {
+      "id": "shade_opacity",
+      "name": "Shading Opacity (%)",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "edge",
+      "name": "Edge Mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Wrap",
+        "Mirror",
+        "Repeat Last",
+        "Transparent"
+      ]
+    },
+    {
+      "id": "feather",
+      "name": "Transparency Feather (original calibration)",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    }
+  ]
+}

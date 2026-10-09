@@ -1,0 +1,315 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-mathops-1",
+  "plugins": [
+    {
+      "api": 2,
+      "bridge_host_revision": 1,
+      "id": "org.craftbridge.mathops",
+      "name": "Bridge Math Ops (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original bounded two-image math operations with optional layer mask. Own color, geometry, blur, alpha, quantization and calibration; no Sapphire visual equivalence. Requires experimental Bridge host revision 1.",
+      "params": [
+        {
+          "id": "source_b",
+          "name": "Source B",
+          "type": "layer",
+          "default": null
+        },
+        {
+          "id": "source_bSource",
+          "name": "Source B source mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Source",
+            "Masks",
+            "Effects & Masks"
+          ]
+        },
+        {
+          "id": "mask",
+          "name": "Mask",
+          "type": "layer",
+          "default": null
+        },
+        {
+          "id": "maskSource",
+          "name": "Mask source mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Source",
+            "Masks",
+            "Effects & Masks"
+          ]
+        },
+        {
+          "id": "operation",
+          "name": "Operation",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Add",
+            "Subtract",
+            "Multiply",
+            "Divide",
+            "Screen",
+            "Average",
+            "Overlay",
+            "Minimum",
+            "Maximum",
+            "Difference",
+            "Xor",
+            "Xor Bits",
+            "And Bits",
+            "Or Bits",
+            "Mod",
+            "Round",
+            "Bounce"
+          ]
+        },
+        {
+          "id": "swap",
+          "name": "Swap inputs",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "a_lights",
+          "name": "A lights",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "a_darks",
+          "name": "A darks",
+          "type": "slider",
+          "default": 0,
+          "min": -64,
+          "max": 64
+        },
+        {
+          "id": "a_saturation",
+          "name": "A saturation",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "b_lights",
+          "name": "B lights",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "b_darks",
+          "name": "B darks",
+          "type": "slider",
+          "default": 0,
+          "min": -64,
+          "max": 64
+        },
+        {
+          "id": "b_saturation",
+          "name": "B saturation",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "dest_lights",
+          "name": "DEST lights",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "dest_darks",
+          "name": "DEST darks",
+          "type": "slider",
+          "default": 0,
+          "min": -64,
+          "max": 64
+        },
+        {
+          "id": "dest_saturation",
+          "name": "DEST saturation",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "opacity",
+          "name": "Opacity",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "All Opaque",
+            "Normal",
+            "As Premult"
+          ]
+        },
+        {
+          "id": "mask_use",
+          "name": "Mask use",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Luma",
+            "Alpha"
+          ]
+        },
+        {
+          "id": "blur_mask",
+          "name": "Raw mask blur",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 8192
+        },
+        {
+          "id": "invert_mask",
+          "name": "Invert mask",
+          "type": "checkbox",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "S_MathOps",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.mathops",
+      "params": {
+        "S_MathOps-0001": {
+          "target": "source_b",
+          "kind": "Layer",
+          "operation": "explicit_layer_binding"
+        },
+        "S_MathOps-0003": {
+          "target": "mask",
+          "kind": "Layer",
+          "operation": "explicit_layer_binding"
+        },
+        "S_MathOps-0002": {
+          "target": "operation",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_MathOps-0050": {
+          "target": "swap",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "S_MathOps-0060": {
+          "target": "opacity",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_MathOps-0540": {
+          "target": "mask_use",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_MathOps-0541": {
+          "target": "blur_mask",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_MathOps-0542": {
+          "target": "invert_mask",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "S_MathOps-0051": {
+          "target": "a_lights",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_MathOps-0052": {
+          "target": "a_darks",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_MathOps-0053": {
+          "target": "a_saturation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_MathOps-0054": {
+          "target": "b_lights",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_MathOps-0055": {
+          "target": "b_darks",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_MathOps-0056": {
+          "target": "b_saturation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_MathOps-0057": {
+          "target": "dest_lights",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_MathOps-0058": {
+          "target": "dest_darks",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_MathOps-0059": {
+          "target": "dest_saturation",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "evidence": "Four complete local parT/tdb4 snapshots prove 17 processing/resource IDs, kinds and operation/opacity/mask menus; Boris FX public functional documentation consulted 2026-10-09; Layer references are explicit manual replacements, not decoded FFX. ADR 030. Original code only.",
+      "validation": "real-source-descriptors; explicit-resource-replacement; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "required_on_create": [
+        "S_MathOps-0001",
+        "S_MathOps-0003",
+        "S_MathOps-0002",
+        "S_MathOps-0050",
+        "S_MathOps-0060",
+        "S_MathOps-0540",
+        "S_MathOps-0541",
+        "S_MathOps-0542",
+        "S_MathOps-0051",
+        "S_MathOps-0052",
+        "S_MathOps-0053",
+        "S_MathOps-0054",
+        "S_MathOps-0055",
+        "S_MathOps-0056",
+        "S_MathOps-0057",
+        "S_MathOps-0058",
+        "S_MathOps-0059"
+      ],
+      "limitations": [
+        "Renderer matem\u00e1tico original aproximado: ajustes lights/darks/saturation, Overlay/Xor/Bounce e calibra\u00e7\u00e3o n\u00e3o certificados por render comparativo Sapphire. Sempre parcial; strict n\u00e3o publica.",
+        "Source B e m\u00e1scara de camada exigem substitui\u00e7\u00f5es manuais fixadas ao SHA-256, inclusive null expl\u00edcito. Refer\u00eancias originais opacas e m\u00e1scaras de path/Mocha/tracking n\u00e3o decodificadas nem presumidas vazias.",
+        "M\u00e1scara usa luma Rec.709/alpha e box separ\u00e1vel com raio raw*scale; n\u00e3o se atribuem unidades \u00e0 origem. Geometria alinha coordenadas locais das camadas, usa bilinear/fora transparente, sem reconstruir transforma\u00e7\u00f5es Adobe.",
+        "Alpha usa uni\u00e3o das entradas; Normal divide/multiplica alpha, All Opaque for\u00e7a alpha e As Premult opera nos canais premultiplicados. RGB intermedi\u00e1rio limitado a \u00b11000000, bitwise quantizado a 8 bits, divisores quase zero produzem zero. Modelos pr\u00f3prios/HDR/cor/fidelidade continuam perdas.",
+        "Modos de origem do recurso usam Source no host; isso \u00e9 uma escolha de destino expl\u00edcita no manifesto, n\u00e3o uma interpreta\u00e7\u00e3o dos blobs FFX."
+      ]
+    }
+  ]
+}

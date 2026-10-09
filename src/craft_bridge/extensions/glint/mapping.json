@@ -1,0 +1,371 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-glint-1",
+  "plugins": [
+    {
+      "api": 1,
+      "id": "org.craftbridge.glint",
+      "name": "Bridge Glint (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original four-axis symmetric exponential highlight rays. Own transfer/size/blur/hue/alpha calibration; background/matte/Mocha dependencies and expanded bounds are unavailable. Not Sapphire render equivalence.",
+      "params": [
+        {
+          "id": "brightness",
+          "name": "Brightness",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "hue_shift",
+          "name": "Hue Shift (original calibration)",
+          "type": "slider",
+          "default": 0,
+          "min": -1,
+          "max": 1
+        },
+        {
+          "id": "scale_colors",
+          "name": "Scale Colors",
+          "type": "color",
+          "default": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "brightness_x",
+          "name": "Brightness X",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "brightness_y",
+          "name": "Brightness Y",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "brightness_diag1",
+          "name": "Brightness Diag1",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "brightness_diag2",
+          "name": "Brightness Diag2",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "threshold",
+          "name": "Raw Threshold",
+          "type": "slider",
+          "default": 0.7,
+          "min": 0,
+          "max": 1000000
+        },
+        {
+          "id": "threshold_add_color",
+          "name": "Threshold Add Color",
+          "type": "color",
+          "default": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "threshold_blur",
+          "name": "Raw Threshold Blur",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 4096
+        },
+        {
+          "id": "size",
+          "name": "Raw Size (original calibration)",
+          "type": "slider",
+          "default": 30,
+          "min": 0,
+          "max": 4096
+        },
+        {
+          "id": "size_x",
+          "name": "Size X",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "size_y",
+          "name": "Size Y",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "size_diag1",
+          "name": "Size Diag1",
+          "type": "slider",
+          "default": 0.75,
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "size_diag2",
+          "name": "Size Diag2",
+          "type": "slider",
+          "default": 0.75,
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "size_red",
+          "name": "Size Red",
+          "type": "slider",
+          "default": 0.5,
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "size_green",
+          "name": "Size Green",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "size_blue",
+          "name": "Size Blue",
+          "type": "slider",
+          "default": 1.5,
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "blur_glint",
+          "name": "Raw Blur Glint",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 4096
+        },
+        {
+          "id": "affect_alpha",
+          "name": "Affect Alpha",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "glint_from_alpha",
+          "name": "Glint From Alpha",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "glint_under_source",
+          "name": "Glint Under Source",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "source_opacity",
+          "name": "Source Opacity",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "bg_brightness",
+          "name": "Source Background Brightness (approximate)",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "opacity_mode",
+          "name": "Opacity Mode",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "All Opaque",
+            "Normal",
+            "As Premult"
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "S_Glint",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.glint",
+      "params": {
+        "S_Glint-0050": {
+          "target": "brightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0100": {
+          "target": "hue_shift",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0051": {
+          "target": "scale_colors",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "S_Glint-0052": {
+          "target": "brightness_x",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0053": {
+          "target": "brightness_y",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0054": {
+          "target": "brightness_diag1",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0055": {
+          "target": "brightness_diag2",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0056": {
+          "target": "threshold",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0057": {
+          "target": "threshold_add_color",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "S_Glint-0058": {
+          "target": "threshold_blur",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0059": {
+          "target": "size",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0060": {
+          "target": "size_x",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0061": {
+          "target": "size_y",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0062": {
+          "target": "size_diag1",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0063": {
+          "target": "size_diag2",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0064": {
+          "target": "size_red",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0065": {
+          "target": "size_green",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0066": {
+          "target": "size_blue",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0101": {
+          "target": "blur_glint",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0067": {
+          "target": "affect_alpha",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0068": {
+          "target": "glint_from_alpha",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0069": {
+          "target": "glint_under_source",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0070": {
+          "target": "source_opacity",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0071": {
+          "target": "bg_brightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Glint-0074": {
+          "target": "opacity_mode",
+          "kind": "Choice",
+          "operation": "minus_one"
+        }
+      },
+      "evidence": "Two real local S_Glint parT/tdb4 profiles with typed controls/colors and Opacity menu; official Boris FX functional documentation; original algorithm/calibration ADR 019; no source plugin code/assets reused",
+      "validation": "real-source; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Raios exponenciais de quatro eixos são originais; kernels/calibração de Size/Blur/Threshold e fidelidade Sapphire não certificados.",
+        "Background/Matte/Mocha/path opacos não são resolvidos; o modelo próprio usa a imagem de entrada como base sem presumir que essas dependências estejam vazias.",
+        "Cor/HDR/gama/hue e transparência usam fórmulas próprias; alpha dos controles Scale Colors/Threshold Add Color é preservado nos dados mas não afeta o RGB calculado.",
+        "ABI de quadro fixo não expande limites nem reproduz widgets, máscaras ou opções sem tradução; sempre parcial e strict não publica."
+      ]
+    }
+  ]
+}

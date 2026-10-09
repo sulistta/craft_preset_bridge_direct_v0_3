@@ -1,0 +1,2634 @@
+{
+  "files": 144,
+  "status": {
+    "PARTIAL": 75,
+    "UNSUPPORTED": 69
+  },
+  "mapped_effects": {
+    "ec.color.curves": 22,
+    "ec.generate.fourcolor": 9,
+    "ec.color.lumetri": 9,
+    "ec.color.cccolorneutralizer": 2,
+    "ec.color.brightnesscontrast": 6,
+    "ec.blur.unsharp": 7,
+    "ec.noise.noise": 3,
+    "ec.color.huesaturation": 7,
+    "ec.color.levels": 3,
+    "ec.color.tritone": 10,
+    "ec.color.tint": 2,
+    "ec.stylize.motiontile": 31,
+    "ec.blur.sharpen": 2,
+    "ec.distort.upscale": 1,
+    "ec.blur.ccradial": 3,
+    "ec.blur.camerashakedeblur": 4,
+    "ec.blur.cameralens": 2,
+    "ec.noise.noisehls": 1,
+    "ec.distort.opticscompensation": 1,
+    "ec.noise.noisehlsauto": 6,
+    "ec.blur.fastbox": 2,
+    "ec.color.exposure": 2,
+    "ec.channel.invert": 2,
+    "ec.distort.wavewarp": 1,
+    "ec.blur.radial": 2,
+    "ec.distort.transform": 2,
+    "ec.transition.ccscalewipe": 1,
+    "ec.color.blackwhite": 1
+  },
+  "converted_parameters": 1370,
+  "preserved_keyframes": 17,
+  "reference_size": [
+    1920,
+    1080
+  ],
+  "native_validation": {
+    "v0.3_full_plan_base": {
+      "plans": 55,
+      "verified_parameters": 976
+    },
+    "v0.4_new_components": {
+      "new_native_components": 16,
+      "native_component_effects": {
+        "ec.color.lumetri": 9,
+        "ec.color.tritone": 1,
+        "ec.blur.camerashakedeblur": 2,
+        "ec.stylize.motiontile": 4
+      },
+      "native_verified_component_parameters": 226,
+      "native_verified_component_keyframes": 11
+    },
+    "new_component_errors": 0,
+    "complete_v0.4_plans_all_verified": false,
+    "adobe_visual_comparison": false,
+    "v0.5_new_components": {
+      "native_components": 8,
+      "native_component_effects": {
+        "ec.blur.ccradial": 3,
+        "ec.blur.cameralens": 2,
+        "ec.blur.radial": 2,
+        "ec.transition.ccscalewipe": 1
+      },
+      "native_verified_parameters": 47,
+      "native_verified_keyframes": 2,
+      "project_reopen_verified": true
+    },
+    "complete_v0.5_plans_all_verified": false,
+    "v0.6_curves_components": {
+      "native_components": 22,
+      "native_component_effects": {
+        "ec.color.curves": 22
+      },
+      "native_verified_parameters": 110,
+      "native_verified_keyframes": 0,
+      "project_reopen_verified": true
+    },
+    "complete_v0.6_plans_all_verified": false,
+    "v0.7_neutralizer_components": {
+      "native_components": 2,
+      "native_component_effects": {
+        "ec.color.cccolorneutralizer": 2
+      },
+      "native_verified_parameters": 4,
+      "native_verified_keyframes": 0,
+      "project_reopen_verified": true
+    },
+    "complete_v0.7_plans_all_verified": false,
+    "v0.7_synthetic_RGB": {
+      "native_components": 1,
+      "native_verified_parameters": 5,
+      "project_reopen_verified": true,
+      "real_source_rgb_verified": false
+    },
+    "v0.8_synthetic_plugin": {
+      "api": 1,
+      "wasm_loaded": true,
+      "synthetic_only": true,
+      "native_properties": 3,
+      "project_reopen_verified": true,
+      "render_cases": 3,
+      "render_samples": 12,
+      "adobe_visual_comparison": false
+    },
+    "complete_v0.8_plans_all_verified": false
+  },
+  "optional_extensions": {
+    "glow": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 92,
+        "UNSUPPORTED": 52
+      },
+      "mapped_effects": {
+        "org.craftbridge.glow": 41,
+        "ec.color.curves": 22,
+        "ec.generate.fourcolor": 9,
+        "ec.color.lumetri": 9,
+        "ec.color.cccolorneutralizer": 2,
+        "ec.color.brightnesscontrast": 6,
+        "ec.blur.unsharp": 7,
+        "ec.noise.noise": 3,
+        "ec.color.huesaturation": 7,
+        "ec.color.levels": 3,
+        "ec.color.tritone": 10,
+        "ec.color.tint": 2,
+        "ec.stylize.motiontile": 31,
+        "ec.blur.sharpen": 2,
+        "ec.distort.upscale": 1,
+        "ec.blur.ccradial": 3,
+        "ec.blur.camerashakedeblur": 4,
+        "ec.blur.cameralens": 2,
+        "ec.noise.noisehls": 1,
+        "ec.distort.opticscompensation": 1,
+        "ec.noise.noisehlsauto": 6,
+        "ec.blur.fastbox": 2,
+        "ec.color.exposure": 2,
+        "ec.channel.invert": 2,
+        "ec.distort.wavewarp": 1,
+        "ec.blur.radial": 2,
+        "ec.distort.transform": 2,
+        "ec.transition.ccscalewipe": 1,
+        "ec.color.blackwhite": 1
+      },
+      "converted_parameters": 1718,
+      "preserved_keyframes": 110,
+      "reference_size": [
+        1920,
+        1080
+      ],
+      "native_components": 41,
+      "native_component_effects": {
+        "org.craftbridge.glow": 41
+      },
+      "native_verified_parameters": 348,
+      "native_verified_keyframes": 93,
+      "project_reopen_verified": true,
+      "adobe_visual_comparison": false,
+      "renderer_validation": {
+        "original_synthetic_only": true,
+        "module_sha256": "468c3abd6fd0940dabcb52d13bb02006eb0a119b749c93df1902eaea9bb4083c",
+        "cases": [
+          {
+            "name": "threshold-hdr",
+            "seconds": 0.10163305600144668,
+            "pixels": 4,
+            "strict_render": true
+          },
+          {
+            "name": "screen",
+            "seconds": 0.01966177299618721,
+            "pixels": 4,
+            "strict_render": true
+          },
+          {
+            "name": "opaque-input",
+            "seconds": 0.01934483499644557,
+            "pixels": 4,
+            "strict_render": true
+          },
+          {
+            "name": "tint",
+            "seconds": 0.01945354499912355,
+            "pixels": 1,
+            "strict_render": true
+          },
+          {
+            "name": "smooth-midpoint",
+            "seconds": 0.01922809700045036,
+            "pixels": 1,
+            "strict_render": true
+          },
+          {
+            "name": "impulse",
+            "seconds": 0.4876449479997973,
+            "pixels": 16641,
+            "strict_render": true
+          },
+          {
+            "name": "deterministic",
+            "seconds": 0.4903093449975131,
+            "pixels": 16641,
+            "strict_render": true
+          },
+          {
+            "name": "preview-scale",
+            "seconds": 0.4602361130018835,
+            "pixels": 16641,
+            "strict_render": true
+          },
+          {
+            "name": "full-hd",
+            "seconds": 21.444694564997917,
+            "pixels": 2073600,
+            "strict_render": true
+          }
+        ],
+        "adobe_visual_comparison": false
+      },
+      "native_selected_validation": {
+        "files": 144,
+        "status": {
+          "PARTIAL": 92,
+          "UNSUPPORTED": 52
+        },
+        "converted_parameters": 1718,
+        "preserved_keyframes": 110,
+        "selected_components": 18,
+        "native_verified_parameters": 49,
+        "native_verified_keyframes": 93,
+        "native_verified_bezier_sides": 31,
+        "intermediate_samples_verified": 150,
+        "inactive_target_verified": true,
+        "existing_count_enabled_uid_preserved": true,
+        "unselected_properties_preserved": true,
+        "project_reopen_verified": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    "glow_and_shake": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 101,
+        "UNSUPPORTED": 43
+      },
+      "mapped_effects": {
+        "org.craftbridge.glow": 41,
+        "ec.color.curves": 22,
+        "ec.generate.fourcolor": 9,
+        "ec.color.lumetri": 9,
+        "ec.color.cccolorneutralizer": 2,
+        "ec.color.brightnesscontrast": 6,
+        "ec.blur.unsharp": 7,
+        "ec.noise.noise": 3,
+        "ec.color.huesaturation": 7,
+        "ec.color.levels": 3,
+        "ec.color.tritone": 10,
+        "ec.color.tint": 2,
+        "ec.stylize.motiontile": 31,
+        "ec.blur.sharpen": 2,
+        "ec.distort.upscale": 1,
+        "ec.blur.ccradial": 3,
+        "ec.blur.camerashakedeblur": 4,
+        "ec.blur.cameralens": 2,
+        "ec.noise.noisehls": 1,
+        "org.craftbridge.shake": 32,
+        "ec.distort.opticscompensation": 1,
+        "ec.noise.noisehlsauto": 6,
+        "ec.blur.fastbox": 2,
+        "ec.color.exposure": 2,
+        "ec.channel.invert": 2,
+        "ec.distort.wavewarp": 1,
+        "ec.blur.radial": 2,
+        "ec.distort.transform": 2,
+        "ec.transition.ccscalewipe": 1,
+        "ec.color.blackwhite": 1
+      },
+      "converted_parameters": 2673,
+      "preserved_keyframes": 345,
+      "reference_size": [
+        1920,
+        1080
+      ],
+      "native_components": 31,
+      "native_component_effects": {
+        "org.craftbridge.shake": 31
+      },
+      "native_verified_parameters": 911,
+      "native_verified_keyframes": 229,
+      "project_reopen_verified": true,
+      "adobe_visual_comparison": false,
+      "installed_extensions": [
+        "glow",
+        "shake"
+      ],
+      "native_time_refusals": [
+        {
+          "effect": "org.craftbridge.shake",
+          "keyframes": 4,
+          "preflight_refused_without_property_mutation": true
+        }
+      ],
+      "native_selected_validation": {
+        "files": 144,
+        "status": {
+          "PARTIAL": 101,
+          "UNSUPPORTED": 43
+        },
+        "converted_parameters": 2672,
+        "preserved_keyframes": 343,
+        "selected_components": 13,
+        "native_verified_parameters": 137,
+        "native_verified_keyframes": 173,
+        "native_verified_bezier_sides": 66,
+        "intermediate_samples_verified": 126,
+        "inactive_target_verified": true,
+        "existing_count_enabled_uid_preserved": true,
+        "unselected_properties_preserved": true,
+        "project_reopen_verified": true,
+        "adobe_visual_comparison": false
+      },
+      "native_whole_curves_validation": {
+        "whole_components": 18,
+        "reopened_bezier_sides_verified": 82,
+        "reopened_intermediate_samples_verified": 90
+      },
+      "renderer_validation": {
+        "original_synthetic_only": true,
+        "module_sha256": "23af5fb6500bc26fafe46a44853c7afd4b096acbe7402e62623b25ae034a3aa8",
+        "cases": [
+          {
+            "name": "quarter-wave",
+            "seconds": 0.026857200005906634,
+            "strict_render": true
+          },
+          {
+            "name": "half-wave",
+            "seconds": 0.026771935998112895,
+            "strict_render": true
+          },
+          {
+            "name": "preview-half-scale",
+            "seconds": 0.024364655000681523,
+            "strict_render": true
+          },
+          {
+            "name": "black-border",
+            "seconds": 0.023792446998413652,
+            "strict_render": true
+          },
+          {
+            "name": "reflect-border",
+            "seconds": 0.026294191004126333,
+            "strict_render": true
+          },
+          {
+            "name": "rotation",
+            "seconds": 0.023786093996022828,
+            "strict_render": true
+          },
+          {
+            "name": "hdr-alpha-identity",
+            "seconds": 0.023778907001542393,
+            "strict_render": true
+          },
+          {
+            "name": "opaque-mode",
+            "seconds": 0.023424017999786884,
+            "strict_render": true
+          },
+          {
+            "name": "rgb-independent-amplitude",
+            "seconds": 0.023708453998551704,
+            "strict_render": true
+          },
+          {
+            "name": "motion-blur",
+            "seconds": 0.024348270002519712,
+            "strict_render": true
+          },
+          {
+            "name": "twitch-stillness",
+            "seconds": 0.02389744299580343,
+            "strict_render": true
+          },
+          {
+            "name": "jumpy-center",
+            "seconds": 0.035944851995736826,
+            "strict_render": true
+          },
+          {
+            "name": "noise-time",
+            "seconds": 0.03168701299728127,
+            "strict_render": true
+          },
+          {
+            "name": "repeatability",
+            "seconds": 0.03328272399812704,
+            "strict_render": true
+          },
+          {
+            "name": "fractional-seed",
+            "seconds": 0.03644057299970882,
+            "strict_render": true
+          },
+          {
+            "name": "another-time",
+            "seconds": 0.038206750999961514,
+            "strict_render": true
+          },
+          {
+            "name": "full-hd-8-samples-rgb",
+            "seconds_estimate": 131.65789771080017,
+            "timing": "owned process start ticks and final stdout mtime",
+            "pixels": 2073600,
+            "strict_render": true,
+            "process_exit": 0
+          }
+        ],
+        "adobe_visual_comparison": false
+      },
+      "conversion_version": "0.15.1"
+    },
+    "glow_shake_local_flare": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 111,
+        "UNSUPPORTED": 33
+      },
+      "converted_parameters": 2892,
+      "preserved_keyframes": 486,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "conversion_version": "0.15.1"
+    },
+    "glow_shake_local_flare_stretch": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 117,
+        "UNSUPPORTED": 27
+      },
+      "converted_parameters": 3037,
+      "preserved_keyframes": 486,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "stretch_native_validation": {
+        "components": 8,
+        "properties": 145,
+        "keyframes": 0,
+        "project_reopen_verified": true,
+        "adobe_visual_comparison": false
+      },
+      "conversion_version": "0.15.1"
+    },
+    "glow_shake_local_flare_stretch_diffusion": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 119,
+        "UNSUPPORTED": 25
+      },
+      "converted_parameters": 3105,
+      "preserved_keyframes": 486,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "all_original_hashes_unchanged": true,
+      "diffusion_native_validation": {
+        "components": 4,
+        "properties": 68,
+        "keyframes": 0,
+        "project_reopen_verified": true,
+        "adobe_visual_comparison": false
+      },
+      "conversion_version": "0.15.1"
+    },
+    "glow_shake_local_flare_stretch_diffusion_modulation": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 120,
+        "UNSUPPORTED": 24
+      },
+      "converted_parameters": 3129,
+      "preserved_keyframes": 492,
+      "all_original_hashes_unchanged": true,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "conversion_version": "0.16.0"
+    },
+    "modulation": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 77,
+        "UNSUPPORTED": 67
+      },
+      "mapped_effects": {
+        "ec.color.curves": 22,
+        "ec.generate.fourcolor": 9,
+        "ec.color.lumetri": 9,
+        "ec.color.cccolorneutralizer": 2,
+        "ec.color.brightnesscontrast": 6,
+        "ec.blur.unsharp": 7,
+        "ec.noise.noise": 3,
+        "ec.color.huesaturation": 7,
+        "ec.color.levels": 3,
+        "ec.color.tritone": 10,
+        "ec.color.tint": 2,
+        "ec.stylize.motiontile": 31,
+        "ec.blur.sharpen": 2,
+        "ec.distort.upscale": 1,
+        "ec.blur.ccradial": 3,
+        "ec.blur.camerashakedeblur": 4,
+        "ec.blur.cameralens": 2,
+        "ec.noise.noisehls": 1,
+        "ec.distort.opticscompensation": 1,
+        "ec.noise.noisehlsauto": 6,
+        "ec.blur.fastbox": 2,
+        "ec.color.exposure": 2,
+        "ec.channel.invert": 2,
+        "ec.distort.wavewarp": 1,
+        "org.craftbridge.modulation": 2,
+        "ec.blur.radial": 2,
+        "ec.distort.transform": 2,
+        "ec.transition.ccscalewipe": 1,
+        "ec.color.blackwhite": 1
+      },
+      "converted_parameters": 1394,
+      "preserved_keyframes": 23,
+      "reference_size": [
+        1920,
+        1080
+      ],
+      "native_components": 2,
+      "native_component_effects": {
+        "org.craftbridge.modulation": 2
+      },
+      "native_verified_parameters": 24,
+      "native_verified_keyframes": 6,
+      "project_reopen_verified": true,
+      "adobe_visual_comparison": false,
+      "skipped_existing_components": 0,
+      "native_time_refusals": [],
+      "curve_validation": {
+        "components": 2,
+        "keyframes": 6,
+        "bezier_sides": 0,
+        "intermediate_samples": 12,
+        "post_reopen_verified": true
+      },
+      "renderer_validation": {
+        "cases": [
+          {
+            "case": "neutral-demodulation",
+            "seconds": 0.03546385899971938,
+            "strict_render": true
+          },
+          {
+            "case": "opacity-zero",
+            "seconds": 0.02445490200079803,
+            "strict_render": true
+          },
+          {
+            "case": "half-opacity",
+            "seconds": 0.022742162000213284,
+            "strict_render": true
+          },
+          {
+            "case": "invert",
+            "seconds": 0.02906439300022612,
+            "strict_render": true
+          },
+          {
+            "case": "forward",
+            "seconds": 0.029234364999865647,
+            "strict_render": true
+          },
+          {
+            "case": "backward",
+            "seconds": 0.026367309999841382,
+            "strict_render": true
+          },
+          {
+            "case": "horizontal-waves",
+            "seconds": 0.02852133899978071,
+            "strict_render": true
+          },
+          {
+            "case": "white-line",
+            "seconds": 0.025349055998958647,
+            "strict_render": true
+          },
+          {
+            "case": "controls-baseline",
+            "seconds": 0.024882327999875997,
+            "strict_render": true
+          },
+          {
+            "case": "lowpass_1",
+            "seconds": 0.024165996999727213,
+            "strict_render": true
+          },
+          {
+            "case": "lowpass_2",
+            "seconds": 0.02437911999913922,
+            "strict_render": true
+          },
+          {
+            "case": "lowpass_3",
+            "seconds": 0.023381138000331703,
+            "strict_render": true
+          },
+          {
+            "case": "distortion",
+            "seconds": 0.02475447699907818,
+            "strict_render": true
+          },
+          {
+            "case": "omega",
+            "seconds": 0.024722407999433926,
+            "strict_render": true
+          },
+          {
+            "case": "phase",
+            "seconds": 0.024821922999763046,
+            "strict_render": true
+          },
+          {
+            "case": "respect-alpha",
+            "seconds": 0.023307155999646056,
+            "strict_render": true
+          },
+          {
+            "case": "ignore-alpha",
+            "seconds": 0.02793133500017575,
+            "strict_render": true
+          },
+          {
+            "case": "preview-scale",
+            "seconds": 0.0237644819990237,
+            "strict_render": true
+          },
+          {
+            "case": "reference-scale",
+            "seconds": 0.022065139999540406,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-0",
+            "seconds": 0.06329336000089825,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-1",
+            "seconds": 0.10922068700165255,
+            "strict_render": true
+          },
+          {
+            "case": "full-hd",
+            "seconds": 14.55876712600002,
+            "strict_render": true
+          }
+        ],
+        "module_sha256": "90e0ff9f7a636849dff34f9fd363bebbca91ed36250efd9c467264c788398ee8",
+        "synthetic_pixels_only": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    "glow_shake_local_flare_stretch_diffusion_modulation_glint": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 121,
+        "UNSUPPORTED": 23
+      },
+      "converted_parameters": 3179,
+      "preserved_keyframes": 504,
+      "all_original_hashes_unchanged": true,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "conversion_version": "0.17.0"
+    },
+    "glint": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 76,
+        "UNSUPPORTED": 68
+      },
+      "mapped_effects": {
+        "ec.color.curves": 22,
+        "ec.generate.fourcolor": 9,
+        "ec.color.lumetri": 9,
+        "ec.color.cccolorneutralizer": 2,
+        "ec.color.brightnesscontrast": 6,
+        "ec.blur.unsharp": 7,
+        "ec.noise.noise": 3,
+        "ec.color.huesaturation": 7,
+        "ec.color.levels": 3,
+        "ec.color.tritone": 10,
+        "ec.color.tint": 2,
+        "ec.stylize.motiontile": 31,
+        "ec.blur.sharpen": 2,
+        "ec.distort.upscale": 1,
+        "org.craftbridge.glint": 2,
+        "ec.blur.ccradial": 3,
+        "ec.blur.camerashakedeblur": 4,
+        "ec.blur.cameralens": 2,
+        "ec.noise.noisehls": 1,
+        "ec.distort.opticscompensation": 1,
+        "ec.noise.noisehlsauto": 6,
+        "ec.blur.fastbox": 2,
+        "ec.color.exposure": 2,
+        "ec.channel.invert": 2,
+        "ec.distort.wavewarp": 1,
+        "ec.blur.radial": 2,
+        "ec.distort.transform": 2,
+        "ec.transition.ccscalewipe": 1,
+        "ec.color.blackwhite": 1
+      },
+      "converted_parameters": 1420,
+      "preserved_keyframes": 29,
+      "reference_size": [
+        1920,
+        1080
+      ],
+      "native_components": 2,
+      "native_component_effects": {
+        "org.craftbridge.glint": 2
+      },
+      "native_verified_parameters": 50,
+      "native_verified_keyframes": 12,
+      "project_reopen_verified": true,
+      "adobe_visual_comparison": false,
+      "skipped_existing_components": 0,
+      "native_time_refusals": [],
+      "curve_validation": {
+        "components": 2,
+        "keyframes": 12,
+        "bezier_sides": 0,
+        "intermediate_samples": 15,
+        "post_reopen_verified": true
+      },
+      "renderer_validation": {
+        "cases": [
+          {
+            "case": "zero-brightness-identity",
+            "seconds": 0.02077892899978906,
+            "strict_render": true
+          },
+          {
+            "case": "horizontal-direct-convolution",
+            "seconds": 0.021220344000539626,
+            "strict_render": true
+          },
+          {
+            "case": "hue-third-cycle",
+            "seconds": 0.020932024999638088,
+            "strict_render": true
+          },
+          {
+            "case": "threshold-add-red",
+            "seconds": 0.02084423899941612,
+            "strict_render": true
+          },
+          {
+            "case": "from-alpha",
+            "seconds": 0.02047746400057804,
+            "strict_render": true
+          },
+          {
+            "case": "scale-colors",
+            "seconds": 0.020944064999639522,
+            "strict_render": true
+          },
+          {
+            "case": "normal-opacity",
+            "seconds": 0.02053032100047858,
+            "strict_render": true
+          },
+          {
+            "case": "under-source",
+            "seconds": 0.02071172200157889,
+            "strict_render": true
+          },
+          {
+            "case": "as-premult",
+            "seconds": 0.020695821000117576,
+            "strict_render": true
+          },
+          {
+            "case": "all-opaque",
+            "seconds": 0.020997976998842205,
+            "strict_render": true
+          },
+          {
+            "case": "affect-alpha-zero",
+            "seconds": 0.02141084499999124,
+            "strict_render": true
+          },
+          {
+            "case": "background-brightness",
+            "seconds": 0.021272183001201483,
+            "strict_render": true
+          },
+          {
+            "case": "four-axes",
+            "seconds": 0.022017884999513626,
+            "strict_render": true
+          },
+          {
+            "case": "brightness_x",
+            "seconds": 0.021531576001507347,
+            "strict_render": true
+          },
+          {
+            "case": "brightness_y",
+            "seconds": 0.021744678999311873,
+            "strict_render": true
+          },
+          {
+            "case": "brightness_diag1",
+            "seconds": 0.02268193700001575,
+            "strict_render": true
+          },
+          {
+            "case": "brightness_diag2",
+            "seconds": 0.02352253000026394,
+            "strict_render": true
+          },
+          {
+            "case": "size_x",
+            "seconds": 0.022188097000253038,
+            "strict_render": true
+          },
+          {
+            "case": "size_y",
+            "seconds": 0.022973633000219706,
+            "strict_render": true
+          },
+          {
+            "case": "size_diag1",
+            "seconds": 0.025368635999257094,
+            "strict_render": true
+          },
+          {
+            "case": "size_diag2",
+            "seconds": 0.021881123999264673,
+            "strict_render": true
+          },
+          {
+            "case": "size_red",
+            "seconds": 0.021683274000679376,
+            "strict_render": true
+          },
+          {
+            "case": "size_green",
+            "seconds": 0.022129144999780692,
+            "strict_render": true
+          },
+          {
+            "case": "size_blue",
+            "seconds": 0.02247115499994834,
+            "strict_render": true
+          },
+          {
+            "case": "threshold_blur",
+            "seconds": 0.022105556001406512,
+            "strict_render": true
+          },
+          {
+            "case": "blur_glint",
+            "seconds": 0.022045615000024554,
+            "strict_render": true
+          },
+          {
+            "case": "preview-scale",
+            "seconds": 0.022688713999741594,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-0",
+            "seconds": 0.07382382200012216,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-1",
+            "seconds": 0.07263991299987538,
+            "strict_render": true
+          },
+          {
+            "case": "full-hd",
+            "seconds": 23.189435960000992,
+            "strict_render": true
+          }
+        ],
+        "module_sha256": "f84aeec072792b26c128e1e6910b5721c981514a053bb42a972826ed6326a674",
+        "synthetic_pixels_only": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    "glow_shake_local_flare_stretch_diffusion_modulation_glint_pixelsort": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 122,
+        "UNSUPPORTED": 22
+      },
+      "converted_parameters": 3203,
+      "preserved_keyframes": 504,
+      "all_original_hashes_unchanged": true,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "conversion_version": "0.18.0"
+    },
+    "pixelsort": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 76,
+        "UNSUPPORTED": 68
+      },
+      "mapped_effects": {
+        "ec.color.curves": 22,
+        "ec.generate.fourcolor": 9,
+        "ec.color.lumetri": 9,
+        "ec.color.cccolorneutralizer": 2,
+        "ec.color.brightnesscontrast": 6,
+        "ec.blur.unsharp": 7,
+        "ec.noise.noise": 3,
+        "ec.color.huesaturation": 7,
+        "ec.color.levels": 3,
+        "ec.color.tritone": 10,
+        "ec.color.tint": 2,
+        "ec.stylize.motiontile": 31,
+        "ec.blur.sharpen": 2,
+        "ec.distort.upscale": 1,
+        "ec.blur.ccradial": 3,
+        "ec.blur.camerashakedeblur": 4,
+        "ec.blur.cameralens": 2,
+        "ec.noise.noisehls": 1,
+        "ec.distort.opticscompensation": 1,
+        "ec.noise.noisehlsauto": 6,
+        "ec.blur.fastbox": 2,
+        "ec.color.exposure": 2,
+        "ec.channel.invert": 2,
+        "ec.distort.wavewarp": 1,
+        "org.craftbridge.pixelsort": 1,
+        "ec.blur.radial": 2,
+        "ec.distort.transform": 2,
+        "ec.transition.ccscalewipe": 1,
+        "ec.color.blackwhite": 1
+      },
+      "converted_parameters": 1394,
+      "preserved_keyframes": 17,
+      "reference_size": [
+        1920,
+        1080
+      ],
+      "native_components": 1,
+      "native_component_effects": {
+        "org.craftbridge.pixelsort": 1
+      },
+      "native_verified_parameters": 24,
+      "native_verified_keyframes": 0,
+      "project_reopen_verified": true,
+      "adobe_visual_comparison": false,
+      "skipped_existing_components": 0,
+      "native_time_refusals": [],
+      "point_and_seed_validation": {
+        "native_points_pixels_verified": true,
+        "point_values": [
+          960,
+          540
+        ],
+        "fractional_seed_exact": 0.2729949951171875,
+        "real_mode": "Linear",
+        "radial_circular_real_source_verified": false
+      },
+      "renderer_validation": {
+        "cases": [
+          {
+            "case": "horizontal-stable-pixel-sort",
+            "seconds": 0.02114146699932462,
+            "strict_render": true
+          },
+          {
+            "case": "reverse-stable-ties",
+            "seconds": 0.021117273998243036,
+            "strict_render": true
+          },
+          {
+            "case": "vertical",
+            "seconds": 0.021930431001237594,
+            "strict_render": true
+          },
+          {
+            "case": "mix-one-hdr-identity",
+            "seconds": 0.02163750999898184,
+            "strict_render": true
+          },
+          {
+            "case": "half-mix",
+            "seconds": 0.02100789399992209,
+            "strict_render": true
+          },
+          {
+            "case": "maximum-restarts-identity",
+            "seconds": 0.021873633000723203,
+            "strict_render": true
+          },
+          {
+            "case": "threshold-regions",
+            "seconds": 0.021222837998720934,
+            "strict_render": true
+          },
+          {
+            "case": "sort-below",
+            "seconds": 0.021346105999327847,
+            "strict_render": true
+          },
+          {
+            "case": "metric-0",
+            "seconds": 0.02161112400062848,
+            "strict_render": true
+          },
+          {
+            "case": "metric-1",
+            "seconds": 0.023459068001102423,
+            "strict_render": true
+          },
+          {
+            "case": "metric-2",
+            "seconds": 0.021547960999669158,
+            "strict_render": true
+          },
+          {
+            "case": "metric-3",
+            "seconds": 0.021702304999053013,
+            "strict_render": true
+          },
+          {
+            "case": "metric-4",
+            "seconds": 0.02165288799915288,
+            "strict_render": true
+          },
+          {
+            "case": "metric-5",
+            "seconds": 0.021023370998591417,
+            "strict_render": true
+          },
+          {
+            "case": "metric-6",
+            "seconds": 0.02160094200007734,
+            "strict_render": true
+          },
+          {
+            "case": "metric-7",
+            "seconds": 0.02209673800098244,
+            "strict_render": true
+          },
+          {
+            "case": "metric-8",
+            "seconds": 0.023928774000523845,
+            "strict_render": true
+          },
+          {
+            "case": "metric-9",
+            "seconds": 0.02074048299982678,
+            "strict_render": true
+          },
+          {
+            "case": "normal-alpha-metric",
+            "seconds": 0.022930214001462446,
+            "strict_render": true
+          },
+          {
+            "case": "premult-alpha-metric",
+            "seconds": 0.02140004200009571,
+            "strict_render": true
+          },
+          {
+            "case": "all-opaque-alpha",
+            "seconds": 0.021125101999132312,
+            "strict_render": true
+          },
+          {
+            "case": "threshold-mask",
+            "seconds": 0.021164581999983056,
+            "strict_render": true
+          },
+          {
+            "case": "restart-mask-all",
+            "seconds": 0.021125991001099464,
+            "strict_render": true
+          },
+          {
+            "case": "pattern-0",
+            "seconds": 0.024103200001263758,
+            "strict_render": true
+          },
+          {
+            "case": "pattern-1",
+            "seconds": 0.02419070100040699,
+            "strict_render": true
+          },
+          {
+            "case": "pattern-2",
+            "seconds": 0.024541408000004594,
+            "strict_render": true
+          },
+          {
+            "case": "fractional-seed-a",
+            "seconds": 0.02297676899979706,
+            "strict_render": true
+          },
+          {
+            "case": "fractional-seed-repeat",
+            "seconds": 0.023018468998998287,
+            "strict_render": true
+          },
+          {
+            "case": "fractional-seed-b",
+            "seconds": 0.025871157999063144,
+            "strict_render": true
+          },
+          {
+            "case": "fractional-seed-same",
+            "seconds": 0.023368668000330217,
+            "strict_render": true
+          },
+          {
+            "case": "radial_start",
+            "seconds": 0.025622279001254356,
+            "strict_render": true
+          },
+          {
+            "case": "radial_degrees",
+            "seconds": 0.024081209001451498,
+            "strict_render": true
+          },
+          {
+            "case": "radial_inner",
+            "seconds": 0.02374864600096771,
+            "strict_render": true
+          },
+          {
+            "case": "ray_length",
+            "seconds": 0.02421777900053712,
+            "strict_render": true
+          },
+          {
+            "case": "vary_radius",
+            "seconds": 0.024502063000909402,
+            "strict_render": true
+          },
+          {
+            "case": "radial_center",
+            "seconds": 0.02376926199940499,
+            "strict_render": true
+          },
+          {
+            "case": "circular_start",
+            "seconds": 0.024762925000686664,
+            "strict_render": true
+          },
+          {
+            "case": "circular_degrees",
+            "seconds": 0.023831120999602717,
+            "strict_render": true
+          },
+          {
+            "case": "circular_inner",
+            "seconds": 0.02522796700031904,
+            "strict_render": true
+          },
+          {
+            "case": "thickness",
+            "seconds": 0.028159176999906776,
+            "strict_render": true
+          },
+          {
+            "case": "vary_start",
+            "seconds": 0.024985939999169204,
+            "strict_render": true
+          },
+          {
+            "case": "circular_center",
+            "seconds": 0.023776862000886467,
+            "strict_render": true
+          },
+          {
+            "case": "softened-mask",
+            "seconds": 0.023847313999795006,
+            "strict_render": true
+          },
+          {
+            "case": "combined-geometry-mask",
+            "seconds": 0.021051778001492494,
+            "strict_render": true
+          },
+          {
+            "case": "full-scope-wrap-1",
+            "seconds": 0.02162155400037591,
+            "strict_render": true
+          },
+          {
+            "case": "full-scope-wrap-2",
+            "seconds": 0.02213235899944266,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-0",
+            "seconds": 0.08575341700088757,
+            "strict_render": true
+          },
+          {
+            "case": "full-hd-angle-37",
+            "seconds": 41.44169171700014,
+            "strict_render": true
+          }
+        ],
+        "module_sha256": "ce3bcff7461ab5dd2e292bfae7a5cb87112e2117affc0a27960b63bb973135b0",
+        "synthetic_pixels_only": true,
+        "adobe_visual_comparison": false
+      }
+    },
+    "glow_shake_local_flare_stretch_diffusion_modulation_glint_pixelsort_flicker": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 122,
+        "UNSUPPORTED": 22
+      },
+      "converted_parameters": 3220,
+      "preserved_keyframes": 507,
+      "all_original_hashes_unchanged": true,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "conversion_version": "0.19.0"
+    },
+    "flicker": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 76,
+        "UNSUPPORTED": 68
+      },
+      "mapped_effects": {
+        "ec.color.curves": 22,
+        "ec.generate.fourcolor": 9,
+        "ec.color.lumetri": 9,
+        "ec.color.cccolorneutralizer": 2,
+        "ec.color.brightnesscontrast": 6,
+        "ec.blur.unsharp": 7,
+        "ec.noise.noise": 3,
+        "ec.color.huesaturation": 7,
+        "ec.color.levels": 3,
+        "ec.color.tritone": 10,
+        "ec.color.tint": 2,
+        "ec.stylize.motiontile": 31,
+        "ec.blur.sharpen": 2,
+        "ec.distort.upscale": 1,
+        "ec.blur.ccradial": 3,
+        "ec.blur.camerashakedeblur": 4,
+        "ec.blur.cameralens": 2,
+        "ec.noise.noisehls": 1,
+        "org.craftbridge.flicker": 2,
+        "ec.distort.opticscompensation": 1,
+        "ec.noise.noisehlsauto": 6,
+        "ec.blur.fastbox": 2,
+        "ec.color.exposure": 2,
+        "ec.channel.invert": 2,
+        "ec.distort.wavewarp": 1,
+        "ec.blur.radial": 2,
+        "ec.distort.transform": 2,
+        "ec.transition.ccscalewipe": 1,
+        "ec.color.blackwhite": 1
+      },
+      "converted_parameters": 1387,
+      "preserved_keyframes": 20,
+      "reference_size": [
+        1920,
+        1080
+      ],
+      "native_components": 1,
+      "native_component_effects": {
+        "org.craftbridge.flicker": 1
+      },
+      "native_verified_parameters": 14,
+      "native_verified_keyframes": 0,
+      "project_reopen_verified": true,
+      "adobe_visual_comparison": false,
+      "skipped_existing_components": 1,
+      "native_time_refusals": [],
+      "selected_validation": {
+        "files": 144,
+        "status": {
+          "PARTIAL": 76,
+          "UNSUPPORTED": 68
+        },
+        "converted_parameters": 1387,
+        "preserved_keyframes": 20,
+        "selected_components": 1,
+        "native_verified_parameters": 3,
+        "native_verified_keyframes": 3,
+        "native_verified_bezier_sides": 0,
+        "intermediate_samples_verified": 0,
+        "inactive_target_verified": true,
+        "existing_count_enabled_uid_preserved": true,
+        "unselected_properties_preserved": true,
+        "project_reopen_verified": true,
+        "adobe_visual_comparison": false,
+        "native_time_refusals": []
+      },
+      "renderer_validation": {
+        "cases": [
+          {
+            "case": "zero-amplitude-hdr-identity",
+            "seconds": 0.2347107599998708,
+            "strict_render": true
+          },
+          {
+            "case": "brightness-two",
+            "seconds": 0.02300375400000121,
+            "strict_render": true
+          },
+          {
+            "case": "brightness-zero",
+            "seconds": 0.019590570999980628,
+            "strict_render": true
+          },
+          {
+            "case": "wave-0",
+            "seconds": 0.02049661199998809,
+            "strict_render": true
+          },
+          {
+            "case": "wave-0.25",
+            "seconds": 0.019256342999824483,
+            "strict_render": true
+          },
+          {
+            "case": "wave-0.5",
+            "seconds": 0.01902362800001356,
+            "strict_render": true
+          },
+          {
+            "case": "wave-0.75",
+            "seconds": 0.020897121999951196,
+            "strict_render": true
+          },
+          {
+            "case": "wave--0.25",
+            "seconds": 0.01997416999984125,
+            "strict_render": true
+          },
+          {
+            "case": "wave-1.25",
+            "seconds": 0.02151259700008268,
+            "strict_render": true
+          },
+          {
+            "case": "red_amp",
+            "seconds": 0.02065085399999589,
+            "strict_render": true
+          },
+          {
+            "case": "green_amp",
+            "seconds": 0.019725771999901553,
+            "strict_render": true
+          },
+          {
+            "case": "blue_amp",
+            "seconds": 0.018779608999921038,
+            "strict_render": true
+          },
+          {
+            "case": "negative-gain-floor",
+            "seconds": 0.019122118000041155,
+            "strict_render": true
+          },
+          {
+            "case": "shared-luma",
+            "seconds": 0.01868083999988812,
+            "strict_render": true
+          },
+          {
+            "case": "negative-time",
+            "seconds": 0.018652195999948162,
+            "strict_render": true
+          },
+          {
+            "case": "time-repeat-after-negative",
+            "seconds": 0.01926575600009528,
+            "strict_render": true
+          },
+          {
+            "case": "fractional-seed",
+            "seconds": 0.020069595000222762,
+            "strict_render": true
+          },
+          {
+            "case": "frequency-change",
+            "seconds": 0.01924986600010925,
+            "strict_render": true
+          },
+          {
+            "case": "independent-color",
+            "seconds": 0.020067254999958095,
+            "strict_render": true
+          },
+          {
+            "case": "color-and-luma",
+            "seconds": 0.019560837999961223,
+            "strict_render": true
+          },
+          {
+            "case": "zero-frequencies-first",
+            "seconds": 0.019808947000001353,
+            "strict_render": true
+          },
+          {
+            "case": "zero-frequencies-second",
+            "seconds": 0.020491938999839476,
+            "strict_render": true
+          },
+          {
+            "case": "preview-scale-invariant",
+            "seconds": 0.029654570000047897,
+            "strict_render": true
+          },
+          {
+            "case": "lattice-left",
+            "seconds": 0.02052038400006495,
+            "strict_render": true
+          },
+          {
+            "case": "lattice-right",
+            "seconds": 0.022224510000114606,
+            "strict_render": true
+          },
+          {
+            "case": "domain-upper-extremes",
+            "seconds": 0.019174506000126712,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-0",
+            "seconds": 0.038012816999980714,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-later-0",
+            "seconds": 0.03857314800006861,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-1",
+            "seconds": 0.03800534400011202,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-later-1",
+            "seconds": 0.03753516899996612,
+            "strict_render": true
+          },
+          {
+            "case": "full-hd",
+            "seconds": 2.221278151999968,
+            "strict_render": true
+          }
+        ],
+        "module_sha256": "eaef76f15dc77f40ff6884c885eaf60418937bcec175d065c61011048f2759ff",
+        "synthetic_pixels_only": true,
+        "adobe_visual_comparison": false,
+        "real_control_sets_verified": 2,
+        "selected_defaults_are_not_source_evidence": true
+      },
+      "build_validation": {
+        "module_sha256": "eaef76f15dc77f40ff6884c885eaf60418937bcec175d065c61011048f2759ff",
+        "module_bytes": 29038,
+        "byte_identical_rebuild": true,
+        "toolchain": "Rust 1.98.1",
+        "dependency_free": true
+      }
+    },
+    "glow_shake_local_flare_stretch_diffusion_modulation_glint_pixelsort_flicker_median": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 123,
+        "UNSUPPORTED": 21
+      },
+      "converted_parameters": 3250,
+      "preserved_keyframes": 507,
+      "all_original_hashes_unchanged": true,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "conversion_version": "0.20.0"
+    },
+    "median": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 76,
+        "UNSUPPORTED": 68
+      },
+      "mapped_effects": {
+        "ec.color.curves": 22,
+        "ec.generate.fourcolor": 9,
+        "ec.color.lumetri": 9,
+        "ec.color.cccolorneutralizer": 2,
+        "ec.color.brightnesscontrast": 6,
+        "ec.blur.unsharp": 7,
+        "ec.noise.noise": 3,
+        "ec.color.huesaturation": 7,
+        "ec.color.levels": 3,
+        "ec.color.tritone": 10,
+        "ec.color.tint": 2,
+        "ec.stylize.motiontile": 31,
+        "ec.blur.sharpen": 2,
+        "ec.distort.upscale": 1,
+        "ec.blur.ccradial": 3,
+        "ec.blur.camerashakedeblur": 4,
+        "ec.blur.cameralens": 2,
+        "ec.noise.noisehls": 1,
+        "org.craftbridge.median": 3,
+        "ec.distort.opticscompensation": 1,
+        "ec.noise.noisehlsauto": 6,
+        "ec.blur.fastbox": 2,
+        "ec.color.exposure": 2,
+        "ec.channel.invert": 2,
+        "ec.distort.wavewarp": 1,
+        "ec.blur.radial": 2,
+        "ec.distort.transform": 2,
+        "ec.transition.ccscalewipe": 1,
+        "ec.color.blackwhite": 1
+      },
+      "converted_parameters": 1400,
+      "preserved_keyframes": 17,
+      "reference_size": [
+        1920,
+        1080
+      ],
+      "native_components": 3,
+      "native_component_effects": {
+        "org.craftbridge.median": 3
+      },
+      "native_verified_parameters": 30,
+      "native_verified_keyframes": 0,
+      "project_reopen_verified": true,
+      "adobe_visual_comparison": false,
+      "skipped_existing_components": 0,
+      "native_time_refusals": [],
+      "renderer_validation": {
+        "cases": [
+          {
+            "case": "mix-identity",
+            "seconds": 0.020254532000308245,
+            "strict_render": true
+          },
+          {
+            "case": "level-identity",
+            "seconds": 0.022991081999862217,
+            "strict_render": true
+          },
+          {
+            "case": "zero-radii",
+            "seconds": 0.020343154000329378,
+            "strict_render": true
+          },
+          {
+            "case": "horizontal-spike",
+            "seconds": 0.02367407599967919,
+            "strict_render": true
+          },
+          {
+            "case": "level-half",
+            "seconds": 0.022199496000212093,
+            "strict_render": true
+          },
+          {
+            "case": "mix-half",
+            "seconds": 0.023088637000000745,
+            "strict_render": true
+          },
+          {
+            "case": "fractional-radius",
+            "seconds": 0.02139130599971395,
+            "strict_render": true
+          },
+          {
+            "case": "nonfractional-floor",
+            "seconds": 0.022210901000107697,
+            "strict_render": true
+          },
+          {
+            "case": "alpha-preserved",
+            "seconds": 0.022490168999866,
+            "strict_render": true
+          },
+          {
+            "case": "alpha-filtered",
+            "seconds": 0.021295963000284246,
+            "strict_render": true
+          },
+          {
+            "case": "selected-red-only",
+            "seconds": 0.02244410399998742,
+            "strict_render": true
+          },
+          {
+            "case": "whole-pixel-by-red",
+            "seconds": 0.021280597999975726,
+            "strict_render": true
+          },
+          {
+            "case": "most-common",
+            "seconds": 0.022671058000014455,
+            "strict_render": true
+          },
+          {
+            "case": "horizontal-direction",
+            "seconds": 0.02286102900006881,
+            "strict_render": true
+          },
+          {
+            "case": "vertical-angle",
+            "seconds": 0.02271932600024229,
+            "strict_render": true
+          },
+          {
+            "case": "vertical-width",
+            "seconds": 0.021136672999546136,
+            "strict_render": true
+          },
+          {
+            "case": "dense-rectangle-reference",
+            "seconds": 0.024031310999816924,
+            "strict_render": true
+          },
+          {
+            "case": "softness-response",
+            "seconds": 0.022267099000146118,
+            "strict_render": true
+          },
+          {
+            "case": "preview-scale",
+            "seconds": 0.021039133000158472,
+            "strict_render": true
+          },
+          {
+            "case": "preview-scale-reference",
+            "seconds": 0.022543570000379987,
+            "strict_render": true
+          },
+          {
+            "case": "channel-0",
+            "seconds": 0.06651860200008741,
+            "strict_render": true
+          },
+          {
+            "case": "channel-1",
+            "seconds": 0.06779441100024997,
+            "strict_render": true
+          },
+          {
+            "case": "channel-2",
+            "seconds": 0.06684563299995716,
+            "strict_render": true
+          },
+          {
+            "case": "channel-3",
+            "seconds": 0.07111842899985277,
+            "strict_render": true
+          },
+          {
+            "case": "channel-4",
+            "seconds": 0.07086078100019222,
+            "strict_render": true
+          },
+          {
+            "case": "channel-5",
+            "seconds": 0.0660454280000522,
+            "strict_render": true
+          },
+          {
+            "case": "channel-6",
+            "seconds": 0.06599872700007836,
+            "strict_render": true
+          },
+          {
+            "case": "channel-7",
+            "seconds": 0.0662071100000503,
+            "strict_render": true
+          },
+          {
+            "case": "channel-8",
+            "seconds": 0.06507210399968244,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-0",
+            "seconds": 0.6811962229999153,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-1",
+            "seconds": 0.6141502899999978,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-2",
+            "seconds": 0.8350121019998369,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-3",
+            "seconds": 0.8702145079996626,
+            "strict_render": true
+          },
+          {
+            "case": "budget-rgba-0",
+            "seconds": 2.165644954000072,
+            "strict_render": true
+          },
+          {
+            "case": "budget-rgba-1",
+            "seconds": 2.0940138010000737,
+            "strict_render": true
+          },
+          {
+            "case": "budget-rgba-2",
+            "seconds": 3.8003073869999753,
+            "strict_render": true
+          },
+          {
+            "case": "budget-rgba-3",
+            "seconds": 2.673150061999877,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-0",
+            "seconds": 0.980677212000046,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-1",
+            "seconds": 0.9571997199996076,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-2",
+            "seconds": 0.9527737720000005,
+            "strict_render": true
+          },
+          {
+            "case": "full-hd-actual-window-with-spike",
+            "seconds": 54.99191980099977,
+            "strict_render": true
+          }
+        ],
+        "module_sha256": "7983570ed85dd4c71fc6f3419e0a305651f03039b4d49c78b28fb451ff553139",
+        "synthetic_pixels_only": true,
+        "adobe_visual_comparison": false,
+        "max_taps_per_pixel": 36,
+        "full_hd_input_if_present": "uniform except one impulse; not general throughput benchmark",
+        "real_control_sets_verified": 3
+      },
+      "build_validation": {
+        "version": "0.20.0",
+        "toolchain": "Rust 1.98.1",
+        "bytes": 79804,
+        "module_sha256": "7983570ed85dd4c71fc6f3419e0a305651f03039b4d49c78b28fb451ff553139",
+        "rebuild_byte_identical": true,
+        "network_generation_byte_identical": true,
+        "external_rust_dependencies": false,
+        "tests_passed": 15,
+        "clippy_passed": true
+      }
+    },
+    "glow_shake_local_flare_stretch_diffusion_modulation_glint_pixelsort_flicker_median_directional": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 124,
+        "UNSUPPORTED": 20
+      },
+      "converted_parameters": 3286,
+      "preserved_keyframes": 507,
+      "all_original_hashes_unchanged": true,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "conversion_version": "0.21.0"
+    },
+    "directional": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 76,
+        "UNSUPPORTED": 68
+      },
+      "mapped_effects": {
+        "ec.color.curves": 22,
+        "ec.generate.fourcolor": 9,
+        "ec.color.lumetri": 9,
+        "ec.color.cccolorneutralizer": 2,
+        "ec.color.brightnesscontrast": 6,
+        "ec.blur.unsharp": 7,
+        "ec.noise.noise": 3,
+        "ec.color.huesaturation": 7,
+        "ec.color.levels": 3,
+        "ec.color.tritone": 10,
+        "ec.color.tint": 2,
+        "ec.stylize.motiontile": 31,
+        "ec.blur.sharpen": 2,
+        "ec.distort.upscale": 1,
+        "ec.blur.ccradial": 3,
+        "ec.blur.camerashakedeblur": 4,
+        "ec.blur.cameralens": 2,
+        "ec.noise.noisehls": 1,
+        "ec.distort.opticscompensation": 1,
+        "ec.noise.noisehlsauto": 6,
+        "ec.blur.fastbox": 2,
+        "ec.color.exposure": 2,
+        "ec.channel.invert": 2,
+        "ec.distort.wavewarp": 1,
+        "org.craftbridge.directional": 3,
+        "ec.blur.radial": 2,
+        "ec.distort.transform": 2,
+        "ec.transition.ccscalewipe": 1,
+        "ec.color.blackwhite": 1
+      },
+      "converted_parameters": 1406,
+      "preserved_keyframes": 17,
+      "reference_size": [
+        1920,
+        1080
+      ],
+      "native_components": 3,
+      "native_component_effects": {
+        "org.craftbridge.directional": 3
+      },
+      "native_verified_parameters": 36,
+      "native_verified_keyframes": 0,
+      "project_reopen_verified": true,
+      "adobe_visual_comparison": false,
+      "skipped_existing_components": 0,
+      "native_time_refusals": [],
+      "renderer_validation": {
+        "cases": [
+          {
+            "case": "mix-identity",
+            "seconds": 0.019917501999771048,
+            "strict_render": true
+          },
+          {
+            "case": "zero-length",
+            "seconds": 0.021081236000100034,
+            "strict_render": true
+          },
+          {
+            "case": "horizontal-independent-box",
+            "seconds": 0.02162715800022852,
+            "strict_render": true
+          },
+          {
+            "case": "vertical-independent-box",
+            "seconds": 0.021139316999324365,
+            "strict_render": true
+          },
+          {
+            "case": "spike-removal",
+            "seconds": 0.02295992500057764,
+            "strict_render": true
+          },
+          {
+            "case": "fractional-length",
+            "seconds": 0.021523357000660326,
+            "strict_render": true
+          },
+          {
+            "case": "mix-half",
+            "seconds": 0.020080201999917335,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mix-zero",
+            "seconds": 0.02165174699985073,
+            "strict_render": true
+          },
+          {
+            "case": "apply-add",
+            "seconds": 0.02097488500021427,
+            "strict_render": true
+          },
+          {
+            "case": "apply-add-zero-blur",
+            "seconds": 0.020369679999930668,
+            "strict_render": true
+          },
+          {
+            "case": "threshold-half",
+            "seconds": 0.020352731000457425,
+            "strict_render": true
+          },
+          {
+            "case": "deviation-limit",
+            "seconds": 0.02143984400026966,
+            "strict_render": true
+          },
+          {
+            "case": "replicated-edge",
+            "seconds": 0.019984677999673295,
+            "strict_render": true
+          },
+          {
+            "case": "transparent-edge",
+            "seconds": 0.0210432949997994,
+            "strict_render": true
+          },
+          {
+            "case": "thin",
+            "seconds": 0.022393404000467854,
+            "strict_render": true
+          },
+          {
+            "case": "spread",
+            "seconds": 0.02041751100023248,
+            "strict_render": true
+          },
+          {
+            "case": "displace-right",
+            "seconds": 0.022667758000352478,
+            "strict_render": true
+          },
+          {
+            "case": "preview-scale",
+            "seconds": 0.021963361000416626,
+            "strict_render": true
+          },
+          {
+            "case": "channels-0",
+            "seconds": 0.019984386000032828,
+            "strict_render": true
+          },
+          {
+            "case": "channels-1",
+            "seconds": 0.02125385199997254,
+            "strict_render": true
+          },
+          {
+            "case": "channels-2",
+            "seconds": 0.020344231000308355,
+            "strict_render": true
+          },
+          {
+            "case": "channels-3",
+            "seconds": 0.02168743199945311,
+            "strict_render": true
+          },
+          {
+            "case": "channels-4",
+            "seconds": 0.02161521299967717,
+            "strict_render": true
+          },
+          {
+            "case": "channels-5",
+            "seconds": 0.020147940999777347,
+            "strict_render": true
+          },
+          {
+            "case": "channels-6",
+            "seconds": 0.021589055999356788,
+            "strict_render": true
+          },
+          {
+            "case": "channels-7",
+            "seconds": 0.02028392600004736,
+            "strict_render": true
+          },
+          {
+            "case": "channels-8",
+            "seconds": 0.02151524700002483,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-0",
+            "seconds": 0.021356176000153937,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-1",
+            "seconds": 0.02150427399919863,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-2",
+            "seconds": 0.02172517799954221,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-3",
+            "seconds": 0.020405685000696394,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-4",
+            "seconds": 0.02027089400053228,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-5",
+            "seconds": 0.020772868999301863,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-6",
+            "seconds": 0.021512626000003365,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-7",
+            "seconds": 0.020147428999734984,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-8",
+            "seconds": 0.020749233000060485,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-9",
+            "seconds": 0.0205256350000127,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-10",
+            "seconds": 0.02061666999998124,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-11",
+            "seconds": 0.022095170999818947,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-12",
+            "seconds": 0.020604233000085515,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-13",
+            "seconds": 0.021822024000357487,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-14",
+            "seconds": 0.021467443999426905,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-15",
+            "seconds": 0.021555043999796908,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-16",
+            "seconds": 0.023628005000318808,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-17",
+            "seconds": 0.022716374999617983,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-18",
+            "seconds": 0.020408760999998776,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-19",
+            "seconds": 0.026232584999888786,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-20",
+            "seconds": 0.022985688000517257,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-21",
+            "seconds": 0.02350012799979595,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-22",
+            "seconds": 0.02072282199969777,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-23",
+            "seconds": 0.022172984000462748,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-24",
+            "seconds": 0.020885321000605472,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-25",
+            "seconds": 0.020910522000122,
+            "strict_render": true
+          },
+          {
+            "case": "apply-mode-26",
+            "seconds": 0.021776599000077113,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-0",
+            "seconds": 3.0936102790001314,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-1",
+            "seconds": 3.187007984999582,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-2",
+            "seconds": 3.246485126999687,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-3",
+            "seconds": 3.088699395000731,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-4",
+            "seconds": 3.2560196939994057,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-5",
+            "seconds": 3.1137351349998426,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-6",
+            "seconds": 3.0852639049999198,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-7",
+            "seconds": 3.215618072000325,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-8",
+            "seconds": 3.0082666309999695,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-9",
+            "seconds": 3.0642765880002116,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-10",
+            "seconds": 3.0501388869997754,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-11",
+            "seconds": 3.038691048999681,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-12",
+            "seconds": 3.11682100500002,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-13",
+            "seconds": 3.2958503890004067,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-14",
+            "seconds": 3.0537296860002243,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-15",
+            "seconds": 3.048218246999568,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-16",
+            "seconds": 3.016341309999916,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-17",
+            "seconds": 3.1187511200005247,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-18",
+            "seconds": 3.129181160999906,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-19",
+            "seconds": 3.13804936500037,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-20",
+            "seconds": 3.155554196000594,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-21",
+            "seconds": 3.1534481779999624,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-22",
+            "seconds": 3.1340842390000034,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-23",
+            "seconds": 3.0764855590005027,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-24",
+            "seconds": 3.0437660960005815,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-25",
+            "seconds": 3.069040141000187,
+            "strict_render": true
+          },
+          {
+            "case": "budget-mode-26",
+            "seconds": 3.029677807000553,
+            "strict_render": true
+          },
+          {
+            "case": "maximum-length-transparent-displace",
+            "seconds": 0.41982686899973487,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-0",
+            "seconds": 1.7791690300000482,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-1",
+            "seconds": 1.169532063000588,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-2",
+            "seconds": 1.5983387989999756,
+            "strict_render": true
+          },
+          {
+            "case": "full-hd-nonuniform-checker",
+            "seconds": 96.33367037700009,
+            "strict_render": true
+          }
+        ],
+        "module_sha256": "7552b1ef82f1195c987d3511bcd426e903edfe98b5eab793049ceb7022ab4f30",
+        "synthetic_pixels_only": true,
+        "adobe_visual_comparison": false,
+        "max_taps_per_pixel": 31,
+        "full_hd_input_if_present": "nonuniform original checker; 31 taps, angle 137.3 degrees, amount 96.7",
+        "real_control_sets_verified": 3
+      },
+      "build_validation": {
+        "version": "0.21.0",
+        "toolchain": "Rust 1.98.1",
+        "bytes": 43712,
+        "module_sha256": "7552b1ef82f1195c987d3511bcd426e903edfe98b5eab793049ceb7022ab4f30",
+        "rebuild_byte_identical": true,
+        "external_rust_dependencies": false,
+        "tests_passed": 13,
+        "clippy_passed": true
+      }
+    },
+    "glow_shake_local_flare_stretch_diffusion_modulation_glint_pixelsort_flicker_median_directional_sharpen": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 124,
+        "UNSUPPORTED": 20
+      },
+      "converted_parameters": 3301,
+      "preserved_keyframes": 507,
+      "all_original_hashes_unchanged": true,
+      "all_source_effects_supported": false,
+      "complete_visual_equivalence_verified": false,
+      "conversion_version": "0.22.0"
+    },
+    "sharpen": {
+      "files": 144,
+      "status": {
+        "PARTIAL": 75,
+        "UNSUPPORTED": 69
+      },
+      "mapped_effects": {
+        "ec.color.curves": 22,
+        "ec.generate.fourcolor": 9,
+        "ec.color.lumetri": 9,
+        "ec.color.cccolorneutralizer": 2,
+        "ec.color.brightnesscontrast": 6,
+        "ec.blur.unsharp": 7,
+        "ec.noise.noise": 3,
+        "ec.color.huesaturation": 7,
+        "ec.color.levels": 3,
+        "ec.color.tritone": 10,
+        "org.craftbridge.sharpen": 1,
+        "ec.color.tint": 2,
+        "ec.stylize.motiontile": 31,
+        "ec.blur.sharpen": 2,
+        "ec.distort.upscale": 1,
+        "ec.blur.ccradial": 3,
+        "ec.blur.camerashakedeblur": 4,
+        "ec.blur.cameralens": 2,
+        "ec.noise.noisehls": 1,
+        "ec.distort.opticscompensation": 1,
+        "ec.noise.noisehlsauto": 6,
+        "ec.blur.fastbox": 2,
+        "ec.color.exposure": 2,
+        "ec.channel.invert": 2,
+        "ec.distort.wavewarp": 1,
+        "ec.blur.radial": 2,
+        "ec.distort.transform": 2,
+        "ec.transition.ccscalewipe": 1,
+        "ec.color.blackwhite": 1
+      },
+      "converted_parameters": 1385,
+      "preserved_keyframes": 17,
+      "reference_size": [
+        1920,
+        1080
+      ],
+      "native_components": 1,
+      "native_component_effects": {
+        "org.craftbridge.sharpen": 1
+      },
+      "native_verified_parameters": 15,
+      "native_verified_keyframes": 0,
+      "project_reopen_verified": true,
+      "adobe_visual_comparison": false,
+      "skipped_existing_components": 0,
+      "native_time_refusals": [],
+      "renderer_validation": {
+        "cases": [
+          {
+            "case": "reference-q0-a0",
+            "seconds": 0.022011858000041684,
+            "strict_render": true
+          },
+          {
+            "case": "reference-q0-a1",
+            "seconds": 0.02186085199991794,
+            "strict_render": true
+          },
+          {
+            "case": "reference-q0-a2",
+            "seconds": 0.0232225310001013,
+            "strict_render": true
+          },
+          {
+            "case": "reference-q1-a0",
+            "seconds": 0.021109094999701483,
+            "strict_render": true
+          },
+          {
+            "case": "reference-q1-a1",
+            "seconds": 0.024964790000012727,
+            "strict_render": true
+          },
+          {
+            "case": "reference-q1-a2",
+            "seconds": 0.02081217400063906,
+            "strict_render": true
+          },
+          {
+            "case": "zero-amp-hdr-a0",
+            "seconds": 0.020346620000054827,
+            "strict_render": true
+          },
+          {
+            "case": "zero-amp-hdr-a1",
+            "seconds": 0.019753538999793818,
+            "strict_render": true
+          },
+          {
+            "case": "zero-amp-hdr-a2",
+            "seconds": 0.02031748800072819,
+            "strict_render": true
+          },
+          {
+            "case": "best-band-baseline",
+            "seconds": 0.021198999999796797,
+            "strict_render": true
+          },
+          {
+            "case": "best-band-tiny",
+            "seconds": 0.02177843200024654,
+            "strict_render": true
+          },
+          {
+            "case": "best-band-small",
+            "seconds": 0.024018065999371174,
+            "strict_render": true
+          },
+          {
+            "case": "best-band-medium",
+            "seconds": 0.023723500000414788,
+            "strict_render": true
+          },
+          {
+            "case": "best-band-large",
+            "seconds": 0.025901805000103195,
+            "strict_render": true
+          },
+          {
+            "case": "suppress-red",
+            "seconds": 0.021950997000203643,
+            "strict_render": true
+          },
+          {
+            "case": "suppress-green",
+            "seconds": 0.02307459699932224,
+            "strict_render": true
+          },
+          {
+            "case": "suppress-blue",
+            "seconds": 0.023134487000788795,
+            "strict_render": true
+          },
+          {
+            "case": "suppress-luma",
+            "seconds": 0.02346198400027788,
+            "strict_render": true
+          },
+          {
+            "case": "suppress-chroma",
+            "seconds": 0.02163584599929891,
+            "strict_render": true
+          },
+          {
+            "case": "negative-amp",
+            "seconds": 0.02162469900031283,
+            "strict_render": true
+          },
+          {
+            "case": "threshold-zero-identity",
+            "seconds": 0.02071927399993001,
+            "strict_render": true
+          },
+          {
+            "case": "constant-hdr",
+            "seconds": 0.021939508999821555,
+            "strict_render": true
+          },
+          {
+            "case": "hidden-color",
+            "seconds": 0.02012099199964723,
+            "strict_render": true
+          },
+          {
+            "case": "hidden-color-zero",
+            "seconds": 0.02065145400047186,
+            "strict_render": true
+          },
+          {
+            "case": "half-scale",
+            "seconds": 0.02135062100023788,
+            "strict_render": true
+          },
+          {
+            "case": "half-radii",
+            "seconds": 0.021332353999241604,
+            "strict_render": true
+          },
+          {
+            "case": "upper-bounds-q0",
+            "seconds": 0.020344615000794875,
+            "strict_render": true
+          },
+          {
+            "case": "upper-bounds-q1",
+            "seconds": 0.02005109700075991,
+            "strict_render": true
+          },
+          {
+            "case": "real-controls-0",
+            "seconds": 0.1080367849999675,
+            "strict_render": true
+          },
+          {
+            "case": "full-hd-nonuniform-q0",
+            "seconds": 44.78181583700007,
+            "strict_render": true
+          },
+          {
+            "case": "full-hd-nonuniform-q1",
+            "seconds": 15.19254016099967,
+            "strict_render": true
+          },
+          {
+            "case": "uhd-nonuniform-best",
+            "seconds": 232.6899283619996,
+            "strict_render": true
+          }
+        ],
+        "synthetic_pixels_only": true,
+        "adobe_visual_comparison": false,
+        "module_sha256": "d193ca442e5dbf08acc33cd584635005b0d82e318212dc13ac70cbc14bf64599",
+        "real_control_sets_verified": 1,
+        "uhd_native_memory_fuel_limits_unchanged": true
+      },
+      "build_validation": {
+        "version": "0.22.0",
+        "toolchain": "Rust 1.98.1",
+        "bytes": 30003,
+        "module_sha256": "d193ca442e5dbf08acc33cd584635005b0d82e318212dc13ac70cbc14bf64599",
+        "rebuild_byte_identical": true,
+        "external_rust_dependencies": false,
+        "tests_passed": 11,
+        "clippy_passed": true
+      }
+    }
+  },
+  "mesh_structural_validation": {
+    "real_blobs": 2,
+    "records_per_blob": 64,
+    "float_fields_per_record": 10,
+    "byte_roundtrip_exact": true,
+    "instance_ownership_verified": true,
+    "render_supported": false
+  },
+  "continuous_endpoint_validation": {
+    "files": 1,
+    "status": {
+      "PARTIAL": 1
+    },
+    "converted_parameters": 11,
+    "preserved_keyframes": 12,
+    "selected_components": 1,
+    "native_verified_parameters": 11,
+    "native_verified_keyframes": 12,
+    "native_verified_bezier_sides": 4,
+    "intermediate_samples_verified": 3,
+    "inactive_target_verified": true,
+    "existing_count_enabled_uid_preserved": true,
+    "unselected_properties_preserved": true,
+    "project_reopen_verified": true,
+    "adobe_visual_comparison": false,
+    "native_time_refusals": []
+  },
+  "native_layer_resource_validation": {
+    "native_effects": 42,
+    "native_layer_properties": 71,
+    "saved_and_reopened": true,
+    "existing_effect_uid_preserved": true,
+    "explicit_null_unbind_verified": true,
+    "inactive_comp_preserved": true,
+    "self_missing_refused_without_mutation": true,
+    "native_host_renderer_cases": [
+      {
+        "operator": 0,
+        "exact_source_uid_requested": true,
+        "independent_pixels_verified": true
+      },
+      {
+        "operator": 1,
+        "exact_source_uid_requested": true,
+        "independent_pixels_verified": true
+      },
+      {
+        "operator": 3,
+        "exact_source_uid_requested": true,
+        "independent_pixels_verified": true
+      }
+    ],
+    "source_ffx_layer_decoding_claimed": false,
+    "adobe_visual_comparison": false,
+    "conversion_version": "0.23.0"
+  },
+  "source_warning_report_validation": {
+    "version": "0.23.1",
+    "files": 144,
+    "source_parameter_warnings_preserved": 1341,
+    "previously_omitted_warnings": 353,
+    "unmapped_instances_with_omitted_warnings": 65,
+    "all_original_hashes_unchanged": true,
+    "new_source_effect_support": false,
+    "general_tests_passed": 535,
+    "real_tests_passed": 26,
+    "evidence": "decisions/026-source-warnings-before-mapping.md"
+  },
+  "colorize_extension_validation": {
+    "version": "0.24.0",
+    "source": "BCC3Colorize",
+    "controls": 23,
+    "real_instances": 4,
+    "native_static_properties": 92,
+    "native_keys": 0,
+    "rust_tests": 11,
+    "wasm_cases": 60,
+    "native_save_reopen_verified": true,
+    "approximate": true,
+    "adobe_visual_comparison": false,
+    "optional_extension_count": 12,
+    "all_optionals_and_local_flare": {
+      "PARTIAL": 124,
+      "UNSUPPORTED": 20,
+      "properties": 3393,
+      "keys": 507
+    },
+    "general_tests_passed": 556,
+    "real_tests_passed": 27,
+    "all_original_hashes_unchanged": true,
+    "evidence": "decisions/027-approximate-colorize-renderer.md"
+  }
+}

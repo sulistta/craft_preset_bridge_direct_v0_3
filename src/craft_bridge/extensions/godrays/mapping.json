@@ -1,0 +1,417 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-godrays-1",
+  "plugins": [
+    {
+      "api": 2,
+      "bridge_host_revision": 1,
+      "id": "org.craftbridge.godrays",
+      "name": "Bridge Godrays (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original radial/spin ray integration with explicit raw-coordinate and alpha models. No ProductionCrate code or assets. Experimental API2 host required.",
+      "params": [
+        {
+          "id": "mode",
+          "name": "Mode",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "Spin",
+            "Zoom"
+          ]
+        },
+        {
+          "id": "position",
+          "name": "Position (Raw)",
+          "type": "point",
+          "default": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "threshold_mode",
+          "name": "Threshold Mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Luma",
+            "Chroma"
+          ]
+        },
+        {
+          "id": "threshold",
+          "name": "Threshold (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "smooth",
+          "name": "Threshold Smooth (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "length",
+          "name": "Length (Raw)",
+          "type": "slider",
+          "default": 10000.0,
+          "min": 0,
+          "max": 100000
+        },
+        {
+          "id": "spin",
+          "name": "Spin Amount (Degrees)",
+          "type": "slider",
+          "default": 30.0,
+          "min": -360000,
+          "max": 360000
+        },
+        {
+          "id": "exposure",
+          "name": "Exposure (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": -20,
+          "max": 20
+        },
+        {
+          "id": "decay",
+          "name": "Decay (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": -10,
+          "max": 10
+        },
+        {
+          "id": "direction",
+          "name": "Direction",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Out",
+            "In",
+            "In & Out"
+          ]
+        },
+        {
+          "id": "chromatic",
+          "name": "Chromatic Amount (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "channels",
+          "name": "Channels",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Red & Blue",
+            "Red & Green",
+            "Green & Blue"
+          ]
+        },
+        {
+          "id": "quality",
+          "name": "Quality",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "Draft",
+            "Moderate",
+            "High",
+            "Extreme",
+            "Custom"
+          ]
+        },
+        {
+          "id": "samples",
+          "name": "Samples (Raw)",
+          "type": "slider",
+          "default": 64.0,
+          "min": 2,
+          "max": 256
+        },
+        {
+          "id": "noise",
+          "name": "Noise (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "repeat",
+          "name": "Repeat Edges",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "expansion",
+          "name": "Buffer Expansion (Neutral Only)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 0
+        },
+        {
+          "id": "opacity",
+          "name": "Input Opacity (Raw)",
+          "type": "slider",
+          "default": 100.0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "blend",
+          "name": "Blend Mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Screen",
+            "Add"
+          ]
+        },
+        {
+          "id": "unmult",
+          "name": "Unmult (Original Alpha Model)",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "view",
+          "name": "View",
+          "type": "popup",
+          "default": 2,
+          "options": [
+            "Input (Processed)",
+            "Rays Solo",
+            "Final Composite"
+          ]
+        },
+        {
+          "id": "left",
+          "name": "Trim Left (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 8192
+        },
+        {
+          "id": "top",
+          "name": "Trim Top (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 8192
+        },
+        {
+          "id": "right",
+          "name": "Trim Right (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 8192
+        },
+        {
+          "id": "bottom",
+          "name": "Trim Bottom (Raw)",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 8192
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "source": "PEGR",
+      "effect": "org.craftbridge.godrays",
+      "params": {
+        "PEGR-0021": {
+          "target": "mode",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "PEGR-0002": {
+          "target": "position",
+          "kind": "Vec2",
+          "operation": "identity"
+        },
+        "PEGR-0036": {
+          "target": "threshold_mode",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "PEGR-0004": {
+          "target": "threshold",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0005": {
+          "target": "smooth",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0008": {
+          "target": "length",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0009": {
+          "target": "spin",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0011": {
+          "target": "exposure",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0010": {
+          "target": "decay",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0012": {
+          "target": "direction",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "PEGR-0031": {
+          "target": "chromatic",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0030": {
+          "target": "channels",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "PEGR-0015": {
+          "target": "quality",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "6": 4
+          }
+        },
+        "PEGR-0016": {
+          "target": "samples",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0017": {
+          "target": "noise",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0032": {
+          "target": "repeat",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "PEGR-0035": {
+          "target": "expansion",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0020": {
+          "target": "opacity",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-1021": {
+          "target": "blend",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "PEGR-0037": {
+          "target": "unmult",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "PEGR-0022": {
+          "target": "view",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "PEGR-0025": {
+          "target": "left",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0026": {
+          "target": "top",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0027": {
+          "target": "right",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "PEGR-0028": {
+          "target": "bottom",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "required_on_create": [
+        "PEGR-0021",
+        "PEGR-0002",
+        "PEGR-0036",
+        "PEGR-0004",
+        "PEGR-0005",
+        "PEGR-0008",
+        "PEGR-0009",
+        "PEGR-0011",
+        "PEGR-0010",
+        "PEGR-0012",
+        "PEGR-0031",
+        "PEGR-0030",
+        "PEGR-0015",
+        "PEGR-0016",
+        "PEGR-0017",
+        "PEGR-0032",
+        "PEGR-0035",
+        "PEGR-0020",
+        "PEGR-1021",
+        "PEGR-0037",
+        "PEGR-0022",
+        "PEGR-0025",
+        "PEGR-0026",
+        "PEGR-0027",
+        "PEGR-0028"
+      ],
+      "evidence": "One real complete parT/tdb4 snapshot proves 25 static typed controls, raw Vec2 position, degree spin angle and explicit menus. Source Quality separator 5 rejected. Own MIT renderer; sliders/position calibration not inferred.",
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Renderer original aproximado: raios radiais/spin, threshold, decay, ruído, chromatic e alpha próprios. Não certifica equivalência Godrays; sempre PARTIAL, strict não publica.",
+        "25 controles preservados sem inferir unidade de sliders kind 10 ou da posição. Modelo próprio center=size*(0.5+position), Length/10000, Threshold/Smooth/Noise/Opacity/Chromatic /100; não são unidades certificadas da origem.",
+        "Spin usa graus comprovados pelo tipo. Qualidade própria: 8/16/32/64 amostras ou Custom com Samples arredondado entre 2 e 256. Quality=5 é separador recusado; Custom=6 traduzido explicitamente.",
+        "Decay exp(-raw*t), Exposure 2^raw e pesos normalizados próprios. Ruído determinístico espacial modifica taps internos sem evolução temporal implícita. Chromatic altera t em ±0.05*raw/100 nos pares de canais.",
+        "RGBA premultiplicado, threshold sobre cor straight, alpha zero ignora RGB oculto. Unmult próprio define alpha pelo máximo positivo de RGB dos raios; Screen/Add e HDR/gama/color management não calibrados com origem.",
+        "Trims próprios em coordenadas lógicas de pixels, bordas bilineares clamp/transparent. Buffer Expansion aceita somente zero; expansão não neutra recusa a criação inteira porque o host usa canvas fixo.",
+        "API 2 exige host experimental separado e geometria real do buffer; até 2097152 pixels. Snapshot real estático; animações, máscaras, expressões, modos adicionais e parâmetros de versões futuras não certificados."
+      ]
+    }
+  ]
+}

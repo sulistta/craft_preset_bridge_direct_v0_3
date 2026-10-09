@@ -1,0 +1,114 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-hfhotspots-1",
+  "plugins": [
+    {
+      "api": 2,
+      "bridge_host_revision": 1,
+      "id": "org.craftbridge.hfhotspots",
+      "name": "Bridge HitFilm Hotspots (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original bounded bright-area gate with subthreshold color fill and preblur. Not HitFilm calibration. Experimental API2 host required.",
+      "params": [
+        {
+          "id": "threshold",
+          "name": "Threshold",
+          "type": "slider",
+          "default": 0.75,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "fill_color",
+          "name": "Threshold Add Color",
+          "type": "color",
+          "default": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "id": "saturation",
+          "name": "Saturation",
+          "type": "slider",
+          "default": 1.0,
+          "min": -64,
+          "max": 64
+        },
+        {
+          "id": "brightness",
+          "name": "Brightness",
+          "type": "slider",
+          "default": 1.0,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "smooth_source",
+          "name": "Smooth Source",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 8192
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "source": "com.FXHOME.HitFilm.Hotspots",
+      "effect": "org.craftbridge.hfhotspots",
+      "params": {
+        "com.FXHOME.HitFilm.Hotspots-0001": {
+          "target": "threshold",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "com.FXHOME.HitFilm.Hotspots-0002": {
+          "target": "fill_color",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "com.FXHOME.HitFilm.Hotspots-0003": {
+          "target": "saturation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "com.FXHOME.HitFilm.Hotspots-0004": {
+          "target": "brightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "com.FXHOME.HitFilm.Hotspots-0006": {
+          "target": "smooth_source",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "required_on_create": [
+        "com.FXHOME.HitFilm.Hotspots-0001",
+        "com.FXHOME.HitFilm.Hotspots-0002",
+        "com.FXHOME.HitFilm.Hotspots-0003",
+        "com.FXHOME.HitFilm.Hotspots-0004",
+        "com.FXHOME.HitFilm.Hotspots-0006"
+      ],
+      "evidence": "Two complete private parT/tdb4 snapshots prove five visible controls, hidden Preset/Smooth Source and ARGB255. Public official HitFilm 2017 user guide describes subthreshold fill and source smoothing; no proprietary material reused.",
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Renderer original aproximado: threshold por pico RGB, box blur e satura\u00e7\u00e3o/alpha pr\u00f3prios, sem equival\u00eancia HitFilm; sempre PARTIAL, strict n\u00e3o publica parcial.",
+        "Cinco controles vis\u00edveis kind 10/ARGB255 comprovados em dois snapshots. Sliders permanecem brutos; faixas e radius raw\u00d7scale pertencem ao Bridge, n\u00e3o s\u00e3o unidades inferidas.",
+        "Preset hidden -1985 e Smooth Source hidden -0005 permanecem perdas, sem inventar sem\u00e2ntica ou confundir o slider vis\u00edvel -0006. M\u00e1scaras padr\u00e3o/anima\u00e7\u00f5es complexas continuam conforme diagn\u00f3stico de origem.",
+        "Threshold Add Color preenche \u00e1reas abaixo do limiar; n\u00e3o usa o bias de cor Sapphire. Alpha de origem \u00e9 conservado nos highlights; fill alpha multiplica alpha suavizado da origem. Calibra\u00e7\u00e3o/cor/premultiplica\u00e7\u00e3o/HDR/gama n\u00e3o certificadas.",
+        "Preblur box fracion\u00e1rio separ\u00e1vel com borda clamp, limiar hard gate em max(0,R,G,B) straight; canvas fixo e limite 2097152 pixels. Todos os pixels s\u00e3o validados antes da publica\u00e7\u00e3o."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1271 @@
+diff --git a/crates/effects/src/plugin.rs b/crates/effects/src/plugin.rs
+--- a/crates/effects/src/plugin.rs
++++ b/crates/effects/src/plugin.rs
+@@ -30,8 +30,11 @@
+ 
+ use crate::{Buf, EffectCtx, EffectSpec, ParamSpec, RenderFn};
+ 
+-/// The plug-in API version this build implements.
++/// The legacy plug-in API version. Additional supported APIs are explicit.
+ pub const PLUGIN_API_VERSION: u32 = 1;
++
++/// Experimental Bridge host; version 1 remains the legacy default.
++pub const SUPPORTED_PLUGIN_APIS: &[u32] = &[1, 2, 3, 4];
+ 
+ /// The most plug-in effects one process can register.
+ pub const MAX_PLUGINS: usize = 64;
+@@ -73,6 +76,11 @@
+         #[serde(default = "centre")]
+         default: [f64; 2],
+     },
++    /// API 2 resource. Only an unbound default is portable between projects.
++    Layer {
++        #[serde(default)]
++        default: Option<u64>,
++    },
+     /// RGBA, 0–1.
+     Color {
+         #[serde(default = "white")]
+@@ -97,7 +105,7 @@
+     /// How many `f64`s the parameter flattens to.
+     pub fn width(&self) -> usize {
+         match self {
+-            PluginParamKind::Point { .. } => 2,
++            PluginParamKind::Point { .. } | PluginParamKind::Layer { .. } => 2,
+             PluginParamKind::Color { .. } => 4,
+             _ => 1,
+         }
+@@ -114,11 +122,35 @@
+     pub kind: PluginParamKind,
+ }
+ 
++/// Original Bridge API 4 temporal request: preceding effects at another layer time.
++#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
++#[serde(deny_unknown_fields)]
++pub struct TemporalInput {
++    pub id: String,
++    pub mode: TemporalMode,
++    pub parameter: String,
++    #[serde(default = "one")]
++    pub multiple: u32,
++    #[serde(default)]
++    pub edge: TemporalEdge,
++}
++fn one() -> u32 { 1 }
++#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
++#[serde(rename_all = "snake_case")]
++pub enum TemporalMode { FrameHold, SecondsOffset, FramesOffset }
++#[derive(Clone, Copy, Debug, Default, PartialEq, Serialize, Deserialize)]
++#[serde(rename_all = "snake_case")]
++pub enum TemporalEdge { #[default] Clamp, Wrap, Mirror }
++
+ /// What a plug-in declares about itself.
+ #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+ pub struct PluginManifest {
+-    /// The plug-in API version it was written for (must be [`PLUGIN_API_VERSION`]).
++    /// The plug-in API version, checked against [`SUPPORTED_PLUGIN_APIS`].
+     pub api: u32,
++    #[serde(default, skip_serializing_if = "Option::is_none")]
++    pub bridge_host_revision: Option<u32>,
++    #[serde(default, skip_serializing_if = "Option::is_none")]
++    pub temporal_inputs: Option<Vec<TemporalInput>>,
+     /// Stable, reverse-domain effect id (`org.example.posterize`); `ec.` is reserved.
+     pub id: String,
+     pub name: String,
+@@ -138,8 +170,8 @@
+     /// Check the manifest against this API version.
+     pub fn validate(&self) -> Result<(), String> {
+         const MAX_PARAMS: usize = 256;
+-        if self.api != PLUGIN_API_VERSION {
+-            return Err(format!("plug-in `{}` targets plug-in API {} but this build implements API {PLUGIN_API_VERSION}", self.id, self.api));
++        if !SUPPORTED_PLUGIN_APIS.contains(&self.api) {
++            return Err(format!("plug-in `{}` targets plug-in API {} but this experimental build implements APIs 1, 2, 3, 4", self.id, self.api));
+         }
+         let ok_id = |s: &str| !s.is_empty() && s.chars().all(|c| c.is_ascii_alphanumeric() || matches!(c, '.' | '_' | '-'));
+         if !ok_id(&self.id) || self.id.starts_with("ec.") {
+@@ -150,11 +182,20 @@
+         }
+         if self.params.len() > MAX_PARAMS {
+             return Err(format!("plug-in `{}` has {} parameters (at most {MAX_PARAMS})", self.id, self.params.len()));
++        }
++        let layers = self.params.iter().filter(|p| matches!(p.kind, PluginParamKind::Layer { .. })).count();
++        if layers > 4 {
++            return Err("at most four Layer inputs are supported".into());
+         }
+         let mut seen = std::collections::HashSet::new();
+         for p in &self.params {
+             if p.id.is_empty() || !p.id.chars().all(|c| c.is_ascii_alphanumeric() || c == '_') || !seen.insert(p.id.as_str()) {
+                 return Err(format!("plug-in `{}`: bad or duplicate parameter id `{}`", self.id, p.id));
++            }
++            if let PluginParamKind::Layer { default } = &p.kind
++                && (!matches!(self.api, 2 | 3 | 4) || default.is_some())
++            {
++                return Err("Layer requires API 2/3 and a null default".into());
+             }
+             if let PluginParamKind::Popup { options, default } = &p.kind
+                 && (options.is_empty() || *default as usize >= options.len())
+@@ -167,6 +208,26 @@
+                     return Err(format!("plug-in `{}`: slider `{}` needs min ≤ default ≤ max (and sliderMin ≤ sliderMax)", self.id, p.id));
+                 }
+             }
++        }
++        if self.api == 4 {
++            if self.bridge_host_revision != Some(3) { return Err("API 4 requires Bridge host revision 3".into()); }
++            let requests = self.temporal_inputs.as_ref().ok_or("API 4 requires temporal_inputs")?;
++            if requests.is_empty() || layers + requests.len() > 4 { return Err("API 4 supports one to four combined auxiliary inputs".into()); }
++            let mut ids = std::collections::HashSet::new();
++            for r in requests {
++                if r.id.is_empty() || r.id.len() > 128 || !r.id.chars().all(|c| c.is_ascii_alphanumeric() || c == '_')
++                    || !ids.insert(&r.id) || !(1..=16).contains(&r.multiple) {
++                    return Err("invalid temporal input id or multiple".into());
++                }
++                let p = self.params.iter().find(|p| p.id == r.parameter).ok_or("temporal parameter is missing")?;
++                let PluginParamKind::Slider { min, max, default, .. } = p.kind else { return Err("temporal parameter must be a slider".into()); };
++                let (lo, hi) = match r.mode { TemporalMode::FrameHold => (0., 1024.), TemporalMode::SecondsOffset => (-1000.,1000.), TemporalMode::FramesOffset => (-10000.,10000.) };
++                if min < lo || max > hi || (r.mode == TemporalMode::FrameHold && (r.multiple != 1 || default.fract() != 0.)) {
++                    return Err("temporal parameter exceeds bounded sampling contract".into());
++                }
++            }
++        } else if self.temporal_inputs.is_some() {
++            return Err("temporal_inputs requires API 4".into());
+         }
+         Ok(())
+     }
+@@ -227,6 +288,11 @@
+     /// Process `frame` in place. `time` is layer time in seconds. An error leaves the frame as
+     /// it was (the error is logged once).
+     fn render(&self, frame: &mut PluginFrame, params: &PluginParams, time: f64) -> Result<(), String>;
++    /// API 2 may read resources via the renderer host. Legacy implementations delegate.
++    fn render_with_context(&self, frame: &mut PluginFrame, params: &PluginParams, ctx: &EffectCtx, offset: [f64; 2]) -> Result<(), String> {
++        let _ = offset;
++        self.render(frame, params, ctx.time)
++    }
+     /// Where the plug-in came from (a file path, `built-in`…), for listings.
+     fn source(&self) -> String {
+         "built-in".into()
+@@ -266,6 +332,7 @@
+         PluginParamKind::Popup { options, default } => (Value::Enum(*default), ParamUi::Popup { options: options.clone() }),
+         PluginParamKind::Point { default } => (Value::Vec2(*default), ParamUi::Point),
+         PluginParamKind::Color { default } => (Value::Color(*default), ParamUi::Color),
++        PluginParamKind::Layer { default } => (Value::Layer(*default), ParamUi::Layer),
+     };
+     ParamSpec { id: leak(&p.id), name: leak(&p.name), default, ui }
+ }
+@@ -315,6 +382,10 @@
+     for p in &m.params {
+         let v = ctx.params.get(&p.id);
+         match &p.kind {
++            PluginParamKind::Layer { .. } => {
++                let uid = v.and_then(Value::as_layer).unwrap_or(0);
++                out.extend([(uid as u32) as f64, (uid >> 32) as f64]);
++            }
+             PluginParamKind::Point { .. } => {
+                 let q = v.map(Value::as_vec2).unwrap_or([0.0; 2]);
+                 let (x, y) = buf.to_px(q);
+@@ -340,7 +411,7 @@
+     let (width, height) = (buf.img.width, buf.img.height);
+     let before = buf.img.data.clone();
+     let mut frame = PluginFrame { width, height, pixels: &mut buf.img.data, scale: buf.scale };
+-    if let Err(e) = plugin.render(&mut frame, &params, ctx.time) {
++    if let Err(e) = plugin.render_with_context(&mut frame, &params, ctx, buf.offset) {
+         log::warn!("plug-in `{}`: {e}", m.id);
+         buf.img.data = before;
+     }
+diff --git a/crates/effects/src/lib.rs b/crates/effects/src/lib.rs
+--- a/crates/effects/src/lib.rs
++++ b/crates/effects/src/lib.rs
+@@ -337,6 +337,8 @@
+     pub comp_time: f64,
+     /// Composition frame rate (0 when unknown).
+     pub frame_rate: f64,
++    /// Actual first/last visible frame in layer time, plus positive layer frame step.
++    pub layer_frame_times: Option<[f64; 3]>,
+     /// Index of the running effect in its layer's stack (for [`EffectHost::self_at`]).
+     pub effect_index: usize,
+     /// The project's working colour space (`None` = unmanaged, treated as sRGB).
+@@ -1150,7 +1152,9 @@
+ pub fn is_time_dependent(id: &str) -> bool {
+     // Simulations replay from layer time 0, so every frame differs even when the defaults
+     // happen to look static at the test's two sample times.
+-    id.starts_with("ec.sim.") || TIME_DEPENDENT.contains(&id)
++    // Plugin APIs include layer time even with static properties. Without a declared
++    // dependency contract, conservatively include time for every registered plugin.
++    id.starts_with("ec.sim.") || TIME_DEPENDENT.contains(&id) || plugin::plugin(id).is_some()
+ }
+ 
+ /// Run an effect on a buffer.
+diff --git a/crates/render/src/lib.rs b/crates/render/src/lib.rs
+--- a/crates/render/src/lib.rs
++++ b/crates/render/src/lib.rs
+@@ -903,6 +903,13 @@
+             host: Some(&host),
+             comp_time: ctx.time.seconds(),
+             frame_rate: ctx.comp.frame_rate.as_f64(),
++            layer_frame_times: {
++                let step = ctx.comp.frame_rate.frame_duration();
++                let first = layer.layer_time(layer.in_point).seconds();
++                let last = layer.layer_time((layer.out_point - step).max(layer.in_point)).seconds();
++                let next = layer.layer_time(layer.in_point + step).seconds();
++                Some([first, last, (next - first).abs()])
++            },
+             effect_index: 0,
+             working_space: self.pipe.space,
+             working_linear: self.pipe.linear,
+diff --git a/crates/render/src/cache.rs b/crates/render/src/cache.rs
+--- a/crates/render/src/cache.rs
++++ b/crates/render/src/cache.rs
+@@ -533,6 +533,14 @@
+ /// the first that many effects (a layer's input, see [`input_key`]).
+ #[allow(clippy::too_many_arguments)]
+ fn key_any(ctx: &EvalCtx, layer: &Layer, scale: f64, draft: bool, blur: bool, footage: bool, effects: Option<usize>) -> Option<u64> {
++    // Context plugins can read auxiliary layers and layer frame bounds. Their dependencies
++    // are opaque to this content hash, so never reuse processed pixels for these prefixes.
++    if layer.switches.effects && layer.effects().is_some_and(|fx| {
++        fx.groups().take(effects.unwrap_or(usize::MAX)).any(|g| g.enabled &&
++            matches!(&g.kind, effectcraft_project::GroupKind::Effect { effect }
++                if effectcraft_effects::plugin::plugin(effect)
++                    .is_some_and(|p| p.manifest().api >= 2)))
++    }) { return None; }
+     let mut h = KeyHasher(0xcbf2_9ce4_8422_2325);
+     match &layer.source {
+         LayerSource::Solid { item } => {
+diff --git a/crates/plugin/src/wasm.rs b/crates/plugin/src/wasm.rs
+--- a/crates/plugin/src/wasm.rs
++++ b/crates/plugin/src/wasm.rs
+@@ -1,10 +1,10 @@
+-//! The wasmi-backed [`EffectPlugin`] (plug-in API v1 ABI, see the crate docs).
++//! The wasmi-backed [`EffectPlugin`], legacy API 1 and experimental Bridge APIs 2/3/4.
+ 
+ use std::sync::Mutex;
+ 
+ use wasmi::{Config, Engine, Instance, Linker, Memory, Module, Store, StoreLimits, StoreLimitsBuilder, TypedFunc, WasmParams, WasmResults};
+ 
+-use crate::{EffectPlugin, PLUGIN_API_VERSION, PluginFrame, PluginManifest, PluginParams};
++use crate::{EffectPlugin, PluginFrame, PluginManifest, PluginParams};
+ 
+ /// Instruction budget per frame: a fixed allowance plus some per pixel. Generous for per-pixel
+ /// work, but a runaway loop stops instead of hanging the render.
+@@ -15,7 +15,15 @@
+ /// The longest manifest read.
+ const MAX_MANIFEST: i32 = 1 << 20;
+ 
+-type RenderFn = TypedFunc<(i32, i32, i32, i32, i32, f64, f64), i32>;
++#[path = "wasm_v2.rs"]
++mod v2;
++
++enum RenderFn {
++    V1(TypedFunc<(i32, i32, i32, i32, i32, f64, f64), i32>),
++    V2(TypedFunc<(i32, i32, i32, i32, i32, f64, f64, i32, i32), i32>),
++    V3(TypedFunc<(i32, i32, i32, i32, i32, f64, f64, i32, i32, i32), i32>),
++    V4(TypedFunc<(i32, i32, i32, i32, i32, f64, f64, i32, i32, i32), i32>),
++}
+ 
+ /// One instantiated module (renders running on several threads each take their own).
+ struct Inst {
+@@ -24,6 +32,7 @@
+     memory: Memory,
+     alloc: TypedFunc<i32, i32>,
+     render: RenderFn,
++    api: u32,
+ }
+ 
+ impl Inst {
+@@ -48,8 +57,15 @@
+     let instance = linker.instantiate_and_start(&mut store, module).map_err(|e| format!("instantiation failed: {e}"))?;
+     let memory = instance.get_memory(&store, "memory").ok_or("the module exports no `memory`")?;
+     let alloc = instance.get_typed_func::<i32, i32>(&store, "ec_alloc").map_err(|_| missing("ec_alloc"))?;
+-    let render = instance.get_typed_func::<(i32, i32, i32, i32, i32, f64, f64), i32>(&store, "ec_render").map_err(|_| missing("ec_render"))?;
+-    Ok(Inst { store, instance, memory, alloc, render })
++    let version = instance.get_typed_func::<(), i32>(&store, "ec_api_version").map_err(|_| missing("ec_api_version"))?.call(&mut store, ()).map_err(err)?;
++    let render = match version {
++        1 => RenderFn::V1(instance.get_typed_func(&store, "ec_render").map_err(|_| missing("ec_render"))?),
++        2 => RenderFn::V2(instance.get_typed_func(&store, "ec_render_v2").map_err(|_| "API 2 requires ec_render_v2 with the correct signature".to_string())?),
++        3 => RenderFn::V3(instance.get_typed_func(&store, "ec_render_v3").map_err(|_| "API 3 requires ec_render_v3 with the correct signature".to_string())?),
++        4 => RenderFn::V4(instance.get_typed_func(&store, "ec_render_v4").map_err(|_| "API 4 requires ec_render_v4 with the correct signature".to_string())?),
++        v => return Err(format!("unsupported plug-in API {v}; supported APIs: 1, 2, 3, 4")),
++    };
++    Ok(Inst { store, instance, memory, alloc, render, api: version as u32 })
+ }
+ 
+ /// A loaded WebAssembly effect plug-in.
+@@ -72,11 +88,7 @@
+             return Err(format!("plug-ins can't import anything (the module imports `{}.{}`)", i.module(), i.name()));
+         }
+         let mut inst = instantiate(&engine, &module)?;
+-        let version = inst.func::<(), i32>("ec_api_version")?;
+-        let v = version.call(&mut inst.store, ()).map_err(err)?;
+-        if v != PLUGIN_API_VERSION as i32 {
+-            return Err(format!("the module implements plug-in API {v}, this build implements API {PLUGIN_API_VERSION}"));
+-        }
++        let v = inst.api;
+         let ptr = inst.func::<(), i32>("ec_manifest_ptr")?.call(&mut inst.store, ()).map_err(err)?;
+         let len = inst.func::<(), i32>("ec_manifest_len")?.call(&mut inst.store, ()).map_err(err)?;
+         if !(0..=MAX_MANIFEST).contains(&len) {
+@@ -86,6 +98,9 @@
+         inst.memory.read(&inst.store, ptr as u32 as usize, &mut text).map_err(|e| format!("manifest out of bounds: {e}"))?;
+         let manifest: PluginManifest = serde_json::from_slice(&text).map_err(|e| format!("bad manifest JSON: {e}"))?;
+         manifest.validate()?;
++        if manifest.api != v {
++            return Err(format!("manifest API {} disagrees with exported API {v}", manifest.api));
++        }
+         Ok(WasmPlugin { manifest, source: source.to_string(), engine, module, pool: Mutex::new(vec![inst]) })
+     }
+ 
+@@ -112,7 +127,20 @@
+         self.source.clone()
+     }
+ 
++    fn render_with_context(
++        &self,
++        frame: &mut PluginFrame,
++        params: &PluginParams,
++        ctx: &effectcraft_effects::EffectCtx,
++        offset: [f64; 2],
++    ) -> Result<(), String> {
++        if self.manifest.api == 1 { self.render(frame, params, ctx.time) } else { v2::render(self, frame, params, ctx, offset) }
++    }
++
+     fn render(&self, frame: &mut PluginFrame, params: &PluginParams, time: f64) -> Result<(), String> {
++        if self.manifest.api >= 2 {
++            return Err("API 2/3/4 rendering requires an EffectCtx; use render_with_context".into());
++        }
+         let n = frame.pixels.len();
+         let params_bytes = params.flat.len() * 8;
+         let total = params_bytes + n * 16;
+@@ -134,8 +162,8 @@
+         }
+         inst.memory.write(&mut inst.store, base, &buf).map_err(|e| format!("ec_alloc returned a buffer out of bounds: {e}"))?;
+         let px_ptr = (base + params_bytes) as i32;
+-        let r = inst
+-            .render
++        let RenderFn::V1(render) = &inst.render else { return Err("expected API 1 renderer".into()) };
++        let r = render
+             .call(&mut inst.store, (px_ptr, frame.width as i32, frame.height as i32, base as i32, params.flat.len() as i32, time, frame.scale))
+             .map_err(|e| format!("ec_render trapped: {e}"));
+         let r = match r {
+diff --git a/crates/plugin/src/lib.rs b/crates/plugin/src/lib.rs
+--- a/crates/plugin/src/lib.rs
++++ b/crates/plugin/src/lib.rs
+@@ -59,7 +59,7 @@
+         "name": spec.name,
+         "category": spec.category,
+         "version": m.as_ref().map(|m| m.version.clone()).unwrap_or_default(),
+-        "api": PLUGIN_API_VERSION,
++        "api": m.as_ref().map(|m| m.api).unwrap_or(PLUGIN_API_VERSION),
+         "params": spec.params.len(),
+     }))
+ }
+@@ -68,3 +68,15 @@
+ #[cfg(test)]
+ #[cfg(feature = "wasm")]
+ mod tests;
++
++#[cfg(test)]
++#[cfg(feature = "wasm")]
++mod tests_v2;
++
++#[cfg(test)]
++#[cfg(feature = "wasm")]
++mod tests_v3;
++
++#[cfg(test)]
++#[cfg(feature = "wasm")]
++mod tests_v4;
+diff --git a/crates/engine/src/commands/effect.rs b/crates/engine/src/commands/effect.rs
+--- a/crates/engine/src/commands/effect.rs
++++ b/crates/engine/src/commands/effect.rs
+@@ -20,14 +20,18 @@
+                 "name": spec.name,
+                 "category": spec.category,
+                 "version": m.as_ref().map(|m| m.version.clone()),
++                "api": m.as_ref().map(|m| m.api),
+                 "author": m.as_ref().map(|m| m.author.clone()),
+                 "description": m.as_ref().map(|m| m.description.clone()),
+                 "source": p.map(|p| p.source()),
+                 "params": spec.params.iter().map(|p| p.id).collect::<Vec<_>>(),
++                "temporal_inputs": m.as_ref().and_then(|m| m.temporal_inputs.clone()),
+             })
+         })
+         .collect();
+-    Ok(json!({"api": plugin::PLUGIN_API_VERSION, "wasm": s.plugin_loader.is_some(), "plugins": list}))
++    Ok(json!({"api": plugin::PLUGIN_API_VERSION, "apis": plugin::SUPPORTED_PLUGIN_APIS,
++        "bridge_host": {"revision": 3, "revisions": [1, 2, 3], "layer_inputs": 4, "layer_timing": true, "temporal_sampling": true, "temporal_inputs": 4},
++        "wasm": s.plugin_loader.is_some(), "plugins": list}))
+ }
+ 
+ /// `effect.plugins.load`: load WebAssembly effect plug-ins (a file, or every `.wasm` in a
+diff --git a/crates/host/tests/plugins.rs b/crates/host/tests/plugins.rs
+--- a/crates/host/tests/plugins.rs
++++ b/crates/host/tests/plugins.rs
+@@ -42,6 +42,7 @@
+ #[test]
+ fn rust_plugins_apply_by_id() {
+     let m = PluginManifest {
++        bridge_host_revision: None, temporal_inputs: None,
+         api: 1,
+         id: "org.test.swap".into(),
+         name: "Swap Red Blue".into(),
+diff --git a/crates/plugin/src/wasm_v2.rs b/crates/plugin/src/wasm_v2.rs
+new file mode 100644
+--- /dev/null
++++ b/crates/plugin/src/wasm_v2.rs
+@@ -0,0 +1,323 @@
++//! Original experimental Bridge transport. This is not the upstream ABI.
++use super::{FUEL_BASE, FUEL_PER_PIXEL, PluginFrame, PluginParams, RenderFn, WasmPlugin, err};
++use effectcraft_effects::{EffectCtx, LayerPixels, plugin::{PluginParamKind, TemporalMode, TemporalEdge}};
++
++const MAX_IMAGE_PIXELS: usize = 8_388_608;
++const MAX_TOTAL_PIXELS: usize = 33_554_432;
++const DESCRIPTOR_BYTES: usize = 80;
++// Synchronous EffectHost callbacks can recursively evaluate preceding plug-ins.
++// Bound the whole API 4 call tree per render thread, not just each node.
++thread_local! { static TEMPORAL_TREE: std::cell::Cell<(usize,usize,bool)> = const { std::cell::Cell::new((0,0,false)) }; }
++struct TemporalBudget { committed: bool }
++impl TemporalBudget {
++    fn enter() -> Result<Self,String> {
++        TEMPORAL_TREE.with(|s| {
++            let (depth,count,failed) = s.get();
++            if depth >= 16 { s.set((depth,count,true)); return Err("temporal nesting budget exceeded".into()); }
++            s.set(if depth == 0 {(1,0,false)} else {(depth+1,count,failed)});
++            Ok(Self { committed:false })
++        })
++    }
++    fn claim(&self) -> Result<(),String> {
++        TEMPORAL_TREE.with(|s| {
++            let (depth,count,failed) = s.get();
++            if failed || count >= 64 { s.set((depth,count,true)); return Err("temporal tree request budget exceeded".into()); }
++            s.set((depth,count+1,false)); Ok(())
++        })
++    }
++    fn healthy(&self) -> Result<(),String> {
++        if TEMPORAL_TREE.with(|s|s.get().2) { Err("nested temporal sampling failed; no partial source substitution".into()) } else { Ok(()) }
++    }
++}
++impl Drop for TemporalBudget {
++    fn drop(&mut self) {
++        TEMPORAL_TREE.with(|s| { let (depth,count,failed)=s.get(); s.set((depth.saturating_sub(1),count,failed || !self.committed)); });
++    }
++}
++
++
++// Original bounded source sampling; every request uses preceding effects only.
++fn temporal_time(now:f64, value:f64, mode:TemporalMode, edge:TemporalEdge, multiple:u32, timing:[f64;4]) -> Result<f64,String> {
++    let [_,first,last,step] = timing;
++    let (lo,hi) = (first.min(last),first.max(last));
++    let at = match mode {
++        TemporalMode::FrameHold => {
++            if !value.is_finite() || value.fract() != 0. || !(0. ..=1024.).contains(&value) || multiple != 1 {
++                return Err("frame_hold needs an integer skipped-frame count in 0..1024".into());
++            }
++            if value == 0. { now } else {
++                // Anchor to the earliest local visible frame; never fabricate an FPS.
++                let n = ((now-lo)/step+1e-8).floor();
++                lo+(n/(value+1.)).floor()*(value+1.)*step
++            }
++        }
++        TemporalMode::SecondsOffset => {
++            if !value.is_finite() || value.abs()>1000. || !(1..=16).contains(&multiple) { return Err("seconds offset exceeds limit".into()); }
++            now+value*multiple as f64
++        }
++        TemporalMode::FramesOffset => {
++            if !value.is_finite() || value.abs()>10000. || !(1..=16).contains(&multiple) { return Err("frames offset exceeds limit".into()); }
++            now+value*step*multiple as f64
++        }
++    };
++    if !at.is_finite() || at.abs()>1e9 { return Err("temporal time exceeds limit".into()); }
++    let span=hi-lo;
++    Ok(if span == 0. {lo} else {match edge {
++        TemporalEdge::Clamp => at.clamp(lo,hi),
++        TemporalEdge::Wrap => {let period=span+step;let v=lo+(at-lo).rem_euclid(period);v.min(hi)},
++        TemporalEdge::Mirror => {let v=(at-lo).rem_euclid(2.*span);if v<=span {lo+v} else {hi-(v-span)}},
++    }})
++}
++
++fn geometry(width: u32, height: u32, len: usize, offset: [f64; 2], scale: f64, size: [f64; 2]) -> Result<(), String> {
++    let count = (width as usize).checked_mul(height as usize).ok_or("image size overflow")?;
++    if width == 0 || height == 0 || width > 65536 || height > 65536 || count != len || count > MAX_IMAGE_PIXELS {
++        return Err("invalid or oversized image dimensions".into());
++    }
++    if offset.iter().any(|v| !v.is_finite() || v.abs() > 1e9)
++        || size.iter().any(|v| !v.is_finite() || *v <= 0.0 || *v > 1e9)
++        || !scale.is_finite()
++        || !(1.0 / 65536.0..=16.0).contains(&scale)
++    {
++        return Err("invalid buffer geometry".into());
++    }
++    Ok(())
++}
++
++fn flat_uid(flat: &[f64]) -> Result<u64, String> {
++    if flat.len() != 2 || flat.iter().any(|v| !v.is_finite() || v.fract() != 0.0 || !(0.0..=u32::MAX as f64).contains(v)) {
++        return Err("Layer UID requires two exact unsigned 32-bit halves".into());
++    }
++    Ok((flat[0] as u64) | ((flat[1] as u64) << 32))
++}
++
++fn total_pixels(current: usize, extra: usize) -> Result<usize, String> {
++    let total = current.checked_add(extra).ok_or("pixel count overflow")?;
++    if total > MAX_TOTAL_PIXELS {
++        return Err("combined pixel budget exceeded".into());
++    }
++    Ok(total)
++}
++
++fn descriptor(
++    buf: &mut Vec<u8>,
++    index: u32,
++    uid: u64,
++    flags: u32,
++    pixels: usize,
++    width: u32,
++    height: u32,
++    offset: [f64; 2],
++    scale: f64,
++    size: [f64; 2],
++) -> Result<(), String> {
++    let pixels = u32::try_from(pixels).map_err(|_| "pixel pointer overflow")?;
++    for v in [index, uid as u32, (uid >> 32) as u32, flags, pixels, width, height, 0] {
++        buf.extend_from_slice(&v.to_le_bytes());
++    }
++    for v in [offset[0], offset[1], scale, size[0], size[1]] {
++        buf.extend_from_slice(&v.to_le_bytes());
++    }
++    buf.extend_from_slice(&0u64.to_le_bytes());
++    Ok(())
++}
++
++fn pixels(buf: &mut Vec<u8>, data: &[[f32; 4]]) {
++    for pixel in data {
++        for v in pixel {
++            buf.extend_from_slice(&v.to_le_bytes());
++        }
++    }
++}
++
++pub(super) fn render(plugin: &WasmPlugin, frame: &mut PluginFrame, params: &PluginParams, ctx: &EffectCtx, offset: [f64; 2]) -> Result<(), String> {
++    let mut temporal_budget = if plugin.manifest.api == 4 {Some(TemporalBudget::enter()?)} else {None};
++    if params.manifest != &plugin.manifest || params.flat.len() != plugin.manifest.flat_len() || params.flat.iter().any(|v| !v.is_finite()) {
++        return Err("parameters do not match the loaded manifest".into());
++    }
++    if !ctx.time.is_finite() || ctx.time.abs() > 1e9 {
++        return Err("invalid render time".into());
++    }
++    geometry(frame.width, frame.height, frame.pixels.len(), offset, frame.scale, ctx.layer_size)?;
++    if frame.pixels.iter().flatten().any(|v| !v.is_finite()) {
++        return Err("nonfinite main pixels".into());
++    }
++    let mut inputs: Vec<(u32, u64, Option<LayerPixels>, u32)> = Vec::new();
++    let mut slot = 0;
++    let mut pixel_count = frame.pixels.len();
++    for (index, p) in plugin.manifest.params.iter().enumerate() {
++        let end = slot + p.kind.width();
++        if matches!(p.kind, PluginParamKind::Layer { .. }) {
++            let uid = flat_uid(&params.flat[slot..end])?;
++            // Do not let a wrong native type silently become an unbound resource.
++            let native = match ctx.params.get(&p.id) {
++                Some(value) if value.kind_name() == "layer" && value.as_layer() != Some(0) => value.as_layer().unwrap_or(0),
++                _ => return Err(format!("Layer `{}` has an invalid or missing native value", p.id)),
++            };
++            if native != uid {
++                return Err("Layer UID disagrees with the native parameter".into());
++            }
++            let image = if uid == 0 {
++                None
++            } else {
++                if let Some(b) = &temporal_budget { b.claim()?; }
++                let image = ctx.layer_param(&p.id, false).ok_or_else(|| format!("Layer `{}` is bound but unavailable from the host", p.id))?;
++                if let Some(b) = &temporal_budget { b.healthy()?; }
++                geometry(image.buf.img.width, image.buf.img.height, image.buf.img.data.len(), image.buf.offset, image.buf.scale, image.size)?;
++                if image.buf.img.data.iter().flatten().any(|v| !v.is_finite()) {
++                    return Err("nonfinite resource pixels".into());
++                }
++                pixel_count = total_pixels(pixel_count, image.buf.img.data.len())?;
++                Some(image)
++            };
++            inputs.push((index as u32, uid, image, 2));
++        }
++        slot = end;
++    }
++    let timing = if plugin.manifest.api >= 3 {
++        let [first, last, step] = ctx.env.layer_frame_times.ok_or("API 3 requires actual layer frame times")?;
++        let fps = ctx.env.frame_rate;
++        if !fps.is_finite() || !(0.001..=1e6).contains(&fps)
++            || [first, last].iter().any(|v| !v.is_finite() || v.abs() > 1e9)
++            || !step.is_finite() || !(1e-9..=1e9).contains(&step)
++        { return Err("invalid layer timing context".into()); }
++        Some([fps, first, last, step])
++    } else { None };
++    let mut temporal_times = Vec::new();
++    if plugin.manifest.api == 4 {
++        let timing = timing.ok_or("API 4 requires actual layer timing")?;
++        let requests = plugin.manifest.temporal_inputs.as_ref().ok_or("missing temporal input declarations")?;
++        for (index, request) in requests.iter().enumerate() {
++            let value = params.f(&request.parameter);
++            let native = ctx.params.get(&request.parameter).ok_or("temporal parameter missing from context")?;
++            if native.kind_name() != "scalar" || native.as_f64() != value {
++                return Err("temporal parameter disagrees with native context".into());
++            }
++            let at = temporal_time(ctx.time, value, request.mode, request.edge, request.multiple, timing)?;
++            let host = ctx.env.host.ok_or("temporal source requires an EffectHost")?;
++            if let Some(b) = &temporal_budget { b.claim()?; }
++            let image = LayerPixels { buf:host.self_at(at, ctx.env.effect_index).ok_or("temporal source unavailable; no substitution")?, size:ctx.layer_size };
++            if let Some(b) = &temporal_budget { b.healthy()?; }
++            geometry(image.buf.img.width, image.buf.img.height, image.buf.img.data.len(), image.buf.offset, image.buf.scale, image.size)?;
++            if image.buf.img.data.iter().flatten().any(|v| !v.is_finite()) { return Err("nonfinite temporal pixels".into()); }
++            pixel_count = total_pixels(pixel_count, image.buf.img.data.len())?;
++            inputs.push((0x8000_0000 | index as u32, 0, Some(image), 4));
++            temporal_times.push(at);
++        }
++    }
++    let timing_bytes = if timing.is_some() {32} else {0};
++    let params_bytes = params.flat.len() * 8;
++    let table_bytes = (inputs.len() + 1) * DESCRIPTOR_BYTES;
++    let main_bytes = frame.pixels.len() * 16;
++    let total = params_bytes.checked_add(table_bytes).and_then(|n| n.checked_add(timing_bytes)).and_then(|n| n.checked_add(pixel_count * 16)).ok_or("allocation overflow")?;
++    if total > i32::MAX as usize {
++        return Err("frame too large for a 32-bit plug-in".into());
++    }
++    let mut inst = plugin.take()?;
++    inst.store.set_fuel(FUEL_BASE + FUEL_PER_PIXEL * pixel_count as u64).map_err(err)?;
++    let base = inst.alloc.call(&mut inst.store, total as i32).map_err(err)? as u32 as usize;
++    let allocation_end = base.checked_add(total).ok_or("allocation pointer overflow")?;
++    if !base.is_multiple_of(8) || allocation_end > inst.memory.data(&inst.store).len() {
++        return Err("ec_alloc returned an unaligned or out-of-bounds buffer".into());
++    }
++    let table_ptr = base + params_bytes;
++    let timing_ptr = table_ptr + table_bytes;
++    let main_ptr = timing_ptr + timing_bytes;
++    let mut buf = Vec::with_capacity(total);
++    for v in params.flat {
++        buf.extend_from_slice(&v.to_le_bytes());
++    }
++    descriptor(&mut buf, u32::MAX, 0, 1, main_ptr, frame.width, frame.height, offset, frame.scale, ctx.layer_size)?;
++    let mut image_ptr = main_ptr + main_bytes;
++    for (index, uid, image, flags) in &inputs {
++        if let Some(image) = image {
++            descriptor(&mut buf, *index, *uid, *flags, image_ptr, image.buf.img.width, image.buf.img.height, image.buf.offset, image.buf.scale, image.size)?;
++            if *flags == 4 {
++                let at = temporal_times[(*index & 0x7fff_ffff) as usize];
++                let end = buf.len(); buf[end-8..end].copy_from_slice(&at.to_le_bytes());
++            }
++            image_ptr += image.buf.img.data.len() * 16;
++        } else {
++            descriptor(&mut buf, *index, 0, 0, 0, 0, 0, [0.0; 2], 0.0, [0.0; 2])?;
++        }
++    }
++    if let Some(timing) = timing { for v in timing { buf.extend_from_slice(&v.to_le_bytes()); } }
++    pixels(&mut buf, frame.pixels);
++    for (_, _, image, _) in &inputs {
++        if let Some(image) = image {
++            pixels(&mut buf, &image.buf.img.data);
++        }
++    }
++    inst.memory.write(&mut inst.store, base, &buf).map_err(err)?;
++    let args = (main_ptr as i32, frame.width as i32, frame.height as i32,
++        base as i32, params.flat.len() as i32, ctx.time, frame.scale,
++        table_ptr as i32, (inputs.len() + 1) as i32);
++    let code = match &inst.render {
++        RenderFn::V2(render) => render.call(&mut inst.store, args),
++        RenderFn::V3(render) => render.call(&mut inst.store, (args.0,args.1,args.2,args.3,args.4,args.5,args.6,args.7,args.8,timing_ptr as i32)),
++        RenderFn::V4(render) => render.call(&mut inst.store, (args.0,args.1,args.2,args.3,args.4,args.5,args.6,args.7,args.8,timing_ptr as i32)),
++        _ => return Err("expected multi-input renderer".into()),
++    }.map_err(|e| format!("ec_render_v{} trapped: {e}", plugin.manifest.api))?;
++    if code != 0 {
++        return Err(format!("ec_render_v{} returned error {code}", plugin.manifest.api));
++    }
++    let start = main_ptr - base;
++    let output = &mut buf[start..start + main_bytes];
++    inst.memory.read(&inst.store, main_ptr, output).map_err(err)?;
++    // Validate the complete result before changing any of the caller's pixels.
++    if output.as_chunks::<4>().0.iter().any(|v| !f32::from_le_bytes(*v).is_finite()) {
++        return Err(format!("ec_render_v{} produced nonfinite pixels", plugin.manifest.api));
++    }
++    for (pixel, bytes) in frame.pixels.iter_mut().zip(output.as_chunks::<16>().0) {
++        for (v, bytes) in pixel.iter_mut().zip(bytes.as_chunks::<4>().0) {
++            *v = f32::from_le_bytes(*bytes);
++        }
++    }
++    plugin.give_back(inst);
++    if let Some(b) = &mut temporal_budget { b.committed = true; }
++    Ok(())
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    #[test]
++    fn resource_budget_and_overflow() {
++        assert_eq!(total_pixels(MAX_TOTAL_PIXELS - 2, 2).unwrap(), MAX_TOTAL_PIXELS);
++        assert!(total_pixels(MAX_TOTAL_PIXELS, 1).is_err());
++        assert!(total_pixels(usize::MAX, 1).is_err());
++    }
++    #[test]
++    fn invalid_uid_halves_are_not_coerced() {
++        for pair in [[-1.0, 0.0], [1.5, 0.0], [0.0, f64::NAN], [0.0, f64::INFINITY], [4294967296.0, 0.0]] {
++            assert!(flat_uid(&pair).is_err());
++        }
++        assert_eq!(flat_uid(&[u32::MAX as f64; 2]).unwrap(), u64::MAX);
++        assert_eq!(flat_uid(&[0.0; 2]).unwrap(), 0);
++        assert!(flat_uid(&[1.0]).is_err());
++    }
++}
++
++#[cfg(test)]
++mod temporal_budget_tests {
++    use super::TemporalBudget;
++    #[test]
++    fn tree_budget_and_failed_child_propagate_without_poisoning_next_root() {
++        let mut root=TemporalBudget::enter().unwrap();
++        for _ in 0..64 { root.claim().unwrap(); }
++        assert!(root.claim().is_err()); assert!(root.healthy().is_err());
++        root.committed=true;drop(root);
++        let next=TemporalBudget::enter().unwrap(); assert!(next.healthy().is_ok());
++        { let _child=TemporalBudget::enter().unwrap(); }
++        assert!(next.healthy().is_err());drop(next);
++        let mut fresh=TemporalBudget::enter().unwrap();fresh.claim().unwrap();fresh.committed=true;
++    }
++    #[test]
++    fn nesting_limit_is_global_to_the_tree() {
++        let mut guards=Vec::new();for _ in 0..16 { guards.push(TemporalBudget::enter().unwrap()); }
++        assert!(TemporalBudget::enter().is_err());
++        assert!(guards[0].healthy().is_err());
++        while let Some(mut g)=guards.pop() {g.committed=true;drop(g);}
++        let mut fresh=TemporalBudget::enter().unwrap();assert!(fresh.healthy().is_ok());fresh.committed=true;
++    }
++}
+diff --git a/crates/plugin/src/tests_v2.rs b/crates/plugin/src/tests_v2.rs
+new file mode 100644
+--- /dev/null
++++ b/crates/plugin/src/tests_v2.rs
+@@ -0,0 +1,350 @@
++//! Original synthetic tests; no Adobe assets or private presets.
++use crate::{EffectPlugin, PluginFrame, PluginParams, wasm::WasmPlugin};
++use effectcraft_effects::{Buf, EffectCtx, EffectEnv, EffectHost, Image, LayerPixels, Params};
++use effectcraft_keyframe::Value;
++use std::sync::Mutex;
++
++fn module(id: &str, body: &str) -> String {
++    let manifest = format!(
++        r#"{{"api":2,"id":"{id}","name":"Two inputs","category":"Bridge test","params":[{{"id":"gain","name":"Gain","type":"slider","default":1}},{{"id":"source","name":"Source","type":"layer","default":null}},{{"id":"tint","name":"Tint","type":"color"}}]}}"#
++    );
++    module_with_manifest(&manifest, body)
++}
++
++fn module_with_manifest(manifest: &str, body: &str) -> String {
++    let escaped = manifest.replace('"', "\\\"");
++    format!(
++        r#"(module
++      (memory (export "memory") 2)
++      (data (i32.const 16) "{escaped}")
++      (func (export "ec_api_version") (result i32) i32.const 2)
++      (func (export "ec_manifest_ptr") (result i32) i32.const 16)
++      (func (export "ec_manifest_len") (result i32) i32.const {len})
++      (func (export "ec_alloc") (param i32) (result i32) i32.const 65536)
++      (func (export "ec_render_v2") (param $px i32) (param $w i32) (param $h i32)
++        (param $params i32) (param $np i32) (param $time f64) (param $scale f64)
++        (param $table i32) (param $nt i32) (result i32)
++        {body} i32.const 0))"#,
++        len = manifest.len()
++    )
++}
++
++const COPY: &str = r#"
++    local.get $px local.get $table i32.load offset=96
++    local.get $w local.get $h i32.mul i32.const 16 i32.mul memory.copy
++"#;
++
++struct Host {
++    image: Option<LayerPixels>,
++    requested: Mutex<Vec<(u64, bool)>>,
++}
++impl EffectHost for Host {
++    fn layer(&self, uid: u64, effects: bool) -> Option<LayerPixels> {
++        self.requested.lock().unwrap().push((uid, effects));
++        self.image.clone()
++    }
++    fn audio(&self, _: u64, _: f64, _: usize, _: u32) -> Option<Vec<f32>> {
++        None
++    }
++    fn layer_masks(&self, uid: u64) -> Option<LayerPixels> {
++        self.requested.lock().unwrap().push((uid, true));
++        self.image.clone()
++    }
++}
++fn host() -> Host {
++    Host {
++        image: Some(LayerPixels { buf: Buf { img: Image::filled(2, 1, [0.2, 0.3, 0.4, 0.5]), offset: [-3.5, 7.25], scale: 0.5 }, size: [20.0, 10.0] }),
++        requested: Mutex::new(vec![]),
++    }
++}
++fn params(uid: Option<u64>) -> Params {
++    Params { values: [("gain".into(), Value::Scalar(0.25)), ("source".into(), Value::Layer(uid)), ("tint".into(), Value::Color([0.7, 0.6, 0.5, 0.4]))].into() }
++}
++fn run(plugin: &WasmPlugin, params: &Params, host: Option<&dyn EffectHost>) -> (Result<(), String>, Vec<[f32; 4]>) {
++    let ctx = EffectCtx { params, time: 0.75, layer_size: [8.0, 4.0], seed: 1, adjustment: false, env: EffectEnv { host, ..Default::default() } };
++    let mut buf = Buf { img: Image::filled(2, 1, [0.8, 0.6, 0.2, 1.0]), offset: [2.5, -4.0], scale: 0.25 };
++    let flat = effectcraft_effects::plugin::flatten(plugin.manifest(), &ctx, &buf);
++    let p = PluginParams { manifest: plugin.manifest(), flat: &flat };
++    let mut frame = PluginFrame { width: 2, height: 1, pixels: &mut buf.img.data, scale: buf.scale };
++    let result = plugin.render_with_context(&mut frame, &p, &ctx, buf.offset);
++    (result, buf.img.data)
++}
++fn load(body: &str) -> WasmPlugin {
++    WasmPlugin::new(module("org.craftbridge.test.two", body).as_bytes(), "original.wat").unwrap()
++}
++fn unchanged(result: (Result<(), String>, Vec<[f32; 4]>), reason: &str) {
++    assert!(result.0.unwrap_err().contains(reason));
++    assert_eq!(result.1, vec![[0.8, 0.6, 0.2, 1.0]; 2]);
++}
++
++#[test]
++fn two_images_and_u64_uid_remain_exact() {
++    let p = load(COPY);
++    for uid in [1, (1 << 53) + 17, u64::MAX] {
++        let h = host();
++        let values = params(Some(uid));
++        let (result, pixels) = run(&p, &values, Some(&h));
++        result.unwrap();
++        assert_eq!(pixels, vec![[0.2, 0.3, 0.4, 0.5]; 2]);
++        assert_eq!(*h.requested.lock().unwrap(), vec![(uid, false)]);
++        let context = EffectCtx { params: &values, time: 0.0, layer_size: [2.0, 1.0], seed: 1, adjustment: false, env: Default::default() };
++        let b = Buf { img: Image::new(2, 1), offset: [0.0; 2], scale: 1.0 };
++        let flat = effectcraft_effects::plugin::flatten(p.manifest(), &context, &b);
++        assert_eq!(flat[1], (uid as u32) as f64);
++        assert_eq!(flat[2], (uid >> 32) as f64);
++        assert_eq!(flat.len(), 7);
++        assert_eq!(flat[3..], [0.7_f64, 0.6, 0.5, 0.4].map(|v| v as f32 as f64));
++    }
++}
++
++#[test]
++fn descriptor_preserves_geometry_and_declaration_index() {
++    fn check(offset: usize, expected: &str, ty: &str) -> String {
++        format!("local.get $table {ty}.load offset={offset} {ty}.const {expected} {ty}.ne if unreachable end\n")
++    }
++    let mut body = String::new();
++    for (offset, value) in [
++        (0, "-1"),
++        (4, "0"),
++        (8, "0"),
++        (12, "1"),
++        (20, "2"),
++        (24, "1"),
++        (28, "0"),
++        (80, "1"),
++        (84, "17"),
++        (88, "2097152"),
++        (92, "2"),
++        (100, "3"),
++        (104, "2"),
++        (108, "0"),
++    ] {
++        body += &check(offset, value, "i32");
++    }
++    for (offset, value) in [(32, "2.5"), (40, "-4"), (48, "0.25"), (56, "8"), (64, "4"), (112, "-3.5"), (120, "7.25"), (128, "0.5"), (136, "20"), (144, "10")] {
++        body += &check(offset, value, "f64");
++    }
++    body += "local.get $np i32.const 7 i32.ne if unreachable end local.get $nt i32.const 2 i32.ne if unreachable end\n";
++    body += "local.get $px local.get $table i32.load offset=16 i32.ne if unreachable end\n";
++    body += "local.get $params f64.load offset=8 f64.const 17 f64.ne if unreachable end\n";
++    body += "local.get $params f64.load offset=16 f64.const 2097152 f64.ne if unreachable end\n";
++    body += "local.get $time f64.const 0.75 f64.ne if unreachable end\n";
++    let mut h = host();
++    h.image.as_mut().unwrap().buf.img = Image::filled(3, 2, [0.1; 4]);
++    run(&load(&body), &params(Some((1 << 53) + 17)), Some(&h)).0.unwrap();
++}
++
++#[test]
++fn explicit_unbound_is_distinct_from_missing_bound_resource() {
++    let body = "local.get $table i32.load offset=92 i32.eqz if else unreachable end local.get $px f32.const 0.1 f32.store";
++    let (result, pixels) = run(&load(body), &params(None), None);
++    result.unwrap();
++    assert_eq!(pixels[0][0], 0.1);
++    unchanged(run(&load("unreachable"), &params(Some(8)), None), "unavailable");
++    let mut h = host();
++    h.image = None;
++    unchanged(run(&load("unreachable"), &params(Some(8)), Some(&h)), "unavailable");
++}
++
++#[test]
++fn wrong_or_missing_layer_value_cannot_turn_into_none() {
++    let p = load("unreachable");
++    let h = host();
++    for value in [Value::Scalar(9.0), Value::Bool(false), Value::Layer(Some(0))] {
++        let mut values = params(None);
++        values.values.insert("source".into(), value);
++        unchanged(run(&p, &values, Some(&h)), "invalid or missing");
++    }
++    let mut values = params(None);
++    values.values.remove("source");
++    unchanged(run(&p, &values, Some(&h)), "invalid or missing");
++    assert!(h.requested.lock().unwrap().is_empty());
++}
++
++#[test]
++fn source_mode_companion_uses_native_host_semantics() {
++    let p = load(COPY);
++    for mode in [0, 1, 2] {
++        let h = host();
++        let mut values = params(Some(12));
++        values.values.insert(effectcraft_effects::layer_source_id("source"), Value::Enum(mode));
++        run(&p, &values, Some(&h)).0.unwrap();
++        assert_eq!(*h.requested.lock().unwrap(), vec![(12, mode != 0)]);
++    }
++}
++
++#[test]
++fn invalid_host_buffers_fail_before_wasm() {
++    let p = load("unreachable");
++    for mode in 0..7 {
++        let mut h = host();
++        let image = h.image.as_mut().unwrap();
++        match mode {
++            0 => image.buf.img.width = 0,
++            1 => image.buf.img.data.clear(),
++            2 => image.buf.offset[0] = f64::NAN,
++            3 => image.buf.scale = 0.0,
++            4 => image.size[0] = f64::INFINITY,
++            5 => image.buf.img.data[0][0] = f32::NAN,
++            _ => {
++                image.buf.img.width = 65536;
++                image.buf.img.height = 65536;
++            }
++        }
++        let result = run(&p, &params(Some(6)), Some(&h));
++        assert!(result.0.is_err());
++        assert_eq!(result.1, vec![[0.8, 0.6, 0.2, 1.0]; 2]);
++    }
++}
++
++#[test]
++fn render_errors_never_publish_partial_pixels_and_recover() {
++    for tail in ["unreachable", "i32.const 7 return", "(loop $spin br $spin)", "local.get $px f32.const nan f32.store i32.const 0 return"] {
++        let body = format!("local.get $time f64.const 0.5 f64.gt if local.get $px f32.const 0.9 f32.store {tail} end {COPY}");
++        let p = load(&body);
++        let h = host();
++        let result = run(&p, &params(Some(1)), Some(&h));
++        assert!(result.0.is_err());
++        assert_eq!(result.1, vec![[0.8, 0.6, 0.2, 1.0]; 2]);
++        let values = params(Some(1));
++        let ctx = EffectCtx {
++            params: &values,
++            time: 0.0,
++            layer_size: [2.0, 1.0],
++            seed: 1,
++            adjustment: false,
++            env: EffectEnv { host: Some(&h), ..Default::default() },
++        };
++        let mut b = Buf { img: Image::filled(2, 1, [0.8; 4]), offset: [0.0; 2], scale: 1.0 };
++        let flat = effectcraft_effects::plugin::flatten(p.manifest(), &ctx, &b);
++        let par = PluginParams { manifest: p.manifest(), flat: &flat };
++        p.render_with_context(&mut PluginFrame { width: 2, height: 1, pixels: &mut b.img.data, scale: 1.0 }, &par, &ctx, b.offset).unwrap();
++        assert_eq!(b.img.data[0], [0.2, 0.3, 0.4, 0.5]);
++    }
++}
++
++#[test]
++fn bad_allocator_and_version_contracts_are_rejected() {
++    for ptr in ["65537", "-8", "131072"] {
++        let m = module("org.craftbridge.test.alloc", COPY).replace("(result i32) i32.const 65536)", &format!("(result i32) i32.const {ptr})"));
++        let p = WasmPlugin::new(m.as_bytes(), "original.wat").unwrap();
++        unchanged(run(&p, &params(Some(1)), Some(&host())), "unaligned or out-of-bounds");
++    }
++    let original = module("org.craftbridge.test.versions", "");
++    for (from, to) in [
++        ("\\\"api\\\":2", "\\\"api\\\":1"),
++        ("ec_render_v2", "ec_render"),
++        ("(param $nt i32)", "(param $nt f64)"),
++        ("\\\"default\\\":null", "\\\"default\\\":7"),
++    ] {
++        assert!(original.contains(from));
++        assert!(WasmPlugin::new(original.replace(from, to).as_bytes(), "original.wat").is_err());
++    }
++}
++
++#[test]
++fn layer_manifests_require_api_two_null_defaults_and_at_most_four_inputs() {
++    let p = load("");
++    let mut manifest = p.manifest().clone();
++    manifest.api = 1;
++    assert!(manifest.validate().unwrap_err().contains("API 2"));
++    manifest.api = 2;
++    let original = manifest.params[1].clone();
++    for i in 1..=4 {
++        let mut layer = original.clone();
++        layer.id = format!("source{i}");
++        manifest.params.push(layer);
++        if i < 4 {
++            manifest.validate().unwrap();
++        } else {
++            assert!(manifest.validate().unwrap_err().contains("four"));
++        }
++    }
++}
++
++#[test]
++fn four_inputs_preserve_slots_uids_and_image_pointers() {
++    let p = load("");
++    let mut manifest = p.manifest().clone();
++    let original = manifest.params[1].clone();
++    for i in 1..=3 {
++        let mut layer = original.clone();
++        layer.id = format!("source{i}");
++        manifest.params.push(layer);
++    }
++    let mut body = "local.get $nt i32.const 5 i32.ne if unreachable end\n".to_string();
++    for (entry, index) in [(1, 1), (2, 3), (3, 4), (4, 5)] {
++        let at = entry * 80;
++        body += &format!("local.get $table i32.load offset={at} i32.const {index} i32.ne if unreachable end\n");
++        body += &format!("local.get $table i32.load offset={} i32.const {entry} i32.ne if unreachable end\n", at + 4);
++        body += &format!("local.get $table i32.load offset={} f32.load f32.const 0.2 f32.ne if unreachable end\n", at + 16);
++    }
++    let raw = serde_json::to_string(&manifest).unwrap();
++    let p = WasmPlugin::new(module_with_manifest(&raw, &body).as_bytes(), "original-four-inputs.wat").unwrap();
++    let mut values = params(Some(1));
++    for i in 1..=3 {
++        values.values.insert(format!("source{i}"), Value::Layer(Some(i + 1)));
++    }
++    let h = host();
++    run(&p, &values, Some(&h)).0.unwrap();
++    assert_eq!(*h.requested.lock().unwrap(), vec![(1, false), (2, false), (3, false), (4, false)]);
++}
++
++#[test]
++fn flat_uid_tampering_fails_before_resolving_host() {
++    let p = load("unreachable");
++    let h = host();
++    let values = params(Some((1 << 53) + 17));
++    let ctx =
++        EffectCtx { params: &values, time: 0.0, layer_size: [2.0, 1.0], seed: 1, adjustment: false, env: EffectEnv { host: Some(&h), ..Default::default() } };
++    let b = Buf { img: Image::filled(2, 1, [0.8; 4]), offset: [0.0; 2], scale: 1.0 };
++    let baseline = effectcraft_effects::plugin::flatten(p.manifest(), &ctx, &b);
++    for half in [0.0, -1.0, 1.5, 4294967296.0] {
++        let mut flat = baseline.clone();
++        flat[1] = half;
++        let par = PluginParams { manifest: p.manifest(), flat: &flat };
++        let mut pixels = b.img.data.clone();
++        assert!(p.render_with_context(&mut PluginFrame { width: 2, height: 1, pixels: &mut pixels, scale: 1.0 }, &par, &ctx, b.offset).is_err());
++        assert_eq!(pixels, b.img.data);
++    }
++    assert!(h.requested.lock().unwrap().is_empty());
++}
++
++#[test]
++fn registered_effect_trampoline_uses_context_and_restores_on_failure() {
++    let spec = crate::load_wasm(module("org.craftbridge.test.registered", COPY).as_bytes(), "original.wat").unwrap();
++    assert_eq!(spec.params[1].default.kind_name(), "layer");
++    let values = params(Some(55));
++    let h = host();
++    let mut ctx =
++        EffectCtx { params: &values, time: 0.0, layer_size: [2.0, 1.0], seed: 1, adjustment: false, env: EffectEnv { host: Some(&h), ..Default::default() } };
++    let b = Buf { img: Image::filled(2, 1, [0.8; 4]), offset: [2.0, 3.0], scale: 0.5 };
++    assert_eq!((spec.render)(&ctx, b.clone()).img.data[0], [0.2, 0.3, 0.4, 0.5]);
++    ctx.env.host = None;
++    let output = (spec.render)(&ctx, b.clone());
++    assert_eq!(output.img, b.img);
++    assert_eq!(output.offset, b.offset);
++    assert_eq!(output.scale, b.scale);
++}
++
++#[test]
++fn concurrent_renders_use_independent_memory() {
++    let p = load(COPY);
++    std::thread::scope(|scope| {
++        let joins: Vec<_> = (1..=8)
++            .map(|i| {
++                let p = &p;
++                scope.spawn(move || {
++                    let mut h = host();
++                    h.image.as_mut().unwrap().buf.img.data.fill([i as f32 / 10.0; 4]);
++                    let (result, output) = run(p, &params(Some(i)), Some(&h));
++                    result.unwrap();
++                    assert_eq!(output, vec![[i as f32 / 10.0; 4]; 2]);
++                })
++            })
++            .collect();
++        for join in joins {
++            join.join().unwrap();
++        }
++    });
++}
+diff --git a/crates/plugin/src/tests_v3.rs b/crates/plugin/src/tests_v3.rs
+new file mode 100644
+--- /dev/null
++++ b/crates/plugin/src/tests_v3.rs
+@@ -0,0 +1,53 @@
++//! Original timing transport cases; no source plugin or private fixture.
++use crate::{EffectPlugin, PluginFrame, PluginParams, wasm::WasmPlugin};
++use effectcraft_effects::{EffectCtx, EffectEnv, Params};
++use effectcraft_keyframe::Value;
++fn module(body: &str) -> String {
++    let manifest = r#"{"api":3,"id":"org.bridge.test.timing","name":"Timing probe","category":"Bridge test","params":[{"id":"gain","name":"Gain","type":"slider","default":1}]}"#;
++    let escaped=manifest.replace('"',"\\\"");
++    format!(r#"(module
++        (memory (export "memory") 2)
++        (data (i32.const 16) "{escaped}")
++        (func (export "ec_api_version") (result i32) i32.const 3)
++        (func (export "ec_manifest_ptr") (result i32) i32.const 16)
++        (func (export "ec_manifest_len") (result i32) i32.const {len})
++        (func (export "ec_alloc") (param i32) (result i32) i32.const 65536)
++        (func (export "ec_render_v3") (param $px i32) (param $w i32) (param $h i32)
++         (param $params i32) (param $np i32) (param $time f64) (param $scale f64)
++         (param $table i32) (param $nt i32) (param $timing i32) (result i32)
++         {body} i32.const 0))"#,len=manifest.len())
++}
++const TIMING:&str=r#"
++    local.get $px local.get $timing f64.load f32.demote_f64 f32.store
++    local.get $px local.get $timing f64.load offset=8 f32.demote_f64 f32.store offset=4
++    local.get $px local.get $timing f64.load offset=16 f32.demote_f64 f32.store offset=8
++    local.get $px local.get $timing f64.load offset=24 f32.demote_f64 f32.store offset=12
++"#;
++fn run(body:&str,fps:f64,times:Option<[f64;3]>)->(Result<(),String>,Vec<[f32;4]>) {
++    let plugin=WasmPlugin::new(module(body).as_bytes(),"original-timing").unwrap();
++    let params=Params{values:[("gain".into(),Value::Scalar(1.))].into()};
++    let ctx=EffectCtx{params:&params,time:0.75,layer_size:[8.,4.],seed:0,adjustment:false,
++        env:EffectEnv{frame_rate:fps,layer_frame_times:times,..Default::default()}};
++    let mut pixels=vec![[0.25,0.5,0.75,1.];2];
++    let flat=[1.];
++    let manifest=plugin.manifest();
++    let mut frame=PluginFrame{width:2,height:1,pixels:&mut pixels,scale:0.5};
++    let result=plugin.render_with_context(&mut frame,&PluginParams{manifest,flat:&flat},&ctx,[0.,0.]);
++    (result,pixels)
++}
++#[test] fn exact_timing_comes_from_context(){let (r,p)=run(TIMING,25.,Some([0.3,1.3,0.04]));assert!(r.is_ok(),"{r:?}");assert_eq!(p[0],[25.,0.3,1.3,0.04]);}
++#[test] fn reversed_and_single_frame_bounds_are_preserved(){
++    for times in [[1.3,0.3,0.04],[0.3,0.3,0.04]]{let (r,p)=run(TIMING,25.,Some(times));assert!(r.is_ok());assert_eq!(p[0],[25.,times[0] as f32,times[1] as f32,0.04]);}
++}
++#[test] fn invalid_timing_does_not_enter_wasm_or_modify_pixels(){
++    for (fps,times) in [(0.,Some([0.,1.,0.04])),(f64::NAN,Some([0.,1.,0.04])),(25.,None),(25.,Some([f64::NAN,1.,0.04])),(25.,Some([0.,1.,0.])),(25.,Some([0.,1e10,0.04]))] {
++        let (r,p)=run(TIMING,fps,times);assert!(r.is_err());assert_eq!(p,vec![[0.25,0.5,0.75,1.];2]);
++    }
++}
++#[test] fn trap_and_nonfinite_output_roll_back(){
++    for body in ["local.get $px f32.const 123 f32.store unreachable", "local.get $px f32.const nan f32.store"] {
++        let (r,p)=run(body,25.,Some([0.,1.,0.04]));assert!(r.is_err());assert_eq!(p,vec![[0.25,0.5,0.75,1.];2]);
++    }
++}
++#[test] fn wrong_v3_export_signature_is_refused(){let wat=module("").replace("(param $timing i32)","(param $timing f64)");assert!(WasmPlugin::new(wat.as_bytes(),"bad-signature").is_err());}
++#[test] fn api3_manifest_export_mismatch_is_refused(){let wat=module(TIMING).replace("api\\\":3","api\\\":2");assert!(WasmPlugin::new(wat.as_bytes(),"bad-manifest").is_err());}
+diff --git a/crates/plugin/src/tests_v4.rs b/crates/plugin/src/tests_v4.rs
+new file mode 100644
+--- /dev/null
++++ b/crates/plugin/src/tests_v4.rs
+@@ -0,0 +1,118 @@
++//! Original API 4 source-image checks, not plugin fixtures.
++use crate::{EffectPlugin, PluginFrame, PluginParams, wasm::WasmPlugin};
++use effectcraft_effects::{Buf,EffectCtx,EffectEnv,EffectHost,LayerPixels,Params};
++use effectcraft_effects::plugin::PluginManifest;
++use effectcraft_keyframe::Value;
++use effectcraft_raster::Image;
++use std::sync::Mutex;
++fn manifest(mode:&str,edge:&str)->String {
++    let (lo,hi)=if mode=="frame_hold" {(0,1024)} else {(-1000,1000)};
++    format!(r#"{{"api":4,"bridge_host_revision":3,"id":"org.bridge.test.temporal","name":"Original temporal source","category":"Bridge test","params":[{{"id":"step","name":"Step","type":"slider","default":0,"min":{lo},"max":{hi}}}],"temporal_inputs":[{{"id":"source","mode":"{mode}","parameter":"step","edge":"{edge}"}}]}}"#)
++}
++fn module(manifest:&str,body:&str)->String {
++    let escaped=manifest.replace('"',"\\\"");
++    format!(r#"(module (memory (export "memory") 2)
++     (data (i32.const 16) "{escaped}")
++     (func (export "ec_api_version") (result i32) i32.const 4)
++     (func (export "ec_manifest_ptr") (result i32) i32.const 16)
++     (func (export "ec_manifest_len") (result i32) i32.const {len})
++     (func (export "ec_alloc") (param i32) (result i32) i32.const 65536)
++     (func (export "ec_render_v4") (param $px i32) (param $w i32) (param $h i32)
++       (param $params i32) (param $np i32) (param $time f64) (param $scale f64)
++       (param $table i32) (param $nt i32) (param $timing i32) (result i32)
++       {body} i32.const 0))"#,len=manifest.len())
++}
++const READ:&str=r#"
++ local.get $nt i32.const 2 i32.ne if unreachable end
++ local.get $table i32.load offset=80 i32.const -2147483648 i32.ne if unreachable end
++ local.get $table i64.load offset=84 i64.eqz i32.eqz if unreachable end
++ local.get $table i32.load offset=92 i32.const 4 i32.ne if unreachable end
++ local.get $table i32.load offset=96 f32.load
++ local.get $table f64.load offset=152 f32.demote_f64 f32.ne if unreachable end
++ local.get $px local.get $table i32.load offset=96 f32.load f32.store
++"#;
++struct Host { requests:Mutex<Vec<(f64,usize)>>, available:bool, fail_nested:bool }
++impl EffectHost for Host {
++ fn layer(&self,_:u64,_:bool)->Option<LayerPixels>{None}
++ fn audio(&self,_:u64,_:f64,_:usize,_:u32)->Option<Vec<f32>>{None}
++ fn self_at(&self,time:f64,prefix:usize)->Option<Buf>{
++  self.requests.lock().unwrap().push((time,prefix));
++  if self.fail_nested {
++    let inner=WasmPlugin::new(module(&manifest("frame_hold","clamp"),READ).as_bytes(),"original-failed-child").unwrap();
++    let native=Params{values:[("step".into(),Value::Scalar(0.))].into()};
++    let ctx=EffectCtx{params:&native,time:f64::NAN,layer_size:[1.,1.],seed:0,adjustment:false,env:EffectEnv::default()};
++    let mut child=vec![[0.;4]];
++    assert!(inner.render_with_context(&mut PluginFrame{width:1,height:1,pixels:&mut child,scale:1.},
++      &PluginParams{manifest:inner.manifest(),flat:&[0.]},&ctx,[0.,0.]).is_err());
++  }
++  self.available.then(||Buf { img:Image::filled(1,1,[time as f32,0.,0.,1.]),offset:[-2.,3.],scale:0.5 })
++ }
++}
++fn run(mode:&str,edge:&str,value:f64,time:f64,times:[f64;3],available:bool,body:&str)->(Result<(),String>,Vec<[f32;4]>,Vec<(f64,usize)>) {
++ let plugin=WasmPlugin::new(module(&manifest(mode,edge),body).as_bytes(),"original-time-input").unwrap();
++ let native=Params{values:[("step".into(),Value::Scalar(value))].into()};
++ let host=Host{requests:Mutex::new(Vec::new()),available,fail_nested:false};
++ let ctx=EffectCtx{params:&native,time,layer_size:[8.,4.],seed:0,adjustment:false,
++ env:EffectEnv{host:Some(&host),effect_index:7,frame_rate:25.,layer_frame_times:Some(times),..Default::default()}};
++ let mut pixels=vec![[0.25,0.5,0.75,1.];2];let flat=[value];
++ let result=plugin.render_with_context(&mut PluginFrame{width:2,height:1,pixels:&mut pixels,scale:0.5},
++   &PluginParams{manifest:plugin.manifest(),flat:&flat},&ctx,[0.,0.]);
++ (result,pixels,host.requests.into_inner().unwrap())
++}
++#[test] fn held_source_uses_actual_frames_and_preceding_effects() {
++ let (r,p,requests)=run("frame_hold","clamp",2.,0.39,[0.2,1.2,0.04],true,READ);
++ assert!(r.is_ok(),"{r:?}");assert!((p[0][0]-0.32).abs()<1e-6);
++ assert!((requests[0].0-0.32).abs()<1e-12);assert_eq!(requests[0].1,7);
++}
++#[test] fn offset_requests_resolve_actual_images_not_time_only() {
++ for (mode,value,expected) in [("seconds_offset",-0.1,0.65),("frames_offset",-2.,0.67)] {
++  let (r,p,q)=run(mode,"clamp",value,0.75,[0.2,1.2,0.04],true,READ);
++  assert!(r.is_ok(),"{r:?}");assert!((p[0][0] as f64-expected).abs()<1e-6);
++  assert!((q[0].0-expected).abs()<1e-12);
++ }
++}
++#[test] fn clamp_wrap_mirror_and_reversed_bounds_have_known_values() {
++ for (edge,value,expected) in [("clamp",-0.8,0.2),("wrap",-0.8,0.99),("mirror",-0.8,0.45)] {
++  for times in [[0.2,1.2,0.04],[1.2,0.2,0.04]] {
++   let (r,p,_)=run("seconds_offset",edge,value,0.75,times,true,READ);
++   assert!(r.is_ok(),"{r:?}");assert!((p[0][0] as f64-expected).abs()<1e-6);
++  }
++ }
++}
++#[test] fn unavailable_image_and_invalid_integer_roll_back() {
++ for (value,available) in [(2.,false),(2.5,true),(-1.,true),(1025.,true)] {
++  let (r,p,_)=run("frame_hold","clamp",value,0.75,[0.2,1.2,0.04],available,READ);
++  assert!(r.is_err());assert_eq!(p,vec![[0.25,0.5,0.75,1.];2]);
++ }
++}
++#[test] fn wasm_trap_or_nonfinite_output_never_commits_partial_pixels() {
++ for body in ["local.get $px f32.const 99 f32.store unreachable","local.get $px f32.const nan f32.store"] {
++  let (r,p,_)=run("seconds_offset","clamp",0.,0.75,[0.2,1.2,0.04],true,body);
++  assert!(r.is_err());assert_eq!(p,vec![[0.25,0.5,0.75,1.];2]);
++ }
++}
++#[test] fn manifests_and_export_signatures_are_bounded() {
++ let valid=manifest("frame_hold","clamp");
++ let m:PluginManifest=serde_json::from_str(&valid).unwrap();assert!(m.validate().is_ok());
++ for bad in [valid.replace("\"api\":4","\"api\":3"),valid.replace("\"bridge_host_revision\":3","\"bridge_host_revision\":2"),
++  valid.replace("\"parameter\":\"step\"","\"parameter\":\"missing\""),valid.replace("\"max\":1024","\"max\":1025"),
++  valid.replace("\"edge\":\"clamp\"","\"edge\":\"clamp\",\"multiple\":2")] {
++   assert!(WasmPlugin::new(module(&bad,READ).as_bytes(),"bad-manifest").is_err());
++ }
++ let wrong=module(&valid,READ).replace("(param $timing i32)","(param $timing f64)");
++ assert!(WasmPlugin::new(wrong.as_bytes(),"wrong-signature").is_err());
++}
++
++#[test] fn a_failed_temporal_child_is_not_accepted_as_partial_source_pixels() {
++ let plugin=WasmPlugin::new(module(&manifest("frame_hold","clamp"),READ).as_bytes(),"original-parent").unwrap();
++ let native=Params{values:[("step".into(),Value::Scalar(2.))].into()};
++ let host=Host{requests:Mutex::new(Vec::new()),available:true,fail_nested:true};
++ let ctx=EffectCtx{params:&native,time:0.39,layer_size:[8.,4.],seed:0,adjustment:false,
++  env:EffectEnv{host:Some(&host),effect_index:7,frame_rate:25.,layer_frame_times:Some([0.2,1.2,0.04]),..Default::default()}};
++ let mut pixels=vec![[0.25,0.5,0.75,1.];2];
++ let result=plugin.render_with_context(&mut PluginFrame{width:2,height:1,pixels:&mut pixels,scale:0.5},
++  &PluginParams{manifest:plugin.manifest(),flat:&[2.]},&ctx,[0.,0.]);
++ assert!(result.is_err());assert_eq!(pixels,vec![[0.25,0.5,0.75,1.];2]);
++ // A failure in one render tree must not poison a subsequent independent render.
++ let (r,_,_)=run("frame_hold","clamp",2.,0.39,[0.2,1.2,0.04],true,READ);assert!(r.is_ok());
++}

@@ -1,0 +1,123 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.flicker",
+  "name": "Bridge Flicker (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original deterministic smooth value noise and periodic RGB modulation. Frequencies, phases, RNG, response and color calibration are independent; source visual equivalence is not certified.",
+  "params": [
+    {
+      "id": "amplitude",
+      "name": "Amplitude",
+      "type": "slider",
+      "default": 0.2,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "rand_luma_amp",
+      "name": "Rand Luma Amp",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "rand_color_amp",
+      "name": "Rand Color Amp",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "rand_freq",
+      "name": "Raw Rand Freq",
+      "type": "slider",
+      "default": 30,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "wave_amp",
+      "name": "Wave Amp",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "wave_freq",
+      "name": "Raw Wave Freq",
+      "type": "slider",
+      "default": 5,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "wave_r_phase",
+      "name": "Raw Wave R Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "wave_g_phase",
+      "name": "Raw Wave G Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "wave_b_phase",
+      "name": "Raw Wave B Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "red_amp",
+      "name": "Red Amp",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "green_amp",
+      "name": "Green Amp",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "blue_amp",
+      "name": "Blue Amp",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "brightness",
+      "name": "Brightness",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "id": "seed",
+      "name": "Seed",
+      "type": "slider",
+      "default": 0.123,
+      "min": 0,
+      "max": 1000000000.0
+    }
+  ]
+}

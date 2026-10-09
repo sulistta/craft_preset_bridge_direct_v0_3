@@ -1,0 +1,600 @@
+{
+  "$defs": {
+    "BezierHandles": {
+      "additionalProperties": false,
+      "properties": {
+        "in_speed": {
+          "items": {
+            "type": "number"
+          },
+          "title": "In Speed",
+          "type": "array"
+        },
+        "in_influence": {
+          "items": {
+            "type": "number"
+          },
+          "title": "In Influence",
+          "type": "array"
+        },
+        "out_speed": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Out Speed",
+          "type": "array"
+        },
+        "out_influence": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Out Influence",
+          "type": "array"
+        }
+      },
+      "title": "BezierHandles",
+      "type": "object"
+    },
+    "ConversionWarning": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "path": {
+          "default": "",
+          "title": "Path",
+          "type": "string"
+        },
+        "loss": {
+          "default": true,
+          "title": "Loss",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ConversionWarning",
+      "type": "object"
+    },
+    "Effect": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "identifier": {
+          "$ref": "#/$defs/EffectIdentifier"
+        },
+        "order": {
+          "title": "Order",
+          "type": "integer"
+        },
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "parameters": {
+          "items": {
+            "$ref": "#/$defs/Parameter"
+          },
+          "title": "Parameters",
+          "type": "array"
+        },
+        "masks": {
+          "items": {
+            "$ref": "#/$defs/Mask"
+          },
+          "title": "Masks",
+          "type": "array"
+        },
+        "feature": {
+          "default": "effect",
+          "title": "Feature",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/ConversionWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "identifier",
+        "order"
+      ],
+      "title": "Effect",
+      "type": "object"
+    },
+    "EffectIdentifier": {
+      "additionalProperties": false,
+      "properties": {
+        "match_name": {
+          "title": "Match Name",
+          "type": "string"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Id"
+        }
+      },
+      "required": [
+        "match_name"
+      ],
+      "title": "EffectIdentifier",
+      "type": "object"
+    },
+    "Interpolation": {
+      "enum": [
+        "Linear",
+        "Hold",
+        "Bezier",
+        "Unknown"
+      ],
+      "title": "Interpolation",
+      "type": "string"
+    },
+    "Keyframe": {
+      "additionalProperties": false,
+      "properties": {
+        "ticks": {
+          "title": "Ticks",
+          "type": "integer"
+        },
+        "time_base": {
+          "exclusiveMinimum": 0,
+          "title": "Time Base",
+          "type": "integer"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        },
+        "in_interp": {
+          "items": {
+            "$ref": "#/$defs/Interpolation"
+          },
+          "title": "In Interp",
+          "type": "array"
+        },
+        "out_interp": {
+          "items": {
+            "$ref": "#/$defs/Interpolation"
+          },
+          "title": "Out Interp",
+          "type": "array"
+        },
+        "handles": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BezierHandles"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        }
+      },
+      "required": [
+        "ticks",
+        "time_base",
+        "value"
+      ],
+      "title": "Keyframe",
+      "type": "object"
+    },
+    "Mask": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "decoded": {
+          "default": false,
+          "title": "Decoded",
+          "type": "boolean"
+        },
+        "raw": {
+          "additionalProperties": true,
+          "title": "Raw",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Mask",
+      "type": "object"
+    },
+    "Parameter": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/ParameterValue"
+        },
+        "keyframes": {
+          "items": {
+            "$ref": "#/$defs/Keyframe"
+          },
+          "title": "Keyframes",
+          "type": "array"
+        },
+        "group": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Group",
+          "type": "array"
+        },
+        "origin": {
+          "additionalProperties": true,
+          "title": "Origin",
+          "type": "object"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/ConversionWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "value"
+      ],
+      "title": "Parameter",
+      "type": "object"
+    },
+    "ParameterValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "number",
+            "boolean",
+            "enum",
+            "color",
+            "point",
+            "vector",
+            "text",
+            "unknown"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ParameterValue",
+      "type": "object"
+    },
+    "Preset": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "effects": {
+          "items": {
+            "$ref": "#/$defs/Effect"
+          },
+          "title": "Effects",
+          "type": "array"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "source_duration_ticks": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Duration Ticks"
+        },
+        "source_time_base": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Time Base"
+        },
+        "source_size": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Size"
+        },
+        "keyframe_mode": {
+          "default": "Scale",
+          "enum": [
+            "Scale",
+            "AnchorToIn",
+            "AnchorToOut"
+          ],
+          "title": "Keyframe Mode",
+          "type": "string"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/ConversionWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Preset",
+      "type": "object"
+    },
+    "SourceMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "format": {
+          "enum": [
+            "prfpset",
+            "ffx"
+          ],
+          "title": "Format",
+          "type": "string"
+        },
+        "size": {
+          "title": "Size",
+          "type": "integer"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "parser_version": {
+          "default": "0.36.0",
+          "title": "Parser Version",
+          "type": "string"
+        },
+        "detected_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detected Version"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        }
+      },
+      "required": [
+        "path",
+        "format",
+        "size",
+        "sha256"
+      ],
+      "title": "SourceMetadata",
+      "type": "object"
+    },
+    "UnsupportedFeature": {
+      "additionalProperties": false,
+      "properties": {
+        "feature": {
+          "title": "Feature",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "path": {
+          "default": "",
+          "title": "Path",
+          "type": "string"
+        },
+        "raw": {
+          "additionalProperties": true,
+          "title": "Raw",
+          "type": "object"
+        }
+      },
+      "required": [
+        "feature",
+        "reason"
+      ],
+      "title": "UnsupportedFeature",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "craftbridge.intermediate",
+      "default": "craftbridge.intermediate",
+      "title": "Format",
+      "type": "string"
+    },
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceMetadata"
+    },
+    "presets": {
+      "items": {
+        "$ref": "#/$defs/Preset"
+      },
+      "title": "Presets",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "$ref": "#/$defs/ConversionWarning"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "unsupported": {
+      "items": {
+        "$ref": "#/$defs/UnsupportedFeature"
+      },
+      "title": "Unsupported",
+      "type": "array"
+    },
+    "diagnostics": {
+      "additionalProperties": true,
+      "title": "Diagnostics",
+      "type": "object"
+    }
+  },
+  "required": [
+    "source"
+  ],
+  "title": "PresetDocument",
+  "type": "object"
+}

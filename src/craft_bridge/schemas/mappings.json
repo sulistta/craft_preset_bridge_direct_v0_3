@@ -1,0 +1,507 @@
+{
+  "$defs": {
+    "Mapping": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "source_format": {
+          "enum": [
+            "prfpset",
+            "ffx"
+          ],
+          "title": "Source Format",
+          "type": "string"
+        },
+        "target": {
+          "enum": [
+            "filmcraft",
+            "effectcraft"
+          ],
+          "title": "Target",
+          "type": "string"
+        },
+        "effect": {
+          "title": "Effect",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Rule"
+          },
+          "title": "Params",
+          "type": "object"
+        },
+        "evidence": {
+          "title": "Evidence",
+          "type": "string"
+        },
+        "validation": {
+          "title": "Validation",
+          "type": "string"
+        },
+        "target_commit": {
+          "title": "Target Commit",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 32,
+          "title": "Limitations",
+          "type": "array"
+        },
+        "required_on_create": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Required On Create",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source",
+        "source_format",
+        "target",
+        "effect",
+        "params",
+        "evidence",
+        "validation",
+        "target_commit"
+      ],
+      "title": "Mapping",
+      "type": "object"
+    },
+    "PluginManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "api": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "title": "Api",
+          "type": "integer"
+        },
+        "bridge_host_revision": {
+          "anyOf": [
+            {
+              "enum": [
+                1,
+                2,
+                3
+              ],
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bridge Host Revision"
+        },
+        "id": {
+          "pattern": "^[A-Za-z0-9_.-]{1,256}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "category": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "version": {
+          "default": "",
+          "maxLength": 128,
+          "title": "Version",
+          "type": "string"
+        },
+        "author": {
+          "default": "",
+          "maxLength": 256,
+          "title": "Author",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 4096,
+          "title": "Description",
+          "type": "string"
+        },
+        "params": {
+          "items": {
+            "$ref": "#/$defs/PluginParam"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "title": "Params",
+          "type": "array"
+        },
+        "temporal_inputs": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/TemporalInput"
+              },
+              "maxItems": 4,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Temporal Inputs"
+        }
+      },
+      "required": [
+        "api",
+        "id",
+        "name",
+        "category",
+        "params"
+      ],
+      "title": "PluginManifest",
+      "type": "object"
+    },
+    "PluginParam": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9_]{1,128}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "slider",
+            "angle",
+            "checkbox",
+            "popup",
+            "point",
+            "color",
+            "layer"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "default": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default"
+        },
+        "min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min"
+        },
+        "max": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max"
+        },
+        "sliderMin": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Slidermin"
+        },
+        "sliderMax": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Slidermax"
+        },
+        "decimals": {
+          "anyOf": [
+            {
+              "maximum": 255,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decimals"
+        },
+        "options": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 256,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Options"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "title": "PluginParam",
+      "type": "object"
+    },
+    "Rule": {
+      "additionalProperties": false,
+      "properties": {
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "operation": {
+          "default": "identity",
+          "enum": [
+            "identity",
+            "normalized_to_pixels",
+            "minus_one",
+            "times_100",
+            "times_255",
+            "argb255_to_rgba",
+            "enum_map",
+            "ofp_scene_lookup",
+            "explicit_layer_binding"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "kind": {
+          "default": "Float",
+          "enum": [
+            "Float",
+            "Bool",
+            "Choice",
+            "Vec2",
+            "Color",
+            "Text",
+            "Layer"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "choices": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Choices",
+          "type": "object"
+        },
+        "requires": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "maxProperties": 32,
+          "title": "Requires",
+          "type": "object"
+        },
+        "inactive_when": {
+          "additionalProperties": {
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "type": "array"
+          },
+          "maxProperties": 4,
+          "title": "Inactive When",
+          "type": "object"
+        },
+        "scenes": {
+          "maxProperties": 256,
+          "patternProperties": {
+            "^[a-f0-9]{64}$": {
+              "maximum": 255,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "title": "Scenes",
+          "type": "object"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "title": "Rule",
+      "type": "object"
+    },
+    "TemporalInput": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9_]{1,128}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "frame_hold",
+            "seconds_offset",
+            "frames_offset"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "parameter": {
+          "pattern": "^[A-Za-z0-9_]{1,128}$",
+          "title": "Parameter",
+          "type": "string"
+        },
+        "multiple": {
+          "default": 1,
+          "maximum": 16,
+          "minimum": 1,
+          "title": "Multiple",
+          "type": "integer"
+        },
+        "edge": {
+          "default": "clamp",
+          "enum": [
+            "clamp",
+            "wrap",
+            "mirror"
+          ],
+          "title": "Edge",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "mode",
+        "parameter"
+      ],
+      "title": "TemporalInput",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "craftbridge.mappings",
+      "default": "craftbridge.mappings",
+      "title": "Format",
+      "type": "string"
+    },
+    "version": {
+      "default": 1,
+      "enum": [
+        1,
+        2
+      ],
+      "title": "Version",
+      "type": "integer"
+    },
+    "name": {
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+      "title": "Name",
+      "type": "string"
+    },
+    "mappings": {
+      "items": {
+        "$ref": "#/$defs/Mapping"
+      },
+      "maxItems": 2048,
+      "title": "Mappings",
+      "type": "array"
+    },
+    "plugins": {
+      "items": {
+        "$ref": "#/$defs/PluginManifest"
+      },
+      "maxItems": 64,
+      "title": "Plugins",
+      "type": "array"
+    }
+  },
+  "required": [
+    "name",
+    "mappings"
+  ],
+  "title": "Package",
+  "type": "object"
+}

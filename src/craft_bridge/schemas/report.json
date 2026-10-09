@@ -1,0 +1,301 @@
+{
+  "$defs": {
+    "ConversionWarning": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "path": {
+          "default": "",
+          "title": "Path",
+          "type": "string"
+        },
+        "loss": {
+          "default": true,
+          "title": "Loss",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ConversionWarning",
+      "type": "object"
+    },
+    "EffectResult": {
+      "additionalProperties": false,
+      "properties": {
+        "preset": {
+          "title": "Preset",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "parameters_found": {
+          "default": 0,
+          "title": "Parameters Found",
+          "type": "integer"
+        },
+        "parameters_converted": {
+          "default": 0,
+          "title": "Parameters Converted",
+          "type": "integer"
+        },
+        "keyframes_found": {
+          "default": 0,
+          "title": "Keyframes Found",
+          "type": "integer"
+        },
+        "keyframes_preserved": {
+          "default": 0,
+          "title": "Keyframes Preserved",
+          "type": "integer"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/ConversionWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        },
+        "transformations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Transformations",
+          "type": "array"
+        },
+        "mapping_validation": {
+          "default": "",
+          "title": "Mapping Validation",
+          "type": "string"
+        },
+        "mapping_evidence": {
+          "default": "",
+          "title": "Mapping Evidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "preset",
+        "source",
+        "status"
+      ],
+      "title": "EffectResult",
+      "type": "object"
+    },
+    "SourceMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "format": {
+          "enum": [
+            "prfpset",
+            "ffx"
+          ],
+          "title": "Format",
+          "type": "string"
+        },
+        "size": {
+          "title": "Size",
+          "type": "integer"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "parser_version": {
+          "default": "0.36.0",
+          "title": "Parser Version",
+          "type": "string"
+        },
+        "detected_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detected Version"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        }
+      },
+      "required": [
+        "path",
+        "format",
+        "size",
+        "sha256"
+      ],
+      "title": "SourceMetadata",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "craftbridge.conversion-report",
+      "default": "craftbridge.conversion-report",
+      "title": "Format",
+      "type": "string"
+    },
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SourceMetadata"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "source_path": {
+      "title": "Source Path",
+      "type": "string"
+    },
+    "input_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Sha256"
+    },
+    "input_size": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Size"
+    },
+    "target": {
+      "title": "Target",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "SUCCESS",
+        "PARTIAL",
+        "UNSUPPORTED",
+        "FAILED"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "catalog_commit": {
+      "default": "",
+      "title": "Catalog Commit",
+      "type": "string"
+    },
+    "mapping_package": {
+      "default": "builtin-1",
+      "title": "Mapping Package",
+      "type": "string"
+    },
+    "effects": {
+      "items": {
+        "$ref": "#/$defs/EffectResult"
+      },
+      "title": "Effects",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "$ref": "#/$defs/ConversionWarning"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "errors": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output"
+    },
+    "validation": {
+      "default": "schema-and-pinned-catalog; engine not contacted",
+      "title": "Validation",
+      "type": "string"
+    },
+    "dry_run": {
+      "default": false,
+      "title": "Dry Run",
+      "type": "boolean"
+    },
+    "strict": {
+      "default": false,
+      "title": "Strict",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_path",
+    "target",
+    "status"
+  ],
+  "title": "ConversionReport",
+  "type": "object"
+}

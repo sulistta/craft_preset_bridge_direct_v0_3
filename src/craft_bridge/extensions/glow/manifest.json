@@ -1,0 +1,121 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.glow",
+  "name": "Bridge Glow (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original multiscale bloom renderer. Partial PEDG transfer; not Deep Glow render equivalence. No automatic gamma or proprietary runtime.",
+  "params": [
+    {
+      "id": "radius",
+      "name": "Radius (approximate profile)",
+      "type": "slider",
+      "default": 100.0,
+      "min": 0,
+      "max": 2000
+    },
+    {
+      "id": "exposure",
+      "name": "Exposure multiplier",
+      "type": "slider",
+      "default": 1.0,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "threshold",
+      "name": "Threshold (%)",
+      "type": "slider",
+      "default": 50.0,
+      "min": 0,
+      "max": 100000
+    },
+    {
+      "id": "threshold_smooth",
+      "name": "Threshold Smooth (%)",
+      "type": "slider",
+      "default": 50.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "blend",
+      "name": "Blend Mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Screen",
+        "Add"
+      ]
+    },
+    {
+      "id": "aspect",
+      "name": "Aspect Ratio",
+      "type": "slider",
+      "default": 1.0,
+      "min": 0,
+      "max": 2
+    },
+    {
+      "id": "tint_enabled",
+      "name": "Tint Enabled",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "tint",
+      "name": "Tint Color",
+      "type": "color",
+      "default": [
+        1.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "tint_mode",
+      "name": "Tint Mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Standard",
+        "Overlay (W3C)",
+        "Soft Light (W3C)"
+      ]
+    },
+    {
+      "id": "tint_mix",
+      "name": "Tint Mix (%)",
+      "type": "slider",
+      "default": 100.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "view",
+      "name": "View",
+      "type": "popup",
+      "default": 1,
+      "options": [
+        "Glow Input",
+        "Final Render"
+      ]
+    },
+    {
+      "id": "source_opacity",
+      "name": "Source Opacity (%)",
+      "type": "slider",
+      "default": 100.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "unmult",
+      "name": "Generate Alpha (approximate)",
+      "type": "checkbox",
+      "default": true
+    }
+  ]
+}

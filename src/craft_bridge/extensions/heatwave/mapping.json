@@ -1,0 +1,419 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-heatwave-1",
+  "plugins": [
+    {
+      "api": 2,
+      "bridge_host_revision": 1,
+      "id": "org.craftbridge.heatwave",
+      "name": "Bridge Heatwave (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original noise displacement, spatial blur and geometric/layer masks. Independent noise, geometry, alpha and raw slider calibration; no Universe equivalence. Requires experimental Bridge API 2 host.",
+      "params": [
+        {
+          "id": "mask",
+          "name": "Mask Layer",
+          "type": "layer",
+          "default": null
+        },
+        {
+          "id": "maskSource",
+          "name": "Mask source mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Source",
+            "Masks",
+            "Effects & Masks"
+          ]
+        },
+        {
+          "id": "wave_type",
+          "name": "Wave Type",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Default",
+            "Billowed",
+            "Ridged"
+          ]
+        },
+        {
+          "id": "intensity",
+          "name": "Heat Intensity",
+          "type": "slider",
+          "default": 25,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "direction",
+          "name": "Flow Direction (degrees)",
+          "type": "slider",
+          "default": 90,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "speed",
+          "name": "Flow Speed",
+          "type": "slider",
+          "default": 19,
+          "min": -10000,
+          "max": 10000
+        },
+        {
+          "id": "blur",
+          "name": "Blur Amount",
+          "type": "slider",
+          "default": 25,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "heat_size",
+          "name": "Heat Size",
+          "type": "slider",
+          "default": 100,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "heat_detail",
+          "name": "Heat Detail Amount",
+          "type": "slider",
+          "default": 42,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "heat_detail_scale",
+          "name": "Heat Detail Scale",
+          "type": "slider",
+          "default": 150,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "blur_size",
+          "name": "Blur Size",
+          "type": "slider",
+          "default": 100,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "blur_feather",
+          "name": "Blur Feather",
+          "type": "slider",
+          "default": 100,
+          "min": -10000,
+          "max": 10000
+        },
+        {
+          "id": "blur_detail",
+          "name": "Blur Detail Amount",
+          "type": "slider",
+          "default": 42,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "blur_detail_scale",
+          "name": "Blur Detail Scale",
+          "type": "slider",
+          "default": 50,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "quality",
+          "name": "Blur Quality",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Fast",
+            "Medium",
+            "Accurate (Slow)"
+          ]
+        },
+        {
+          "id": "shape",
+          "name": "Shape",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "None",
+            "Ellipse",
+            "Rectangle",
+            "Layer"
+          ]
+        },
+        {
+          "id": "invert",
+          "name": "Invert",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "point_a",
+          "name": "Point A",
+          "type": "point",
+          "default": [
+            0.5,
+            0.25
+          ]
+        },
+        {
+          "id": "point_b",
+          "name": "Point B",
+          "type": "point",
+          "default": [
+            0.5,
+            0.75
+          ]
+        },
+        {
+          "id": "radius",
+          "name": "Radius",
+          "type": "slider",
+          "default": 25,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "feather",
+          "name": "Feather Size",
+          "type": "slider",
+          "default": 10,
+          "min": -10000,
+          "max": 10000
+        },
+        {
+          "id": "mask_channel",
+          "name": "Mask Channel",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Luminance",
+            "Alpha"
+          ]
+        },
+        {
+          "id": "mask_scale",
+          "name": "Mask Scale",
+          "type": "slider",
+          "default": 100,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "mask_position",
+          "name": "Mask Position",
+          "type": "point",
+          "default": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "id": "output",
+          "name": "Output",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Final Image",
+            "Distortion",
+            "Blur",
+            "Mask",
+            "Mask Overlay"
+          ]
+        },
+        {
+          "id": "bias",
+          "name": "Heat Bias",
+          "type": "slider",
+          "default": 0,
+          "min": -100,
+          "max": 100
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "params": {
+        "Universe_Distort_Heatwave-0025": {
+          "target": "mask",
+          "kind": "Layer",
+          "operation": "explicit_layer_binding"
+        },
+        "Universe_Distort_Heatwave-0001": {
+          "target": "wave_type",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "Universe_Distort_Heatwave-0002": {
+          "target": "intensity",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0003": {
+          "target": "direction",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0004": {
+          "target": "speed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0005": {
+          "target": "blur",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0007": {
+          "target": "heat_size",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0008": {
+          "target": "heat_detail",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0009": {
+          "target": "heat_detail_scale",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0012": {
+          "target": "blur_size",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0013": {
+          "target": "blur_feather",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0014": {
+          "target": "blur_detail",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0015": {
+          "target": "blur_detail_scale",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0016": {
+          "target": "quality",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "Universe_Distort_Heatwave-0019": {
+          "target": "shape",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "Universe_Distort_Heatwave-0020": {
+          "target": "invert",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0021": {
+          "target": "point_a",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "Universe_Distort_Heatwave-0022": {
+          "target": "point_b",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "Universe_Distort_Heatwave-0023": {
+          "target": "radius",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0024": {
+          "target": "feather",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0026": {
+          "target": "mask_channel",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "Universe_Distort_Heatwave-0027": {
+          "target": "mask_scale",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "Universe_Distort_Heatwave-0028": {
+          "target": "mask_position",
+          "kind": "Vec2",
+          "operation": "normalized_to_pixels"
+        },
+        "Universe_Distort_Heatwave-0030": {
+          "target": "output",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "Universe_Distort_Heatwave-0031": {
+          "target": "bias",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "evidence": "One complete local parT/tdb4 snapshot proves 24 processing controls, menus, normalized points and one opaque Layer. Official Maxon Heatwave docs consulted 2026-10-09; ADR 032. Original MIT code only.",
+      "validation": "real-source-descriptors; explicit-resource-replacement; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "required_on_create": [
+        "Universe_Distort_Heatwave-0025",
+        "Universe_Distort_Heatwave-0001",
+        "Universe_Distort_Heatwave-0002",
+        "Universe_Distort_Heatwave-0003",
+        "Universe_Distort_Heatwave-0004",
+        "Universe_Distort_Heatwave-0005",
+        "Universe_Distort_Heatwave-0007",
+        "Universe_Distort_Heatwave-0008",
+        "Universe_Distort_Heatwave-0009",
+        "Universe_Distort_Heatwave-0012",
+        "Universe_Distort_Heatwave-0013",
+        "Universe_Distort_Heatwave-0014",
+        "Universe_Distort_Heatwave-0015",
+        "Universe_Distort_Heatwave-0016",
+        "Universe_Distort_Heatwave-0019",
+        "Universe_Distort_Heatwave-0020",
+        "Universe_Distort_Heatwave-0021",
+        "Universe_Distort_Heatwave-0022",
+        "Universe_Distort_Heatwave-0023",
+        "Universe_Distort_Heatwave-0024",
+        "Universe_Distort_Heatwave-0026",
+        "Universe_Distort_Heatwave-0027",
+        "Universe_Distort_Heatwave-0028",
+        "Universe_Distort_Heatwave-0030",
+        "Universe_Distort_Heatwave-0031"
+      ],
+      "limitations": [
+        "Renderer original aproximado de ru\u00eddo/displacement/blur; PRNG, frequ\u00eancias, escalas, intensidades, qualidade e calibra\u00e7\u00e3o n\u00e3o certificados Universe. Sempre PARTIAL; strict n\u00e3o publica.",
+        "Mask Layer FFX permanece opaco e exige substitui\u00e7\u00e3o expl\u00edcita fixada ao hash/\u00edndice/ID, inclusive null deliberado. Nenhuma refer\u00eancia None \u00e9 inferida. Mask Layer \u00e9 ignorado por Shape None/Ellipse/Rectangle, mas sua escolha permanece expl\u00edcita.",
+        "Pontos normalizados exigem tamanho expl\u00edcito da camada. M\u00e1scaras geom\u00e9tricas, feather assinado, escala/posi\u00e7\u00e3o de camada e coordenadas bilinear s\u00e3o modelos pr\u00f3prios; canvas e transforma\u00e7\u00f5es Adobe n\u00e3o s\u00e3o reconstru\u00eddos.",
+        "Modelos pr\u00f3prios: ru\u00eddo value/fractal em tr\u00eas oitavas; Default/Billowed/Ridged, deslocamento raw intensity/100*dimens\u00e3o m\u00ednima*0,25 e flow speed/100 em coordenadas do ru\u00eddo. Sliders brutos n\u00e3o recebem unidade Adobe presumida.",
+        "Blur espacial estratificado com 4/9/16 taps usa as imagens do instante atual. Campo de blur, Heat Bias e displays de diagn\u00f3stico s\u00e3o pr\u00f3prios; n\u00e3o reproduzem gamma/HDR/alpha/qualidade/FFT Universe. Exterior transparente; m\u00e1scara null \u00e9 preta e invers\u00e3o pode torn\u00e1-la branca.",
+        "Resource mode Source \u00e9 escolha do destino no manifesto. Express\u00f5es, m\u00e1scaras Adobe, anima\u00e7\u00e3o Layer e estados administrativos/presets propriet\u00e1rios n\u00e3o s\u00e3o traduzidos; avisos de origem preservados."
+      ],
+      "source": "Universe_Distort_Heatwave",
+      "effect": "org.craftbridge.heatwave"
+    }
+  ]
+}

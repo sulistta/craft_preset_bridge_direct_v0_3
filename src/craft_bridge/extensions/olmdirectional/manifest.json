@@ -1,0 +1,144 @@
+{
+  "api": 2,
+  "bridge_host_revision": 1,
+  "id": "org.craftbridge.olmdirectional",
+  "name": "Bridge OLM Directional Blur (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original anisotropic alpha-max ray blur, component-based size/tails and directional noise. Not OLM kernel/calibration. Requires experimental API2 host.",
+  "params": [
+    {
+      "id": "noise",
+      "name": "Noise Layer (explicit replacement if active)",
+      "type": "layer",
+      "default": null
+    },
+    {
+      "id": "noiseSource",
+      "name": "Noise source mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Source",
+        "Masks",
+        "Effects & Masks"
+      ]
+    },
+    {
+      "id": "angle",
+      "name": "Angle",
+      "type": "slider",
+      "default": 106.0,
+      "min": -360000,
+      "max": 360000
+    },
+    {
+      "id": "gain",
+      "name": "Brightness Gain",
+      "type": "slider",
+      "default": 1.0,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "size_variation",
+      "name": "Size Variation",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "front",
+      "name": "Blur Strength",
+      "type": "slider",
+      "default": 140.0,
+      "min": 0,
+      "max": 4000
+    },
+    {
+      "id": "front_fade",
+      "name": "Alpha Fade",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "front_tail",
+      "name": "Sharp Tail",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "back",
+      "name": "Blur Strength",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 4000
+    },
+    {
+      "id": "back_fade",
+      "name": "Alpha Fade",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "back_tail",
+      "name": "Sharp Tail",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "noise_variation",
+      "name": "Noise Variation",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "noise_type",
+      "name": "Noise Type",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Smooth",
+        "Block",
+        "Layer"
+      ]
+    },
+    {
+      "id": "seed",
+      "name": "Seed",
+      "type": "slider",
+      "default": 1.0,
+      "min": -1000000000.0,
+      "max": 1000000000.0
+    },
+    {
+      "id": "offset",
+      "name": "Offset",
+      "type": "slider",
+      "default": 0.0,
+      "min": -360000,
+      "max": 360000
+    },
+    {
+      "id": "thickness",
+      "name": "Thickness",
+      "type": "slider",
+      "default": 10.0,
+      "min": 1,
+      "max": 100
+    }
+  ]
+}

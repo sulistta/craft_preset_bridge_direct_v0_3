@@ -1,0 +1,278 @@
+{
+  "api": 2,
+  "bridge_host_revision": 1,
+  "id": "org.craftbridge.signal",
+  "name": "Bridge Signal (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original bounded luminance/chrominance modulation and decoding. Independent calibration; no Zaebects Signal equivalence. Requires experimental Bridge API 2 host.",
+  "params": [
+    {
+      "id": "seed",
+      "name": "Random seed",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 1000000000.0
+    },
+    {
+      "id": "strength",
+      "name": "Signal strength",
+      "type": "slider",
+      "default": 40,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "amplification",
+      "name": "Signal amplification",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "cutoff",
+      "name": "Cutoff filter",
+      "type": "slider",
+      "default": 88,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "luma_noise",
+      "name": "Luma noise",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "chroma_noise",
+      "name": "Chroma noise",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "hue_noise",
+      "name": "Hue Noise",
+      "type": "slider",
+      "default": 15,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "chroma_loss",
+      "name": "Chroma loss",
+      "type": "slider",
+      "default": 0.24,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "sharpen",
+      "name": "Sharpen",
+      "type": "slider",
+      "default": 2,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "connections",
+      "name": "Device-to-device connections",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 16
+    },
+    {
+      "id": "vhs",
+      "name": "Emulating VHS",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "VHS_SP",
+        "VHS_LP",
+        "VHS_EP"
+      ]
+    },
+    {
+      "id": "luma_enable",
+      "name": "Luma modulation On/Off",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "frequency",
+      "name": "Frequency",
+      "type": "slider",
+      "default": 0.62,
+      "min": -10000,
+      "max": 10000
+    },
+    {
+      "id": "phase",
+      "name": "Phase",
+      "type": "slider",
+      "default": 2,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "lightness",
+      "name": "Lightness",
+      "type": "slider",
+      "default": 0.62,
+      "min": -100,
+      "max": 100
+    },
+    {
+      "id": "quantize",
+      "name": "Quantize",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "tape_enable",
+      "name": "Tape Errors",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "te_start",
+      "name": "TE start",
+      "type": "slider",
+      "default": 0.92,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "te_end",
+      "name": "TE end",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "te_probability",
+      "name": "TE probability",
+      "type": "slider",
+      "default": 0.1,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "te_fade",
+      "name": "TE fade",
+      "type": "slider",
+      "default": 5,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "te_gamma",
+      "name": "TE gamma",
+      "type": "slider",
+      "default": 3,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "thick",
+      "name": "Thick distortion",
+      "type": "slider",
+      "default": 0,
+      "min": -100,
+      "max": 100
+    },
+    {
+      "id": "fine",
+      "name": "Fine distotrion",
+      "type": "slider",
+      "default": 0,
+      "min": -100,
+      "max": 100
+    },
+    {
+      "id": "distortion_speed",
+      "name": "Distortion speed",
+      "type": "slider",
+      "default": 0,
+      "min": -10000,
+      "max": 10000
+    },
+    {
+      "id": "roll_speed",
+      "name": "Roll speed",
+      "type": "slider",
+      "default": 0,
+      "min": -10000,
+      "max": 10000
+    },
+    {
+      "id": "lowpass_in",
+      "name": "Low-Pass filter in",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "lowpass_out",
+      "name": "Low-Pass filter out",
+      "type": "popup",
+      "default": 2,
+      "options": [
+        "Off",
+        "Lite",
+        "Strong"
+      ]
+    },
+    {
+      "id": "phase_shift",
+      "name": "Phase shift",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "phase_offset",
+      "name": "Phase shift offset",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "s_video",
+      "name": "S-video out",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "chroma_vertical",
+      "name": "Chroma vertical blend",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "sharpen_enable",
+      "name": "Sharpen On/Off",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "scan_blur",
+      "name": "Scanlines blur",
+      "type": "slider",
+      "default": 1.5,
+      "min": 0,
+      "max": 100
+    }
+  ]
+}

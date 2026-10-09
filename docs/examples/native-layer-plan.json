@@ -1,0 +1,74 @@
+{
+  "format": "craftbridge.effectcraft-plan",
+  "version": 4,
+  "name": "Original native two-layer example",
+  "catalog_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+  "source_sha256": "bfb4ef636a177e35d7f7872378b39a9327c7776bc1d60062d679983e2df42b93",
+  "preset_index": 0,
+  "effects": [
+    {
+      "ref": "fx0",
+      "effect": "ec.channel.compoundarithmetic",
+      "source": "original-native-demo",
+      "enabled": true,
+      "plugin_fingerprint": null,
+      "application": "create",
+      "source_effect_index": null,
+      "properties": [
+        {
+          "id": "secondSource",
+          "kind": "Layer",
+          "value": {
+            "layer_ref": "background"
+          },
+          "keyframes": []
+        },
+        {
+          "id": "operator",
+          "kind": "Choice",
+          "value": 1,
+          "keyframes": []
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "command": "bridge.resolveLayer",
+      "params": {
+        "ref": "background",
+        "layer": "$layerBinding.background",
+        "comp": "$comp"
+      }
+    },
+    {
+      "command": "effect.apply",
+      "params": {
+        "effect": "ec.channel.compoundarithmetic",
+        "layer": "$layer",
+        "comp": "$comp"
+      },
+      "bind": "fx0"
+    },
+    {
+      "command": "prop.set",
+      "params": {
+        "layer": "$layer",
+        "comp": "$comp",
+        "path": "$fx0.path/secondSource",
+        "value": {
+          "layer_ref": "background"
+        }
+      }
+    },
+    {
+      "command": "prop.set",
+      "params": {
+        "layer": "$layer",
+        "comp": "$comp",
+        "path": "$fx0.path/operator",
+        "value": 1
+      }
+    }
+  ]
+}

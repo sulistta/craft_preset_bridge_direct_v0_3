@@ -1,0 +1,406 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-colorize-1",
+  "plugins": [
+    {
+      "api": 1,
+      "id": "org.craftbridge.colorize",
+      "name": "Bridge Colorize (approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge",
+      "description": "Original six-color gradient toning. Independent calibration; PixelChooser, Mocha and tracking are not transferred. See ADR 027.",
+      "params": [
+        {
+          "id": "input",
+          "name": "Input",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Luma",
+            "Red",
+            "Green",
+            "Blue",
+            "Luma Inverse",
+            "Red Inverse",
+            "Green Inverse",
+            "Blue Inverse"
+          ]
+        },
+        {
+          "id": "color_space",
+          "name": "Color Space",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "RGB",
+            "HSL",
+            "HSV"
+          ]
+        },
+        {
+          "id": "color2_on",
+          "name": "Color 2 On",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "color3_on",
+          "name": "Color 3 On",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "color4_on",
+          "name": "Color 4 On",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "color5_on",
+          "name": "Color 5 On",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "color1",
+          "name": "Color 1",
+          "type": "color",
+          "default": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "id": "color2",
+          "name": "Color 2",
+          "type": "color",
+          "default": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "id": "color3",
+          "name": "Color 3",
+          "type": "color",
+          "default": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "id": "color4",
+          "name": "Color 4",
+          "type": "color",
+          "default": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "id": "color5",
+          "name": "Color 5",
+          "type": "color",
+          "default": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "id": "color6",
+          "name": "Color 6",
+          "type": "color",
+          "default": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "id": "black_point",
+          "name": "Black Point",
+          "type": "slider",
+          "default": 0,
+          "min": -1000,
+          "max": 1000
+        },
+        {
+          "id": "white_point",
+          "name": "White Point",
+          "type": "slider",
+          "default": 100,
+          "min": -1000,
+          "max": 1000
+        },
+        {
+          "id": "squeeze",
+          "name": "Squeeze",
+          "type": "slider",
+          "default": 0,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "id": "loop_mode",
+          "name": "Loop Mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Off",
+            "Forward Loop",
+            "Back & Forth Loop"
+          ]
+        },
+        {
+          "id": "loop_count",
+          "name": "Loop Count",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "gradient_offset",
+          "name": "Gradient Offset",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "color_ease",
+          "name": "Color Ease",
+          "type": "slider",
+          "default": 0,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "id": "hue",
+          "name": "Hue (degrees)",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000000.0,
+          "max": 1000000000.0
+        },
+        {
+          "id": "saturation",
+          "name": "Saturation",
+          "type": "slider",
+          "default": 0,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "id": "lightness",
+          "name": "Lightness",
+          "type": "slider",
+          "default": 0,
+          "min": -100,
+          "max": 100
+        },
+        {
+          "id": "mix",
+          "name": "Mix with Original",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 100
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "BCC3Colorize",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.colorize",
+      "params": {
+        "BCC3Colorize-6488072": {
+          "target": "input",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "5": 4,
+            "6": 5,
+            "7": 6,
+            "8": 7
+          }
+        },
+        "BCC3Colorize-6488066": {
+          "target": "color_space",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2
+          }
+        },
+        "BCC3Colorize-6492164": {
+          "target": "color2_on",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6496260": {
+          "target": "color3_on",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6500356": {
+          "target": "color4_on",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6504452": {
+          "target": "color5_on",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6488067": {
+          "target": "color1",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "BCC3Colorize-6492163": {
+          "target": "color2",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "BCC3Colorize-6496259": {
+          "target": "color3",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "BCC3Colorize-6500355": {
+          "target": "color4",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "BCC3Colorize-6504451": {
+          "target": "color5",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "BCC3Colorize-6508547": {
+          "target": "color6",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "BCC3Colorize-6488069": {
+          "target": "black_point",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6488070": {
+          "target": "white_point",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6488071": {
+          "target": "squeeze",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6488086": {
+          "target": "loop_mode",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2
+          }
+        },
+        "BCC3Colorize-6488079": {
+          "target": "loop_count",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6488080": {
+          "target": "gradient_offset",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6488073": {
+          "target": "color_ease",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6488075": {
+          "target": "hue",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6488076": {
+          "target": "saturation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Colorize-6488077": {
+          "target": "lightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Colorize-0116": {
+          "target": "mix",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "evidence": "Four local complete parT/tdb4 snapshots verify 23 controls and menus; official Boris FX Colorize/Gradient functional descriptions; ADR 027; no proprietary code or assets reused",
+      "required_on_create": [
+        "BCC3Colorize-6488072",
+        "BCC3Colorize-6488066",
+        "BCC3Colorize-6492164",
+        "BCC3Colorize-6496260",
+        "BCC3Colorize-6500356",
+        "BCC3Colorize-6504452",
+        "BCC3Colorize-6488067",
+        "BCC3Colorize-6492163",
+        "BCC3Colorize-6496259",
+        "BCC3Colorize-6500355",
+        "BCC3Colorize-6504451",
+        "BCC3Colorize-6508547",
+        "BCC3Colorize-6488069",
+        "BCC3Colorize-6488070",
+        "BCC3Colorize-6488071",
+        "BCC3Colorize-6488086",
+        "BCC3Colorize-6488079",
+        "BCC3Colorize-6488080",
+        "BCC3Colorize-6488073",
+        "BCC3Colorize-6488075",
+        "BCC3Colorize-6488076",
+        "BCC3Colorize-6488077",
+        "BCC3Colorize-0116"
+      ],
+      "limitations": [
+        "Gradiente, luma Rec.709, posição igualmente espaçada das cores habilitadas, hue circular curto e fórmulas Squeeze/Ease/HSL são originais; equivalência visual BCC não certificada.",
+        "Sliders conservam coeficientes brutos; normalização Black/White/Offset/Mix por 100 e calibração Squeeze/Ease são próprias, sem atribuir unidades não comprovadas à origem.",
+        "PixelChooser, Mocha, tracking, camadas/path externos, Compare e controles de preset/preview não são transferidos; referências opacas não são presumidas vazias. Input PixelChooser é recusado.",
+        "Cor/HDR/gamma e premultiplicação da origem não certificados. Renderer usa entrada premultiplicada, alpha do gradiente multiplicado pelo alpha da fonte e mistura premultiplicada.",
+        "Quatro instâncias reais só confirmam controles estáticos RGB/Luma; HSL/HSV, canais alternativos, looping, curvas e comportamento de black/white iguais ou invertidos possuem evidência sintética."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-median-1",
+  "plugins": [
+    {
+      "api": 1,
+      "id": "org.craftbridge.median",
+      "name": "Bridge Median (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original oriented rectangular neighborhood filtering with four channel modes and bounded sampling. Geometry, fractional response, color/alpha and compositing are not certified against BCC; masks remain unresolved.",
+      "params": [
+        {
+          "id": "mode",
+          "name": "Mode",
+          "type": "popup",
+          "default": 2,
+          "options": [
+            "Selected Channel Only",
+            "Pixel Selected by Channel",
+            "A R G B Separately",
+            "Most Common Pixel"
+          ]
+        },
+        {
+          "id": "channel",
+          "name": "Channel",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Luminance",
+            "Lightness",
+            "Brightness",
+            "Hue",
+            "Saturation",
+            "Alpha",
+            "Red",
+            "Green",
+            "Blue"
+          ]
+        },
+        {
+          "id": "preserve_alpha",
+          "name": "Preserve Alpha",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "length",
+          "name": "Raw Median Length",
+          "type": "slider",
+          "default": 5,
+          "min": 0,
+          "max": 512
+        },
+        {
+          "id": "width",
+          "name": "Raw Median Width",
+          "type": "slider",
+          "default": 5,
+          "min": 0,
+          "max": 512
+        },
+        {
+          "id": "angle",
+          "name": "Median Angle",
+          "type": "slider",
+          "default": 0,
+          "min": -36000,
+          "max": 36000
+        },
+        {
+          "id": "fractional",
+          "name": "Enable Fractional Radius",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "level",
+          "name": "Raw Median Level",
+          "type": "slider",
+          "default": 100,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "softness",
+          "name": "Raw Softness",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "mix",
+          "name": "Raw Mix with Original",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 100
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "BCC3Median",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.median",
+      "params": {
+        "BCC3Median-0852": {
+          "target": "mode",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "BCC3Median-0851": {
+          "target": "channel",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "BCC3Median-0803": {
+          "target": "preserve_alpha",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "BCC3Median-0801": {
+          "target": "length",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Median-0806": {
+          "target": "width",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Median-0805": {
+          "target": "angle",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Median-0804": {
+          "target": "fractional",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "BCC3Median-0802": {
+          "target": "level",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Median-0807": {
+          "target": "softness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Median-0520": {
+          "target": "mix",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "evidence": "Three local BCC3Median complete parT/tdb4 snapshots, exact IDs/kinds/menu order and degrees; official Boris FX functional description; ADR 022; no proprietary code/assets reused",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Mediana e janela retangular orientada usam algoritmo original; discretização, bordas replicadas e amostragem de até 36 taps por pixel (distribuídos entre até quatro kernels fracionários) não certificam o kernel BCC.",
+        "Length/Width/Level/Softness/Mix permanecem coeficientes brutos; raios raw*scale/2, mistura /100 e interpolação fracionária usam calibração própria, sem unidade de origem inferida.",
+        "Métricas RGB/HSV, alpha, quantização de Most Common Pixel e limites HDR são próprios; não há equivalência visual comprovada.",
+        "Compare Mode, Compositing, PixelChooser/Mocha, tracking e referências opacas continuam perdas; não se presume máscara vazia nem composição equivalente. Sempre parcial; strict não publica."
+      ]
+    }
+  ]
+}

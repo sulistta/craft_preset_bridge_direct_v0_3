@@ -1,0 +1,365 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.shake",
+  "name": "Bridge Shake (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original deterministic camera shake; partial S_Shake control transfer. Not Sapphire render equivalence.",
+  "params": [
+    {
+      "id": "style",
+      "name": "Style (original approximation)",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Normal",
+        "Twitchy",
+        "Jumpy"
+      ]
+    },
+    {
+      "id": "amplitude",
+      "name": "Amplitude",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "frequency",
+      "name": "Frequency",
+      "type": "slider",
+      "default": 8,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "phase",
+      "name": "Phase (original time shift)",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "z_dist",
+      "name": "Z Distance",
+      "type": "slider",
+      "default": 1,
+      "min": 0.001,
+      "max": 10000
+    },
+    {
+      "id": "motion_blur",
+      "name": "Motion Blur (8 fixed-time samples)",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "blur_length",
+      "name": "Blur Length (span = value / 30 seconds)",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "seed",
+      "name": "Seed (fractional values retained)",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 1000000000.0
+    },
+    {
+      "id": "wrap_x",
+      "name": "Wrap X",
+      "type": "popup",
+      "default": 2,
+      "options": [
+        "No",
+        "Tile",
+        "Reflect"
+      ]
+    },
+    {
+      "id": "wrap_y",
+      "name": "Wrap Y",
+      "type": "popup",
+      "default": 2,
+      "options": [
+        "No",
+        "Tile",
+        "Reflect"
+      ]
+    },
+    {
+      "id": "x_rand_amp",
+      "name": "X Rand Amp",
+      "type": "slider",
+      "default": 192,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "x_rand_freq",
+      "name": "X Rand Freq",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "x_wave_amp",
+      "name": "X Wave Amp",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "x_wave_freq",
+      "name": "X Wave Freq",
+      "type": "slider",
+      "default": 0.5,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "x_phase",
+      "name": "X Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "y_rand_amp",
+      "name": "Y Rand Amp",
+      "type": "slider",
+      "default": 96,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "y_rand_freq",
+      "name": "Y Rand Freq",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "y_wave_amp",
+      "name": "Y Wave Amp",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "y_wave_freq",
+      "name": "Y Wave Freq",
+      "type": "slider",
+      "default": 0.5,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "y_phase",
+      "name": "Y Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "z_rand_amp",
+      "name": "Z Rand Amp",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "z_rand_freq",
+      "name": "Z Rand Freq",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "z_wave_amp",
+      "name": "Z Wave Amp",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "z_wave_freq",
+      "name": "Z Wave Freq",
+      "type": "slider",
+      "default": 0.5,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "z_phase",
+      "name": "Z Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "tilt_rand_amp",
+      "name": "TILT Rand Amp",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "tilt_rand_freq",
+      "name": "TILT Rand Freq",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "tilt_wave_amp",
+      "name": "TILT Wave Amp",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "tilt_wave_freq",
+      "name": "TILT Wave Freq",
+      "type": "slider",
+      "default": 0.5,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "tilt_phase",
+      "name": "TILT Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "stillness",
+      "name": "Stillness",
+      "type": "slider",
+      "default": 0.7,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "twitch_frequency",
+      "name": "Twitch Frequency",
+      "type": "slider",
+      "default": 2,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "drift",
+      "name": "Drift",
+      "type": "slider",
+      "default": 0.3,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "center_bias",
+      "name": "Center Bias",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "red_amplitude",
+      "name": "Red Amplitude",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "green_amplitude",
+      "name": "Green Amplitude",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "blue_amplitude",
+      "name": "Blue Amplitude",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "red_phase",
+      "name": "Red Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "green_phase",
+      "name": "Green Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "blue_phase",
+      "name": "Blue Phase",
+      "type": "slider",
+      "default": 0,
+      "min": -1000000.0,
+      "max": 1000000.0
+    },
+    {
+      "id": "rgb_randomness",
+      "name": "RGB Randomness",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "rgb_frequency",
+      "name": "RGB Frequency",
+      "type": "slider",
+      "default": 2,
+      "min": 0,
+      "max": 10000
+    },
+    {
+      "id": "opacity",
+      "name": "Opacity",
+      "type": "popup",
+      "default": 1,
+      "options": [
+        "All Opaque",
+        "Normal",
+        "As Premult"
+      ]
+    }
+  ]
+}

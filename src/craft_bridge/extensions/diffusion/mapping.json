@@ -1,0 +1,295 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-diffusion",
+  "plugins": [
+    {
+      "api": 1,
+      "id": "org.craftbridge.diffusion",
+      "name": "Bridge Diffusion (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original bounded palette error diffusion. Partial omino_diffusion controls; source kernel, alpha, phase, width calibration and color space are not certified.",
+      "params": [
+        {
+          "id": "error_across",
+          "name": "Error Across (original calibration)",
+          "type": "slider",
+          "default": 1,
+          "min": -4,
+          "max": 4
+        },
+        {
+          "id": "error_aside",
+          "name": "Error Aside (original calibration)",
+          "type": "slider",
+          "default": 0,
+          "min": -4,
+          "max": 4
+        },
+        {
+          "id": "initial_phase",
+          "name": "Initial Phase (original calibration)",
+          "type": "color",
+          "default": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "direction",
+          "name": "Direction",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Right",
+            "Left",
+            "Down",
+            "Up"
+          ]
+        },
+        {
+          "id": "color_count",
+          "name": "Color Count",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        },
+        {
+          "id": "color_1",
+          "name": "Color 1",
+          "type": "color",
+          "default": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "width_1",
+          "name": "Width 1 (original calibration)",
+          "type": "slider",
+          "default": 1,
+          "min": 1,
+          "max": 4096
+        },
+        {
+          "id": "color_2",
+          "name": "Color 2",
+          "type": "color",
+          "default": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "width_2",
+          "name": "Width 2 (original calibration)",
+          "type": "slider",
+          "default": 1,
+          "min": 1,
+          "max": 4096
+        },
+        {
+          "id": "color_3",
+          "name": "Color 3",
+          "type": "color",
+          "default": [
+            1,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "width_3",
+          "name": "Width 3 (original calibration)",
+          "type": "slider",
+          "default": 1,
+          "min": 1,
+          "max": 4096
+        },
+        {
+          "id": "color_4",
+          "name": "Color 4",
+          "type": "color",
+          "default": [
+            0,
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "width_4",
+          "name": "Width 4 (original calibration)",
+          "type": "slider",
+          "default": 1,
+          "min": 1,
+          "max": 4096
+        },
+        {
+          "id": "color_5",
+          "name": "Color 5",
+          "type": "color",
+          "default": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "width_5",
+          "name": "Width 5 (original calibration)",
+          "type": "slider",
+          "default": 1,
+          "min": 1,
+          "max": 4096
+        },
+        {
+          "id": "color_6",
+          "name": "Color 6",
+          "type": "color",
+          "default": [
+            0.5,
+            0.5,
+            0.5,
+            1
+          ]
+        },
+        {
+          "id": "width_6",
+          "name": "Width 6 (original calibration)",
+          "type": "slider",
+          "default": 1,
+          "min": 1,
+          "max": 4096
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "omino_diffusion",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.diffusion",
+      "params": {
+        "omino_diffusion-0001": {
+          "target": "error_across",
+          "kind": "Float"
+        },
+        "omino_diffusion-0017": {
+          "target": "error_aside",
+          "kind": "Float"
+        },
+        "omino_diffusion-0002": {
+          "target": "initial_phase",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "omino_diffusion-0003": {
+          "target": "direction",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "4": 3
+          }
+        },
+        "omino_diffusion-0016": {
+          "target": "color_count",
+          "kind": "Choice",
+          "operation": "enum_map",
+          "choices": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "5": 4,
+            "6": 5
+          }
+        },
+        "omino_diffusion-0004": {
+          "target": "color_1",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "omino_diffusion-0005": {
+          "target": "width_1",
+          "kind": "Float"
+        },
+        "omino_diffusion-0006": {
+          "target": "color_2",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "omino_diffusion-0007": {
+          "target": "width_2",
+          "kind": "Float"
+        },
+        "omino_diffusion-0008": {
+          "target": "color_3",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "omino_diffusion-0009": {
+          "target": "width_3",
+          "kind": "Float"
+        },
+        "omino_diffusion-0010": {
+          "target": "color_4",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "omino_diffusion-0011": {
+          "target": "width_4",
+          "kind": "Float"
+        },
+        "omino_diffusion-0012": {
+          "target": "color_5",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "omino_diffusion-0013": {
+          "target": "width_5",
+          "kind": "Float"
+        },
+        "omino_diffusion-0014": {
+          "target": "color_6",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "omino_diffusion-0015": {
+          "target": "width_6",
+          "kind": "Float"
+        }
+      },
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "evidence": "Four authorized static parT/tdb4 snapshots prove IDs, types, colors and the four-direction menu. Omino author public functional description; renderer is independent original code.",
+      "validation": "real-source-structure; original-approximate-renderer; no-adobe-visual-comparison",
+      "limitations": [
+        "O kernel de difusão, distância de paleta, fase, largura, quantização, bordas, alpha e espaço de cor são aproximações próprias; não há equivalência visual omino_diffusion comprovada.",
+        "Os coeficientes brutos usam limites próprios -4..4; widths usam 1..4096 e arredondamento por escala de preview. Estes limites/calibrações não são unidades ou limites certificados do plugin de origem. Erros acumulados são limitados a ±1024.",
+        "A imagem de entrada é convertida de RGBA premultiplicado para RGB direto, limitada e quantizada a 8 bits; HDR e gama da origem não são preservados. A paleta multiplica o alpha de entrada; o alpha de Initial Phase é ignorado.",
+        "Stamp params/time, cores/pontos de debug, dependências, máscaras e expressões não são renderizados. É necessário carregar o módulo Bridge correspondente; o fingerprint identifica o manifesto, não os bytes do módulo carregado."
+      ]
+    }
+  ]
+}

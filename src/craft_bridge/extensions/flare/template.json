@@ -1,0 +1,7 @@
+{
+  "format": "craftbridge.flare-template",
+  "version": 1,
+  "toolchain": "Rust 1.98.1",
+  "sha256": "68a71a00638e525e1b397437b37a6758b20dc914cf0af471ac0147ffb513520b",
+  "note": "Original template; only fixed active data slots may be replaced. No user scenes bundled."
+}

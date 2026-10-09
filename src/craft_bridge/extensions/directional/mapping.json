@@ -1,0 +1,225 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-directional-1",
+  "plugins": [
+    {
+      "api": 1,
+      "id": "org.craftbridge.directional",
+      "name": "Bridge Directional Blur (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original directional line sampling, thin/spread weighting, thresholds, channel selection and blending. BCC kernels, calibration, masks/audio and rendering beyond the input canvas are not certified.",
+      "params": [
+        {
+          "id": "amount",
+          "name": "Raw Blur Amount",
+          "type": "slider",
+          "default": 10,
+          "min": 0,
+          "max": 8192
+        },
+        {
+          "id": "angle",
+          "name": "Angle",
+          "type": "slider",
+          "default": 0,
+          "min": -36000,
+          "max": 36000
+        },
+        {
+          "id": "thin",
+          "name": "Raw Thin",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "spread",
+          "name": "Raw Spread",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "threshold",
+          "name": "Raw Blur Threshold",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 255
+        },
+        {
+          "id": "deviation",
+          "name": "Raw Maximum Deviation",
+          "type": "slider",
+          "default": 255,
+          "min": 0,
+          "max": 255
+        },
+        {
+          "id": "avoid_clipping",
+          "name": "Avoid Clipping",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "displace",
+          "name": "Displace Pixels",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "apply_mode",
+          "name": "Apply Mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Normal",
+            "Lighten",
+            "Darken",
+            "Multiply",
+            "Screen",
+            "Difference",
+            "Lighter",
+            "Darker",
+            "Scale Multiply",
+            "Scale Screen",
+            "Difference X 2",
+            "Difference X 4",
+            "Add",
+            "Subtract",
+            "Overlay",
+            "Soft Light",
+            "Hard Light",
+            "Hue",
+            "Saturation",
+            "Color",
+            "Lightness",
+            "Boost Expo 1",
+            "Boost Expo 2",
+            "Boost Eq Power +",
+            "Boost Eq Power -",
+            "Boost Bias",
+            "50 50 Mix"
+          ]
+        },
+        {
+          "id": "apply_mix",
+          "name": "Raw Apply Mix",
+          "type": "slider",
+          "default": 100,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "channels",
+          "name": "Channels",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "RGBA",
+            "RGB",
+            "Alpha",
+            "Red",
+            "Green",
+            "Blue",
+            "Red and Green",
+            "Red and Blue",
+            "Green and Blue"
+          ]
+        },
+        {
+          "id": "mix",
+          "name": "Raw Mix with Original",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 100
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "BCC3Directional Blur",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.directional",
+      "params": {
+        "BCC3Directional Blur-0002": {
+          "target": "amount",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Directional Blur-0003": {
+          "target": "angle",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Directional Blur-0004": {
+          "target": "thin",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Directional Blur-0005": {
+          "target": "spread",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Directional Blur-0006": {
+          "target": "threshold",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Directional Blur-0015": {
+          "target": "deviation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Directional Blur-0007": {
+          "target": "avoid_clipping",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "BCC3Directional Blur-0008": {
+          "target": "displace",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "BCC3Directional Blur-0009": {
+          "target": "apply_mode",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "BCC3Directional Blur-0010": {
+          "target": "apply_mix",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "BCC3Directional Blur-0011": {
+          "target": "channels",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "BCC3Directional Blur-0013": {
+          "target": "mix",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "evidence": "Three complete local parT/tdb4 snapshots prove 12 IDs/kinds, menus and angle degrees; official Boris FX functional description and Apply Modes; ADR 023; no proprietary code/assets reused",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Kernel de linha com interpolação bilinear, Thin/Spread e até 31 taps é original aproximado; amostragem, bordas e fidelidade BCC não certificadas.",
+        "Sliders permanecem brutos; comprimento raw*scale, deslocamento raw*scale e limiares /255 usam calibração própria, sem inferência de unidades não declaradas na origem.",
+        "Apply Modes, Blend Mix, alpha/HDR e modelos de cor usam fórmulas próprias; não há equivalência visual comprovada.",
+        "Avoid Clipping usa transparência fora da imagem durante amostragem, mas ABI mantém o canvas: pixels externos não são publicados. Compare, PixelChooser/Mocha, tracking e Beat Reactor/audio continuam perdas; não se presume máscara vazia. Sempre parcial; strict não publica."
+      ]
+    }
+  ]
+}

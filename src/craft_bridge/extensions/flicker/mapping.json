@@ -1,0 +1,219 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-flicker-1",
+  "plugins": [
+    {
+      "api": 1,
+      "id": "org.craftbridge.flicker",
+      "name": "Bridge Flicker (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original deterministic smooth value noise and periodic RGB modulation. Frequencies, phases, RNG, response and color calibration are independent; source visual equivalence is not certified.",
+      "params": [
+        {
+          "id": "amplitude",
+          "name": "Amplitude",
+          "type": "slider",
+          "default": 0.2,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "rand_luma_amp",
+          "name": "Rand Luma Amp",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "rand_color_amp",
+          "name": "Rand Color Amp",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "rand_freq",
+          "name": "Raw Rand Freq",
+          "type": "slider",
+          "default": 30,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "wave_amp",
+          "name": "Wave Amp",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "wave_freq",
+          "name": "Raw Wave Freq",
+          "type": "slider",
+          "default": 5,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "wave_r_phase",
+          "name": "Raw Wave R Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "wave_g_phase",
+          "name": "Raw Wave G Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "wave_b_phase",
+          "name": "Raw Wave B Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "red_amp",
+          "name": "Red Amp",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "green_amp",
+          "name": "Green Amp",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "blue_amp",
+          "name": "Blue Amp",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "brightness",
+          "name": "Brightness",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 1000
+        },
+        {
+          "id": "seed",
+          "name": "Seed",
+          "type": "slider",
+          "default": 0.123,
+          "min": 0,
+          "max": 1000000000.0
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "S_Flicker",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.flicker",
+      "params": {
+        "S_Flicker-0050": {
+          "target": "amplitude",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0051": {
+          "target": "rand_luma_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0052": {
+          "target": "rand_color_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0053": {
+          "target": "rand_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0054": {
+          "target": "wave_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0055": {
+          "target": "wave_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0056": {
+          "target": "wave_r_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0057": {
+          "target": "wave_g_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0058": {
+          "target": "wave_b_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0059": {
+          "target": "red_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0060": {
+          "target": "green_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0061": {
+          "target": "blue_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0062": {
+          "target": "brightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Flicker-0063": {
+          "target": "seed",
+          "kind": "Float",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "evidence": "One local complete parT/tdb4 snapshot and one selected group, 14 kind-2 IDs; official Boris FX functional description; ADR 021; no proprietary code or assets reused",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Ruído temporal suave, PRNG, onda e resposta de ganho são fórmulas próprias; não há equivalência visual certificada com S_Flicker.",
+        "Rand Freq/Wave Freq/Phase conservam coeficientes brutos; o renderer interpreta frequência em ciclos por segundo e fase em ciclos com calibração própria, sem unidade de origem inferida.",
+        "Ganho RGB não negativo preserva alpha e pixels HDR/negativos recebidos; gamma/espaço de cor/premultiplicação da origem não são certificados.",
+        "Amostras reais incluem um snapshot estático e três chaves isoladas em grupo selecionado; ondas/color flicker e curvas entre múltiplas chaves só têm evidência sintética."
+      ]
+    }
+  ]
+}

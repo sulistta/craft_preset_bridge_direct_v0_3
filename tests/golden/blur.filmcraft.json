@@ -1,0 +1,12 @@
+{
+  "format": "filmcraft.effect-presets",
+  "version": 1,
+  "presets": [{
+    "name": "Blur original",
+    "description": "",
+    "keyframes": "AnchorToIn",
+    "source_duration": 254016000000,
+    "source_size": [1920, 1080],
+    "effects": [{"effect": "gaussian_blur", "enabled": true, "params": {"blurriness": {"value": {"Float": 25.0}}}}]
+  }]
+}

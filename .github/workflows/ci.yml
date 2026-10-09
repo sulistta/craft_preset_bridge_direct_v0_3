@@ -1,0 +1,26 @@
+name: Verify
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ['3.11', '3.12']
+    runs-on: ${{ matrix.os }}
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python }}
+          enable-cache: true
+      - run: uv sync --frozen --extra dev --extra gui
+      - run: uv run --frozen --extra dev --extra gui pytest -q
+      - run: uv run --frozen --extra dev ruff check src tests scripts
+      - run: uv run --frozen --extra dev mypy
+      - run: uv run --frozen --extra dev python -m build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-${{ matrix.os }}-${{ matrix.python }}
+          path: dist/*

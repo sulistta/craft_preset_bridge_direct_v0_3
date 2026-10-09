@@ -1,0 +1,237 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-sharpen-1",
+  "plugins": [
+    {
+      "api": 1,
+      "id": "org.craftbridge.sharpen",
+      "name": "Bridge Multiband Sharpen (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original multiband/box sharpening with edge rejection and luminance/chroma control. Own kernels, transfer, calibration, alpha and quality modes; source Matte/Mocha and on-screen widget unavailable. Not Sapphire visual equivalence.",
+      "params": [
+        {
+          "id": "quality",
+          "name": "Quality",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Best",
+            "Fast"
+          ]
+        },
+        {
+          "id": "amplitude",
+          "name": "Sharpen Amp",
+          "type": "slider",
+          "default": 1,
+          "min": -64,
+          "max": 64
+        },
+        {
+          "id": "threshold",
+          "name": "Raw Edge Threshold",
+          "type": "slider",
+          "default": 0.15,
+          "min": 0,
+          "max": 1000000.0
+        },
+        {
+          "id": "detail_size",
+          "name": "Raw Small Detail Size",
+          "type": "slider",
+          "default": 2,
+          "min": 0,
+          "max": 8192
+        },
+        {
+          "id": "tiny",
+          "name": "Scale Tiny Details",
+          "type": "slider",
+          "default": 3,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "small",
+          "name": "Scale Small Details",
+          "type": "slider",
+          "default": 1.5,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "medium",
+          "name": "Scale Medium Details",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "large",
+          "name": "Scale Large Details",
+          "type": "slider",
+          "default": 2,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "width",
+          "name": "Raw Sharpen Width",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 8192
+        },
+        {
+          "id": "luma",
+          "name": "Sharpen Luma",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "chroma",
+          "name": "Sharpen Chroma",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "red",
+          "name": "Sharpen Red",
+          "type": "slider",
+          "default": 1,
+          "min": -64,
+          "max": 64
+        },
+        {
+          "id": "green",
+          "name": "Sharpen Green",
+          "type": "slider",
+          "default": 1,
+          "min": -64,
+          "max": 64
+        },
+        {
+          "id": "blue",
+          "name": "Sharpen Blue",
+          "type": "slider",
+          "default": 1,
+          "min": -64,
+          "max": 64
+        },
+        {
+          "id": "opacity",
+          "name": "Opacity",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "All Opaque",
+            "Normal",
+            "As Premult"
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "S_Sharpen",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.sharpen",
+      "params": {
+        "S_Sharpen-0001": {
+          "target": "quality",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_Sharpen-0050": {
+          "target": "amplitude",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0105": {
+          "target": "threshold",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0106": {
+          "target": "detail_size",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0107": {
+          "target": "tiny",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0108": {
+          "target": "small",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0109": {
+          "target": "medium",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0110": {
+          "target": "large",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0051": {
+          "target": "width",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0100": {
+          "target": "luma",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0101": {
+          "target": "chroma",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0102": {
+          "target": "red",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0103": {
+          "target": "green",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0104": {
+          "target": "blue",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Sharpen-0052": {
+          "target": "opacity",
+          "kind": "Choice",
+          "operation": "minus_one"
+        }
+      },
+      "validation": "real-source-descriptors; original-renderer-approximate",
+      "evidence": "One local complete parT/tdb4 snapshot proves 15 processing IDs/kinds and Quality/Opacity menu order; official Boris FX functional description and UI-only detail-size widget; ADR 024; no proprietary code/assets reused",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Filtro multibanda Best e unsharp Fast são originais aproximados; kernels, transição entre detalhes, qualidade e fidelidade Sapphire não certificados.",
+        "Coeficientes são preservados brutos; raios raw*scale, limiar e ganhos usam calibração própria. Nenhuma unidade não comprovada da origem é inferida.",
+        "Luma Rec.709, chroma, limiar de borda e processamento alpha/HDR usam modelos próprios; cores retas são limitadas a ±1000000. Sem comparação visual de origem.",
+        "Matte de camada/path, Mocha/tracking e controles de máscara não são traduzidos; não se presume máscara vazia. Widget Show Small Detail Size não é transferido. Sempre parcial; strict não publica."
+      ]
+    }
+  ]
+}

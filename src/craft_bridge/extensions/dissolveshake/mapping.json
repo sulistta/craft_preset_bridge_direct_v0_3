@@ -1,0 +1,636 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-dissolveshake-1",
+  "plugins": [
+    {
+      "api": 3,
+      "bridge_host_revision": 2,
+      "id": "org.craftbridge.dissolveshake",
+      "name": "Bridge Dissolve Shake (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original deterministic two-image shake/dissolve with target layer frame bounds and frame step. Source Background explicitly replaced; own envelope, PRNG, blur, color and geometry. No Sapphire equivalence.",
+      "params": [
+        {
+          "id": "background",
+          "name": "Background",
+          "type": "layer",
+          "default": null
+        },
+        {
+          "id": "backgroundSource",
+          "name": "Background source mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Source",
+            "Masks",
+            "Effects & Masks"
+          ]
+        },
+        {
+          "id": "direction",
+          "name": "Transition direction",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Dissolve Off to Bg",
+            "Dissolve On from Bg"
+          ]
+        },
+        {
+          "id": "auto_trans",
+          "name": "Auto transition (actual layer frames)",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "No",
+            "Yes"
+          ]
+        },
+        {
+          "id": "dissolve",
+          "name": "Dissolve percent",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "speed",
+          "name": "Dissolve speed",
+          "type": "slider",
+          "default": 3,
+          "min": 1,
+          "max": 10000
+        },
+        {
+          "id": "amplitude",
+          "name": "Amplitude",
+          "type": "slider",
+          "default": 3,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "frequency",
+          "name": "Frequency",
+          "type": "slider",
+          "default": 10,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "motion_blur",
+          "name": "Motion blur (8 original spatial samples)",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "blur_length",
+          "name": "Raw blur length (actual target frame step)",
+          "type": "slider",
+          "default": 0.5,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "seed",
+          "name": "Seed (fractional values retained)",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 1000000000.0
+        },
+        {
+          "id": "wrap_x",
+          "name": "Wrap X",
+          "type": "popup",
+          "default": 2,
+          "options": [
+            "No",
+            "Tile",
+            "Reflect"
+          ]
+        },
+        {
+          "id": "wrap_y",
+          "name": "Wrap Y",
+          "type": "popup",
+          "default": 2,
+          "options": [
+            "No",
+            "Tile",
+            "Reflect"
+          ]
+        },
+        {
+          "id": "x_rand_amp",
+          "name": "X Rand Amp",
+          "type": "slider",
+          "default": 192,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "x_rand_freq",
+          "name": "X Rand Freq",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "x_wave_amp",
+          "name": "X Wave Amp",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "x_wave_freq",
+          "name": "X Wave Freq",
+          "type": "slider",
+          "default": 0.5,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "x_phase",
+          "name": "X Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "y_rand_amp",
+          "name": "Y Rand Amp",
+          "type": "slider",
+          "default": 96,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "y_rand_freq",
+          "name": "Y Rand Freq",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "y_wave_amp",
+          "name": "Y Wave Amp",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "y_wave_freq",
+          "name": "Y Wave Freq",
+          "type": "slider",
+          "default": 0.5,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "y_phase",
+          "name": "Y Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "z_rand_amp",
+          "name": "Z Rand Amp",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "z_rand_freq",
+          "name": "Z Rand Freq",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "z_wave_amp",
+          "name": "Z Wave Amp",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "z_wave_freq",
+          "name": "Z Wave Freq",
+          "type": "slider",
+          "default": 0.5,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "z_phase",
+          "name": "Z Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "tilt_rand_amp",
+          "name": "TILT Rand Amp",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "tilt_rand_freq",
+          "name": "TILT Rand Freq",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "tilt_wave_amp",
+          "name": "TILT Wave Amp",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "tilt_wave_freq",
+          "name": "TILT Wave Freq",
+          "type": "slider",
+          "default": 0.5,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "tilt_phase",
+          "name": "TILT Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "red_amplitude",
+          "name": "Red Amplitude",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "green_amplitude",
+          "name": "Green Amplitude",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "blue_amplitude",
+          "name": "Blue Amplitude",
+          "type": "slider",
+          "default": 1,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "red_phase",
+          "name": "Red Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "green_phase",
+          "name": "Green Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "blue_phase",
+          "name": "Blue Phase",
+          "type": "slider",
+          "default": 0,
+          "min": -1000000.0,
+          "max": 1000000.0
+        },
+        {
+          "id": "rgb_randomness",
+          "name": "RGB Randomness",
+          "type": "slider",
+          "default": 0,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "rgb_frequency",
+          "name": "RGB Frequency",
+          "type": "slider",
+          "default": 2,
+          "min": 0,
+          "max": 10000
+        },
+        {
+          "id": "opacity",
+          "name": "Opacity",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "All Opaque",
+            "Normal",
+            "As Premult"
+          ]
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "S_DissolveShake",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.dissolveshake",
+      "params": {
+        "S_DissolveShake-0001": {
+          "target": "background",
+          "kind": "Layer",
+          "operation": "explicit_layer_binding"
+        },
+        "S_DissolveShake-0050": {
+          "target": "direction",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_DissolveShake-0051": {
+          "target": "auto_trans",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_DissolveShake-0052": {
+          "target": "dissolve",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0053": {
+          "target": "speed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0054": {
+          "target": "amplitude",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0055": {
+          "target": "frequency",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0056": {
+          "target": "motion_blur",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0057": {
+          "target": "blur_length",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0058": {
+          "target": "seed",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0059": {
+          "target": "wrap_x",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_DissolveShake-0060": {
+          "target": "wrap_y",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_DissolveShake-0061": {
+          "target": "x_rand_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0062": {
+          "target": "x_rand_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0063": {
+          "target": "x_wave_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0064": {
+          "target": "x_wave_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0065": {
+          "target": "x_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0066": {
+          "target": "y_rand_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0067": {
+          "target": "y_rand_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0068": {
+          "target": "y_wave_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0069": {
+          "target": "y_wave_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0070": {
+          "target": "y_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0071": {
+          "target": "z_rand_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0072": {
+          "target": "z_rand_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0073": {
+          "target": "z_wave_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0074": {
+          "target": "z_wave_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0075": {
+          "target": "z_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0076": {
+          "target": "tilt_rand_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0077": {
+          "target": "tilt_rand_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0078": {
+          "target": "tilt_wave_amp",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0079": {
+          "target": "tilt_wave_freq",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0080": {
+          "target": "tilt_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0100": {
+          "target": "red_amplitude",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0101": {
+          "target": "green_amplitude",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0102": {
+          "target": "blue_amplitude",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0103": {
+          "target": "red_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0104": {
+          "target": "green_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0105": {
+          "target": "blue_phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0106": {
+          "target": "rgb_randomness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0107": {
+          "target": "rgb_frequency",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_DissolveShake-0081": {
+          "target": "opacity",
+          "kind": "Choice",
+          "operation": "minus_one"
+        }
+      },
+      "evidence": "Four complete local parT/tdb4 snapshots plus five selected groups prove 40 processing IDs/kinds and menu order. Background kind 0 remains opaque, replaced explicitly. Official Boris FX functional docs consulted 2026-10-09; ADR 031. Original MIT implementation only.",
+      "validation": "real-source-descriptors; explicit-resource-replacement; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "required_on_create": [
+        "S_DissolveShake-0001",
+        "S_DissolveShake-0050",
+        "S_DissolveShake-0051",
+        "S_DissolveShake-0052",
+        "S_DissolveShake-0053",
+        "S_DissolveShake-0054",
+        "S_DissolveShake-0055",
+        "S_DissolveShake-0056",
+        "S_DissolveShake-0057",
+        "S_DissolveShake-0058",
+        "S_DissolveShake-0059",
+        "S_DissolveShake-0060",
+        "S_DissolveShake-0061",
+        "S_DissolveShake-0062",
+        "S_DissolveShake-0063",
+        "S_DissolveShake-0064",
+        "S_DissolveShake-0065",
+        "S_DissolveShake-0066",
+        "S_DissolveShake-0067",
+        "S_DissolveShake-0068",
+        "S_DissolveShake-0069",
+        "S_DissolveShake-0070",
+        "S_DissolveShake-0071",
+        "S_DissolveShake-0072",
+        "S_DissolveShake-0073",
+        "S_DissolveShake-0074",
+        "S_DissolveShake-0075",
+        "S_DissolveShake-0076",
+        "S_DissolveShake-0077",
+        "S_DissolveShake-0078",
+        "S_DissolveShake-0079",
+        "S_DissolveShake-0080",
+        "S_DissolveShake-0100",
+        "S_DissolveShake-0101",
+        "S_DissolveShake-0102",
+        "S_DissolveShake-0103",
+        "S_DissolveShake-0104",
+        "S_DissolveShake-0105",
+        "S_DissolveShake-0106",
+        "S_DissolveShake-0107",
+        "S_DissolveShake-0081"
+      ],
+      "limitations": [
+        "Renderer original aproximado: dissolve centrado com speed, envelope 4u(1-u), PRNG e rampas/zoom/rota\u00e7\u00e3o/calibra\u00e7\u00e3o pr\u00f3prios; n\u00e3o certificado Sapphire. Sempre parcial, strict n\u00e3o publica.",
+        "Background FFX permanece opaco e exige substitui\u00e7\u00e3o expl\u00edcita fixada ao hash/\u00edndice/ID, inclusive null deliberado. Nenhum estado None \u00e9 inferido; null usa preto transparente no renderer.",
+        "Auto Trans usa primeiro/\u00faltimo frame efetivo e passo da camada do destino via API 3/revis\u00e3o 2, incluindo trim/stretch. N\u00e3o reconstr\u00f3i a dura\u00e7\u00e3o ou cortes Adobe; camada de um frame escolhe o final da transi\u00e7\u00e3o.",
+        "Coordenadas locais e offset/scale por imagem, bilinear e No/Tile/Reflect pr\u00f3prios; n\u00e3o reconstroem transforma\u00e7\u00f5es/canvas Adobe. Zoom usa raw/1000; sliders brutos n\u00e3o recebem unidade de origem inferida.",
+        "Motion blur usa oito transforma\u00e7\u00f5es do mesmo par de imagens no tempo atual, span raw*passo local do frame do destino; sem amostrar frames vizinhos da filmagem ou controles animados nesses subtempos. Espa\u00e7o de cor/alpha/HDR e separa\u00e7\u00e3o RGB s\u00e3o modelos pr\u00f3prios.",
+        "Normal limpa RGB oculto por alpha zero; As Premult conserva canais; All Opaque for\u00e7a alpha em cada amostra. Alpha separado usa m\u00e1ximo dos canais; sem certifica\u00e7\u00e3o de transpar\u00eancia Sapphire. Resource mode Source \u00e9 escolha do destino expl\u00edcita no manifesto."
+      ]
+    }
+  ]
+}

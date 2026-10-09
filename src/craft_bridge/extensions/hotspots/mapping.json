@@ -1,0 +1,197 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-hotspots-1",
+  "plugins": [
+    {
+      "api": 2,
+      "bridge_host_revision": 1,
+      "id": "org.craftbridge.hotspots",
+      "name": "Bridge Hotspots (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original bounded hue-preserving highlight extraction with explicit mask replacement. No Sapphire algorithm/calibration. Requires experimental API2 host.",
+      "params": [
+        {
+          "id": "mask",
+          "name": "Mask (explicit replacement)",
+          "type": "layer",
+          "default": null
+        },
+        {
+          "id": "maskSource",
+          "name": "Mask source mode",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Source",
+            "Masks",
+            "Effects & Masks"
+          ]
+        },
+        {
+          "id": "blur_input",
+          "name": "Blur Input",
+          "type": "slider",
+          "default": 0.0,
+          "min": 0,
+          "max": 8192
+        },
+        {
+          "id": "threshold",
+          "name": "Threshold",
+          "type": "slider",
+          "default": 0.11999694824218742,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "add_color",
+          "name": "Threshold Add Color",
+          "type": "color",
+          "default": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "id": "saturation",
+          "name": "Saturation",
+          "type": "slider",
+          "default": 1.0,
+          "min": -64,
+          "max": 64
+        },
+        {
+          "id": "brightness",
+          "name": "Brightness",
+          "type": "slider",
+          "default": 1.0,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "id": "opacity",
+          "name": "Opacity",
+          "type": "popup",
+          "default": 1,
+          "options": [
+            "All Opaque",
+            "Normal",
+            "As Premult"
+          ]
+        },
+        {
+          "id": "mask_use",
+          "name": "Mask Use",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Luma",
+            "Alpha"
+          ]
+        },
+        {
+          "id": "blur_mask",
+          "name": "Blur Mask",
+          "type": "slider",
+          "default": 12.0,
+          "min": 0,
+          "max": 8192
+        },
+        {
+          "id": "invert_mask",
+          "name": "Invert Mask",
+          "type": "checkbox",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "source": "S_Hotspots",
+      "effect": "org.craftbridge.hotspots",
+      "params": {
+        "S_Hotspots-0001": {
+          "target": "mask",
+          "kind": "Layer",
+          "operation": "explicit_layer_binding"
+        },
+        "S_Hotspots-0050": {
+          "target": "blur_input",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Hotspots-0051": {
+          "target": "threshold",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Hotspots-0052": {
+          "target": "add_color",
+          "kind": "Color",
+          "operation": "argb255_to_rgba"
+        },
+        "S_Hotspots-0053": {
+          "target": "saturation",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Hotspots-0054": {
+          "target": "brightness",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Hotspots-0055": {
+          "target": "opacity",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_Hotspots-0540": {
+          "target": "mask_use",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "S_Hotspots-0541": {
+          "target": "blur_mask",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "S_Hotspots-0542": {
+          "target": "invert_mask",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "required_on_create": [
+        "S_Hotspots-0001",
+        "S_Hotspots-0050",
+        "S_Hotspots-0051",
+        "S_Hotspots-0052",
+        "S_Hotspots-0053",
+        "S_Hotspots-0054",
+        "S_Hotspots-0055",
+        "S_Hotspots-0540",
+        "S_Hotspots-0541",
+        "S_Hotspots-0542"
+      ],
+      "evidence": "One complete parT/tdb4 snapshot proves nine processing IDs/types/color and opacity/mask menus plus opaque Mask from Layer. Source Layer is an explicit manual replacement, not decoding. Boris FX functional docs consulted 2026-10-09.",
+      "validation": "real-source-descriptors; explicit-resource-replacement; original-renderer-approximate",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Renderer original aproximado, nunca equivalência Sapphire. Extração por pico RGB, threshold por cor, box blur, saturação e alpha/calibração próprios; sempre PARTIAL, strict sem saída parcial.",
+        "Mask from Layer é opaco: exige escolha explícita fixada ao hash/índice/ID, inclusive null. Não se presume ausência com base no default público. Blur Mask=12 é preservado bruto.",
+        "Mask from Path e Mocha/tracking/Combine Masks continuam perdas. O renderer usa somente a máscara substituta; não inventa Mocha vazio nem interpreta blobs privados.",
+        "Nove controles de processamento preservados sem inventar unidades kind 2; box radius usa raw×scale por contrato original. ARGB255 e menus vêm do descriptor real.",
+        "Normal interpreta RGB premultiplicado e divide por alpha positivo; All Opaque usa alpha um; As Premult conserva alpha e RGB. Kernel retira threshold pelo pico e mantém proporções de cor antes da saturação. Espaço de cor/HDR/gama/antialias não certificados.",
+        "Blur Input/Mask são boxes separáveis fracionários, não filtro Sapphire. Entrada usa clamp de borda; máscara bilinear usa transparência exterior. Canvas fixo, limite 2097152 pixels/imagem, validação completa antes de publicar saída."
+      ]
+    }
+  ]
+}

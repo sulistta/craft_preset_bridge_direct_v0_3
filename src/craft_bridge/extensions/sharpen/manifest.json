@@ -1,0 +1,136 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.sharpen",
+  "name": "Bridge Multiband Sharpen (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original multiband/box sharpening with edge rejection and luminance/chroma control. Own kernels, transfer, calibration, alpha and quality modes; source Matte/Mocha and on-screen widget unavailable. Not Sapphire visual equivalence.",
+  "params": [
+    {
+      "id": "quality",
+      "name": "Quality",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Best",
+        "Fast"
+      ]
+    },
+    {
+      "id": "amplitude",
+      "name": "Sharpen Amp",
+      "type": "slider",
+      "default": 1,
+      "min": -64,
+      "max": 64
+    },
+    {
+      "id": "threshold",
+      "name": "Raw Edge Threshold",
+      "type": "slider",
+      "default": 0.15,
+      "min": 0,
+      "max": 1000000.0
+    },
+    {
+      "id": "detail_size",
+      "name": "Raw Small Detail Size",
+      "type": "slider",
+      "default": 2,
+      "min": 0,
+      "max": 8192
+    },
+    {
+      "id": "tiny",
+      "name": "Scale Tiny Details",
+      "type": "slider",
+      "default": 3,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "small",
+      "name": "Scale Small Details",
+      "type": "slider",
+      "default": 1.5,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "medium",
+      "name": "Scale Medium Details",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "large",
+      "name": "Scale Large Details",
+      "type": "slider",
+      "default": 2,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "width",
+      "name": "Raw Sharpen Width",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 8192
+    },
+    {
+      "id": "luma",
+      "name": "Sharpen Luma",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "chroma",
+      "name": "Sharpen Chroma",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "red",
+      "name": "Sharpen Red",
+      "type": "slider",
+      "default": 1,
+      "min": -64,
+      "max": 64
+    },
+    {
+      "id": "green",
+      "name": "Sharpen Green",
+      "type": "slider",
+      "default": 1,
+      "min": -64,
+      "max": 64
+    },
+    {
+      "id": "blue",
+      "name": "Sharpen Blue",
+      "type": "slider",
+      "default": 1,
+      "min": -64,
+      "max": 64
+    },
+    {
+      "id": "opacity",
+      "name": "Opacity",
+      "type": "popup",
+      "default": 1,
+      "options": [
+        "All Opaque",
+        "Normal",
+        "As Premult"
+      ]
+    }
+  ]
+}

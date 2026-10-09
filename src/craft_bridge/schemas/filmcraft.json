@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FilmCraft effect-presets v1 subset (pinned commit)",
+  "type": "object",
+  "required": [
+    "format",
+    "version",
+    "presets"
+  ],
+  "properties": {
+    "format": {
+      "const": "filmcraft.effect-presets"
+    },
+    "version": {
+      "const": 1
+    },
+    "presets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "keyframes",
+          "source_duration",
+          "source_size",
+          "effects"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "keyframes": {
+            "enum": [
+              "Scale",
+              "AnchorToIn",
+              "AnchorToOut"
+            ]
+          },
+          "source_duration": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9223372036854775807
+          },
+          "source_size": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65536
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "effect",
+                "enabled",
+                "params"
+              ],
+              "properties": {
+                "effect": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean"
+                },
+                "params": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "Float": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "Float"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "Bool": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "Bool"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "Choice": {
+                                "type": "integer",
+                                "minimum": 0
+                              }
+                            },
+                            "required": [
+                              "Choice"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "Text": {
+                                "type": "string",
+                                "maxLength": 65536
+                              }
+                            },
+                            "required": [
+                              "Text"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "Color": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                },
+                                "minItems": 4,
+                                "maxItems": 4
+                              }
+                            },
+                            "required": [
+                              "Color"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "Vec2": {
+                                "type": "object",
+                                "required": [
+                                  "x",
+                                  "y"
+                                ],
+                                "properties": {
+                                  "x": {
+                                    "type": "number"
+                                  },
+                                  "y": {
+                                    "type": "number"
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "Vec2"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      "keyframes": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "time",
+                            "value",
+                            "interp"
+                          ],
+                          "properties": {
+                            "time": {
+                              "type": "integer",
+                              "minimum": -9223372036854775808,
+                              "maximum": 9223372036854775807
+                            },
+                            "value": {
+                              "oneOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "Float": {
+                                      "type": "number"
+                                    }
+                                  },
+                                  "required": [
+                                    "Float"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "Bool": {
+                                      "type": "boolean"
+                                    }
+                                  },
+                                  "required": [
+                                    "Bool"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "Choice": {
+                                      "type": "integer",
+                                      "minimum": 0
+                                    }
+                                  },
+                                  "required": [
+                                    "Choice"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "Text": {
+                                      "type": "string",
+                                      "maxLength": 65536
+                                    }
+                                  },
+                                  "required": [
+                                    "Text"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "Color": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "number"
+                                      },
+                                      "minItems": 4,
+                                      "maxItems": 4
+                                    }
+                                  },
+                                  "required": [
+                                    "Color"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "Vec2": {
+                                      "type": "object",
+                                      "required": [
+                                        "x",
+                                        "y"
+                                      ],
+                                      "properties": {
+                                        "x": {
+                                          "type": "number"
+                                        },
+                                        "y": {
+                                          "type": "number"
+                                        }
+                                      },
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "required": [
+                                    "Vec2"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              ]
+                            },
+                            "interp": {
+                              "enum": [
+                                "Linear",
+                                "Hold",
+                                "Bezier",
+                                "AutoBezier",
+                                "ContinuousBezier",
+                                "EaseIn",
+                                "EaseOut"
+                              ]
+                            },
+                            "in_influence": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1
+                            },
+                            "out_influence": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,55 @@
+{
+  "api": 2,
+  "bridge_host_revision": 1,
+  "id": "org.craftbridge.hfhotspots",
+  "name": "Bridge HitFilm Hotspots (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original bounded bright-area gate with subthreshold color fill and preblur. Not HitFilm calibration. Experimental API2 host required.",
+  "params": [
+    {
+      "id": "threshold",
+      "name": "Threshold",
+      "type": "slider",
+      "default": 0.75,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "fill_color",
+      "name": "Threshold Add Color",
+      "type": "color",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "saturation",
+      "name": "Saturation",
+      "type": "slider",
+      "default": 1.0,
+      "min": -64,
+      "max": 64
+    },
+    {
+      "id": "brightness",
+      "name": "Brightness",
+      "type": "slider",
+      "default": 1.0,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "smooth_source",
+      "name": "Smooth Source",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 8192
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "api": 2,
+  "bridge_host_revision": 1,
+  "id": "org.craftbridge.godrays",
+  "name": "Bridge Godrays (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original radial/spin ray integration with explicit raw-coordinate and alpha models. No ProductionCrate code or assets. Experimental API2 host required.",
+  "params": [
+    {
+      "id": "mode",
+      "name": "Mode",
+      "type": "popup",
+      "default": 1,
+      "options": [
+        "Spin",
+        "Zoom"
+      ]
+    },
+    {
+      "id": "position",
+      "name": "Position (Raw)",
+      "type": "point",
+      "default": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "threshold_mode",
+      "name": "Threshold Mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Luma",
+        "Chroma"
+      ]
+    },
+    {
+      "id": "threshold",
+      "name": "Threshold (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "smooth",
+      "name": "Threshold Smooth (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "length",
+      "name": "Length (Raw)",
+      "type": "slider",
+      "default": 10000.0,
+      "min": 0,
+      "max": 100000
+    },
+    {
+      "id": "spin",
+      "name": "Spin Amount (Degrees)",
+      "type": "slider",
+      "default": 30.0,
+      "min": -360000,
+      "max": 360000
+    },
+    {
+      "id": "exposure",
+      "name": "Exposure (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": -20,
+      "max": 20
+    },
+    {
+      "id": "decay",
+      "name": "Decay (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": -10,
+      "max": 10
+    },
+    {
+      "id": "direction",
+      "name": "Direction",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Out",
+        "In",
+        "In & Out"
+      ]
+    },
+    {
+      "id": "chromatic",
+      "name": "Chromatic Amount (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "channels",
+      "name": "Channels",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Red & Blue",
+        "Red & Green",
+        "Green & Blue"
+      ]
+    },
+    {
+      "id": "quality",
+      "name": "Quality",
+      "type": "popup",
+      "default": 1,
+      "options": [
+        "Draft",
+        "Moderate",
+        "High",
+        "Extreme",
+        "Custom"
+      ]
+    },
+    {
+      "id": "samples",
+      "name": "Samples (Raw)",
+      "type": "slider",
+      "default": 64.0,
+      "min": 2,
+      "max": 256
+    },
+    {
+      "id": "noise",
+      "name": "Noise (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "repeat",
+      "name": "Repeat Edges",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "expansion",
+      "name": "Buffer Expansion (Neutral Only)",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    {
+      "id": "opacity",
+      "name": "Input Opacity (Raw)",
+      "type": "slider",
+      "default": 100.0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "blend",
+      "name": "Blend Mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Screen",
+        "Add"
+      ]
+    },
+    {
+      "id": "unmult",
+      "name": "Unmult (Original Alpha Model)",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "view",
+      "name": "View",
+      "type": "popup",
+      "default": 2,
+      "options": [
+        "Input (Processed)",
+        "Rays Solo",
+        "Final Composite"
+      ]
+    },
+    {
+      "id": "left",
+      "name": "Trim Left (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 8192
+    },
+    {
+      "id": "top",
+      "name": "Trim Top (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 8192
+    },
+    {
+      "id": "right",
+      "name": "Trim Right (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 8192
+    },
+    {
+      "id": "bottom",
+      "name": "Trim Bottom (Raw)",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 8192
+    }
+  ]
+}

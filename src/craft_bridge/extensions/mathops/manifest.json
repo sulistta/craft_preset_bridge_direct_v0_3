@@ -1,0 +1,184 @@
+{
+  "api": 2,
+  "bridge_host_revision": 1,
+  "id": "org.craftbridge.mathops",
+  "name": "Bridge Math Ops (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original bounded two-image math operations with optional layer mask. Own color, geometry, blur, alpha, quantization and calibration; no Sapphire visual equivalence. Requires experimental Bridge host revision 1.",
+  "params": [
+    {
+      "id": "source_b",
+      "name": "Source B",
+      "type": "layer",
+      "default": null
+    },
+    {
+      "id": "source_bSource",
+      "name": "Source B source mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Source",
+        "Masks",
+        "Effects & Masks"
+      ]
+    },
+    {
+      "id": "mask",
+      "name": "Mask",
+      "type": "layer",
+      "default": null
+    },
+    {
+      "id": "maskSource",
+      "name": "Mask source mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Source",
+        "Masks",
+        "Effects & Masks"
+      ]
+    },
+    {
+      "id": "operation",
+      "name": "Operation",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Add",
+        "Subtract",
+        "Multiply",
+        "Divide",
+        "Screen",
+        "Average",
+        "Overlay",
+        "Minimum",
+        "Maximum",
+        "Difference",
+        "Xor",
+        "Xor Bits",
+        "And Bits",
+        "Or Bits",
+        "Mod",
+        "Round",
+        "Bounce"
+      ]
+    },
+    {
+      "id": "swap",
+      "name": "Swap inputs",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "a_lights",
+      "name": "A lights",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "a_darks",
+      "name": "A darks",
+      "type": "slider",
+      "default": 0,
+      "min": -64,
+      "max": 64
+    },
+    {
+      "id": "a_saturation",
+      "name": "A saturation",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "b_lights",
+      "name": "B lights",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "b_darks",
+      "name": "B darks",
+      "type": "slider",
+      "default": 0,
+      "min": -64,
+      "max": 64
+    },
+    {
+      "id": "b_saturation",
+      "name": "B saturation",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "dest_lights",
+      "name": "DEST lights",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "dest_darks",
+      "name": "DEST darks",
+      "type": "slider",
+      "default": 0,
+      "min": -64,
+      "max": 64
+    },
+    {
+      "id": "dest_saturation",
+      "name": "DEST saturation",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "opacity",
+      "name": "Opacity",
+      "type": "popup",
+      "default": 1,
+      "options": [
+        "All Opaque",
+        "Normal",
+        "As Premult"
+      ]
+    },
+    {
+      "id": "mask_use",
+      "name": "Mask use",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Luma",
+        "Alpha"
+      ]
+    },
+    {
+      "id": "blur_mask",
+      "name": "Raw mask blur",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 8192
+    },
+    {
+      "id": "invert_mask",
+      "name": "Invert mask",
+      "type": "checkbox",
+      "default": false
+    }
+  ]
+}

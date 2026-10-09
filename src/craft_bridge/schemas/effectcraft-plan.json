@@ -1,0 +1,343 @@
+{
+  "$defs": {
+    "BezierHandles": {
+      "additionalProperties": false,
+      "properties": {
+        "in_speed": {
+          "items": {
+            "type": "number"
+          },
+          "title": "In Speed",
+          "type": "array"
+        },
+        "in_influence": {
+          "items": {
+            "type": "number"
+          },
+          "title": "In Influence",
+          "type": "array"
+        },
+        "out_speed": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Out Speed",
+          "type": "array"
+        },
+        "out_influence": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Out Influence",
+          "type": "array"
+        }
+      },
+      "title": "BezierHandles",
+      "type": "object"
+    },
+    "Interpolation": {
+      "enum": [
+        "Linear",
+        "Hold",
+        "Bezier",
+        "Unknown"
+      ],
+      "title": "Interpolation",
+      "type": "string"
+    },
+    "Keyframe": {
+      "additionalProperties": false,
+      "properties": {
+        "ticks": {
+          "title": "Ticks",
+          "type": "integer"
+        },
+        "time_base": {
+          "exclusiveMinimum": 0,
+          "title": "Time Base",
+          "type": "integer"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        },
+        "in_interp": {
+          "items": {
+            "$ref": "#/$defs/Interpolation"
+          },
+          "title": "In Interp",
+          "type": "array"
+        },
+        "out_interp": {
+          "items": {
+            "$ref": "#/$defs/Interpolation"
+          },
+          "title": "Out Interp",
+          "type": "array"
+        },
+        "handles": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BezierHandles"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        }
+      },
+      "required": [
+        "ticks",
+        "time_base",
+        "value"
+      ],
+      "title": "Keyframe",
+      "type": "object"
+    },
+    "LayerReference": {
+      "additionalProperties": false,
+      "properties": {
+        "layer_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,79}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Layer Ref"
+        }
+      },
+      "required": [
+        "layer_ref"
+      ],
+      "title": "LayerReference",
+      "type": "object"
+    },
+    "PlanEffect": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "pattern": "^fx[0-9]+$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "effect": {
+          "title": "Effect",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "plugin_fingerprint": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Plugin Fingerprint"
+        },
+        "application": {
+          "default": "create",
+          "enum": [
+            "create",
+            "existing"
+          ],
+          "title": "Application",
+          "type": "string"
+        },
+        "source_effect_index": {
+          "anyOf": [
+            {
+              "exclusiveMaximum": 4294967295,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Effect Index"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanProperty"
+          },
+          "maxItems": 2048,
+          "title": "Properties"
+        }
+      },
+      "required": [
+        "ref",
+        "effect",
+        "source",
+        "properties"
+      ],
+      "title": "PlanEffect",
+      "type": "object"
+    },
+    "PlanProperty": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9_]+(/[A-Za-z0-9_]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "Float",
+            "Bool",
+            "Choice",
+            "Vec2",
+            "Color",
+            "Text",
+            "Layer"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/LayerReference"
+            }
+          ],
+          "title": "Value"
+        },
+        "keyframes": {
+          "items": {
+            "$ref": "#/$defs/Keyframe"
+          },
+          "maxItems": 100000,
+          "title": "Keyframes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "value"
+      ],
+      "title": "PlanProperty",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "craftbridge.effectcraft-plan",
+      "default": "craftbridge.effectcraft-plan",
+      "title": "Format",
+      "type": "string"
+    },
+    "version": {
+      "default": 3,
+      "enum": [
+        2,
+        3,
+        4
+      ],
+      "title": "Version",
+      "type": "integer"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "catalog_commit": {
+      "title": "Catalog Commit",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "preset_index": {
+      "default": 0,
+      "title": "Preset Index",
+      "type": "integer"
+    },
+    "effects": {
+      "items": {
+        "$ref": "#/$defs/PlanEffect"
+      },
+      "maxItems": 2048,
+      "title": "Effects",
+      "type": "array"
+    },
+    "commands": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Commands",
+      "type": "array"
+    }
+  },
+  "required": [
+    "name",
+    "catalog_commit",
+    "source_sha256"
+  ],
+  "title": "EffectCraftPlan",
+  "type": "object"
+}

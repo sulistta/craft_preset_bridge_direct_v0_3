@@ -1,0 +1,89 @@
+{
+  "format": "craftbridge.effectcraft-plan",
+  "version": 4,
+  "name": "Original two-input Bridge probe",
+  "catalog_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+  "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "preset_index": 0,
+  "effects": [
+    {
+      "ref": "fx0",
+      "effect": "org.craftbridge.test.layer_mix",
+      "source": "original-synthetic",
+      "enabled": true,
+      "plugin_fingerprint": "00bf1b67e54fd9060967b1cbadbd5dbd561806ba3ac39b9cc74dcca25602e7bd",
+      "application": "create",
+      "source_effect_index": null,
+      "properties": [
+        {
+          "id": "source",
+          "kind": "Layer",
+          "value": {
+            "layer_ref": "second"
+          },
+          "keyframes": []
+        },
+        {
+          "id": "sourceSource",
+          "kind": "Choice",
+          "value": 0,
+          "keyframes": []
+        },
+        {
+          "id": "mix",
+          "kind": "Float",
+          "value": 0.5,
+          "keyframes": []
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "command": "bridge.resolveLayer",
+      "params": {
+        "ref": "second",
+        "layer": "$layerBinding.second",
+        "comp": "$comp"
+      }
+    },
+    {
+      "command": "effect.apply",
+      "params": {
+        "effect": "org.craftbridge.test.layer_mix",
+        "layer": "$layer",
+        "comp": "$comp"
+      },
+      "bind": "fx0"
+    },
+    {
+      "command": "prop.set",
+      "params": {
+        "layer": "$layer",
+        "comp": "$comp",
+        "path": "$fx0.path/source",
+        "value": {
+          "layer_ref": "second"
+        }
+      }
+    },
+    {
+      "command": "prop.set",
+      "params": {
+        "layer": "$layer",
+        "comp": "$comp",
+        "path": "$fx0.path/sourceSource",
+        "value": 0
+      }
+    },
+    {
+      "command": "prop.set",
+      "params": {
+        "layer": "$layer",
+        "comp": "$comp",
+        "path": "$fx0.path/mix",
+        "value": 0.5
+      }
+    }
+  ]
+}

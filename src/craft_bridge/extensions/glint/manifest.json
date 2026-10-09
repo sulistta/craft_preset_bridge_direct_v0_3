@@ -1,0 +1,220 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.glint",
+  "name": "Bridge Glint (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original four-axis symmetric exponential highlight rays. Own transfer/size/blur/hue/alpha calibration; background/matte/Mocha dependencies and expanded bounds are unavailable. Not Sapphire render equivalence.",
+  "params": [
+    {
+      "id": "brightness",
+      "name": "Brightness",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "hue_shift",
+      "name": "Hue Shift (original calibration)",
+      "type": "slider",
+      "default": 0,
+      "min": -1,
+      "max": 1
+    },
+    {
+      "id": "scale_colors",
+      "name": "Scale Colors",
+      "type": "color",
+      "default": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "brightness_x",
+      "name": "Brightness X",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "brightness_y",
+      "name": "Brightness Y",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "brightness_diag1",
+      "name": "Brightness Diag1",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "brightness_diag2",
+      "name": "Brightness Diag2",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "threshold",
+      "name": "Raw Threshold",
+      "type": "slider",
+      "default": 0.7,
+      "min": 0,
+      "max": 1000000
+    },
+    {
+      "id": "threshold_add_color",
+      "name": "Threshold Add Color",
+      "type": "color",
+      "default": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "threshold_blur",
+      "name": "Raw Threshold Blur",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 4096
+    },
+    {
+      "id": "size",
+      "name": "Raw Size (original calibration)",
+      "type": "slider",
+      "default": 30,
+      "min": 0,
+      "max": 4096
+    },
+    {
+      "id": "size_x",
+      "name": "Size X",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 8
+    },
+    {
+      "id": "size_y",
+      "name": "Size Y",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 8
+    },
+    {
+      "id": "size_diag1",
+      "name": "Size Diag1",
+      "type": "slider",
+      "default": 0.75,
+      "min": 0,
+      "max": 8
+    },
+    {
+      "id": "size_diag2",
+      "name": "Size Diag2",
+      "type": "slider",
+      "default": 0.75,
+      "min": 0,
+      "max": 8
+    },
+    {
+      "id": "size_red",
+      "name": "Size Red",
+      "type": "slider",
+      "default": 0.5,
+      "min": 0,
+      "max": 8
+    },
+    {
+      "id": "size_green",
+      "name": "Size Green",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 8
+    },
+    {
+      "id": "size_blue",
+      "name": "Size Blue",
+      "type": "slider",
+      "default": 1.5,
+      "min": 0,
+      "max": 8
+    },
+    {
+      "id": "blur_glint",
+      "name": "Raw Blur Glint",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 4096
+    },
+    {
+      "id": "affect_alpha",
+      "name": "Affect Alpha",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "glint_from_alpha",
+      "name": "Glint From Alpha",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "glint_under_source",
+      "name": "Glint Under Source",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "source_opacity",
+      "name": "Source Opacity",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "id": "bg_brightness",
+      "name": "Source Background Brightness (approximate)",
+      "type": "slider",
+      "default": 1,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "opacity_mode",
+      "name": "Opacity Mode",
+      "type": "popup",
+      "default": 1,
+      "options": [
+        "All Opaque",
+        "Normal",
+        "As Premult"
+      ]
+    }
+  ]
+}

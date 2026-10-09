@@ -1,0 +1,185 @@
+{
+  "format": "craftbridge.mappings",
+  "version": 2,
+  "name": "bridge-modulation-1",
+  "plugins": [
+    {
+      "api": 1,
+      "id": "org.craftbridge.modulation",
+      "name": "Bridge Modulation (Approximate)",
+      "category": "Craft Bridge",
+      "version": "0.1.0",
+      "author": "Craft Preset Bridge contributors",
+      "description": "Original bounded grayscale FM carrier and quadrature demodulation. Modulation v1 controls; source filters, transfer functions, frequency and opacity calibration, alpha, white-line behavior and color space are not certified.",
+      "params": [
+        {
+          "id": "omega",
+          "name": "Raw Omega (original calibration)",
+          "type": "slider",
+          "default": 0.8,
+          "min": 0,
+          "max": 4
+        },
+        {
+          "id": "phase",
+          "name": "Raw Phase (original calibration)",
+          "type": "slider",
+          "default": 0.25,
+          "min": 0,
+          "max": 4
+        },
+        {
+          "id": "distortion",
+          "name": "Raw Distortion (original calibration)",
+          "type": "slider",
+          "default": 12,
+          "min": -4096,
+          "max": 4096
+        },
+        {
+          "id": "lowpass_1",
+          "name": "Lowpass 1",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "lowpass_2",
+          "name": "Lowpass 2",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "lowpass_3",
+          "name": "Lowpass 3",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "direction",
+          "name": "Direction",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Forward",
+            "Backward"
+          ]
+        },
+        {
+          "id": "invert",
+          "name": "Invert",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "opacity",
+          "name": "Raw Opacity (original calibration)",
+          "type": "slider",
+          "default": 255,
+          "min": 0,
+          "max": 255
+        },
+        {
+          "id": "ignore_alpha",
+          "name": "Ignore alpha",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "orientation",
+          "name": "Wave Orientation",
+          "type": "popup",
+          "default": 0,
+          "options": [
+            "Vertical",
+            "Horizontal"
+          ]
+        },
+        {
+          "id": "hide_white_line",
+          "name": "Hide white line",
+          "type": "checkbox",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "source": "ADBE Checkout",
+      "source_format": "ffx",
+      "target": "effectcraft",
+      "effect": "org.craftbridge.modulation",
+      "params": {
+        "ADBE Checkout-0001": {
+          "target": "omega",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Checkout-0002": {
+          "target": "phase",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Checkout-0003": {
+          "target": "distortion",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Checkout-0004": {
+          "target": "lowpass_1",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Checkout-0005": {
+          "target": "lowpass_2",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Checkout-0006": {
+          "target": "lowpass_3",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Checkout-0007": {
+          "target": "direction",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Checkout-0008": {
+          "target": "invert",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Checkout-0009": {
+          "target": "opacity",
+          "kind": "Float",
+          "operation": "identity"
+        },
+        "ADBE Checkout-0010": {
+          "target": "ignore_alpha",
+          "kind": "Bool",
+          "operation": "identity"
+        },
+        "ADBE Checkout-0011": {
+          "target": "orientation",
+          "kind": "Choice",
+          "operation": "minus_one"
+        },
+        "ADBE Checkout-0012": {
+          "target": "hide_white_line",
+          "kind": "Bool",
+          "operation": "identity"
+        }
+      },
+      "validation": "real-source; original-renderer-approximate",
+      "evidence": "Two local Modulation v1 parT/tdb4 profiles: IDs/types/menu labels; official aescripts functional description; ADR 018; no source plugin code/assets reused",
+      "target_commit": "e38a92e792c07f1c57c5dcfcab37d91932b9e2b8",
+      "limitations": [
+        "Renderer original FM em cinza com demodulação quadratura; algoritmo/cores/HDR/gamma do plugin não certificados.",
+        "Omega/Phase/Distortion são coeficientes brutos; frequências e transferências usam calibração própria limitada, sem unidade de origem inferida.",
+        "Três lowpass causais e ordem de processamento são originais; não reproduzem kernels privados nem o quarto filtro/color modes de Modulation 2.",
+        "Opacity bruto /255, amplitude por alpha e primeira linha branca são modelos próprios; comportamento original não certificado."
+      ]
+    }
+  ]
+}

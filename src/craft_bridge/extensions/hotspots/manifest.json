@@ -1,0 +1,107 @@
+{
+  "api": 2,
+  "bridge_host_revision": 1,
+  "id": "org.craftbridge.hotspots",
+  "name": "Bridge Hotspots (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original bounded hue-preserving highlight extraction with explicit mask replacement. No Sapphire algorithm/calibration. Requires experimental API2 host.",
+  "params": [
+    {
+      "id": "mask",
+      "name": "Mask (explicit replacement)",
+      "type": "layer",
+      "default": null
+    },
+    {
+      "id": "maskSource",
+      "name": "Mask source mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Source",
+        "Masks",
+        "Effects & Masks"
+      ]
+    },
+    {
+      "id": "blur_input",
+      "name": "Blur Input",
+      "type": "slider",
+      "default": 0.0,
+      "min": 0,
+      "max": 8192
+    },
+    {
+      "id": "threshold",
+      "name": "Threshold",
+      "type": "slider",
+      "default": 0.11999694824218742,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "add_color",
+      "name": "Threshold Add Color",
+      "type": "color",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "saturation",
+      "name": "Saturation",
+      "type": "slider",
+      "default": 1.0,
+      "min": -64,
+      "max": 64
+    },
+    {
+      "id": "brightness",
+      "name": "Brightness",
+      "type": "slider",
+      "default": 1.0,
+      "min": 0,
+      "max": 64
+    },
+    {
+      "id": "opacity",
+      "name": "Opacity",
+      "type": "popup",
+      "default": 1,
+      "options": [
+        "All Opaque",
+        "Normal",
+        "As Premult"
+      ]
+    },
+    {
+      "id": "mask_use",
+      "name": "Mask Use",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Luma",
+        "Alpha"
+      ]
+    },
+    {
+      "id": "blur_mask",
+      "name": "Blur Mask",
+      "type": "slider",
+      "default": 12.0,
+      "min": 0,
+      "max": 8192
+    },
+    {
+      "id": "invert_mask",
+      "name": "Invert Mask",
+      "type": "checkbox",
+      "default": false
+    }
+  ]
+}

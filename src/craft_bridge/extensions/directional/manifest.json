@@ -1,0 +1,139 @@
+{
+  "api": 1,
+  "id": "org.craftbridge.directional",
+  "name": "Bridge Directional Blur (Approximate)",
+  "category": "Craft Bridge",
+  "version": "0.1.0",
+  "author": "Craft Preset Bridge contributors",
+  "description": "Original directional line sampling, thin/spread weighting, thresholds, channel selection and blending. BCC kernels, calibration, masks/audio and rendering beyond the input canvas are not certified.",
+  "params": [
+    {
+      "id": "amount",
+      "name": "Raw Blur Amount",
+      "type": "slider",
+      "default": 10,
+      "min": 0,
+      "max": 8192
+    },
+    {
+      "id": "angle",
+      "name": "Angle",
+      "type": "slider",
+      "default": 0,
+      "min": -36000,
+      "max": 36000
+    },
+    {
+      "id": "thin",
+      "name": "Raw Thin",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "spread",
+      "name": "Raw Spread",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "threshold",
+      "name": "Raw Blur Threshold",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 255
+    },
+    {
+      "id": "deviation",
+      "name": "Raw Maximum Deviation",
+      "type": "slider",
+      "default": 255,
+      "min": 0,
+      "max": 255
+    },
+    {
+      "id": "avoid_clipping",
+      "name": "Avoid Clipping",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "displace",
+      "name": "Displace Pixels",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "apply_mode",
+      "name": "Apply Mode",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "Normal",
+        "Lighten",
+        "Darken",
+        "Multiply",
+        "Screen",
+        "Difference",
+        "Lighter",
+        "Darker",
+        "Scale Multiply",
+        "Scale Screen",
+        "Difference X 2",
+        "Difference X 4",
+        "Add",
+        "Subtract",
+        "Overlay",
+        "Soft Light",
+        "Hard Light",
+        "Hue",
+        "Saturation",
+        "Color",
+        "Lightness",
+        "Boost Expo 1",
+        "Boost Expo 2",
+        "Boost Eq Power +",
+        "Boost Eq Power -",
+        "Boost Bias",
+        "50 50 Mix"
+      ]
+    },
+    {
+      "id": "apply_mix",
+      "name": "Raw Apply Mix",
+      "type": "slider",
+      "default": 100,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "channels",
+      "name": "Channels",
+      "type": "popup",
+      "default": 0,
+      "options": [
+        "RGBA",
+        "RGB",
+        "Alpha",
+        "Red",
+        "Green",
+        "Blue",
+        "Red and Green",
+        "Red and Blue",
+        "Green and Blue"
+      ]
+    },
+    {
+      "id": "mix",
+      "name": "Raw Mix with Original",
+      "type": "slider",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    }
+  ]
+}
